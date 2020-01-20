@@ -1,0 +1,133 @@
+<br />
+<div nz-row nzGutter="12" class="example-input">
+    <div nz-col nzSpan="12">
+        <button nz-button nzType="primary" (click)="open()">
+      <i nz-icon type="laptop" theme="outline"></i>
+      Ajouter
+    </button>
+    </div>
+</div>
+
+
+
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+
+
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+        <div nz-row nzGutter="12" class="example-input">
+
+            <div nz-row nzGutter="12" class="example-input">
+                <!-- <div nz-col nzSpan="12"> -->
+
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
+                        <span>
+              Numero Bon
+              <i nz-icon nz-tooltip nzTitle=" Numero Bon" type="question-circle" theme="outline"></i>
+            </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <!--  <nz-tooltip nzTrigger="focus" nzPlacement="topLeft" nzOverlayClassName="numeric-input" [nzTitle]="title">
+              <input #inputElement nz-input id="id" formControlName="id" nzSize="small" nz-tooltip
+                placeholder="Input a number" [ngModel]="value" (ngModelChange)="onChange($event)" (blur)="onBlur()">
+            </nz-tooltip> -->
+                        <input nz-input id="id" formControlName="id" nzSize="small" placeholder="crédit">
+                        <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
+                            Le Numero Bon du SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+
+
+            </div>
+
+
+        </div>
+
+        <div class="footer">
+
+            <div nz-row>
+                <div nz-col nzSpan="8">
+                    <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+            <i nz-icon type="retweet" theme="outline"></i>
+            <span>Annuler</span></button>
+                </div>
+                <div nz-col nzSpan="8">
+
+                    <nz-form-item nz-row style="margin-bottom:8px;">
+                        <nz-form-control>
+
+                            <button nz-button nzType="primary">
+                <i nz-icon type="diff"></i>
+                <span>Ajouter</span></button>
+
+                        </nz-form-control>
+                    </nz-form-item>
+
+                </div>
+                <div nz-col nzSpan="8">
+                    <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+            <i nz-icon type="logout"></i>
+            <span>Fermer</span></button>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+
+
+
+
+
+</nz-drawer>
+
+
+
+<nz-card style="width: 100%;">
+    <h4 class="card-title">LISTES DES BONS LIQUIDE</h4>
+    <h6 class="card-subtitle">
+        LISTES DES BONS LIQUIDE<br>
+        <hr>
+    </h6>
+    <nz-table #editRowTable nzBordered [nzPageSize]=7 [nzShowPagination]=true [nzData]="dataSet">
+        <thead>
+            <tr>
+                <th nzWidth="20%" nzCustomFilter>
+                    Numero Bon
+                    <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                        <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                    </nz-dropdown>
+                </th>
+                <th nzWidth="10%">Montant</th>
+                <th nzWidth="10%">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data">
+                <td>
+
+                    <ng-container>
+                        {{data.id}}
+                    </ng-container>
+
+                </td>
+                <td>
+
+                    <ng-container>
+                        {{data.montant}}
+                    </ng-container>
+
+                </td>
+                <td>
+                    <ng-container>
+                        {{data.description}}
+                    </ng-container>
+                </td>
+
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>

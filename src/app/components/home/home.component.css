@@ -1,0 +1,58 @@
+:host {
+    text-align: center;
+}
+
+nz-card-tab {
+    background: #fff;
+    color: #fff;
+    padding: 0;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
+}
+
+#more {
+    display: none;
+}
+
+nz-header {
+    background: #fff;
+    color: #fff;
+    padding: 0;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
+}
+
+nz-footer {
+    line-height: 1.5;
+}
+
+nz-sider {
+    color: #fff;
+    line-height: 120px;
+}
+
+nz-content {
+    min-height: 10px;
+    line-height: 1.5;
+}
+
+[nz-carousel-content] {
+    text-align: center;
+    height: 350px;
+    color: #5f5964;
+    overflow: hidden;
+}
+
+h3 {
+    color: #fff;
+}
+
+nz-layout {
+    margin-bottom: 48px;
+}
+
+nz-layout:last-child {
+    margin: 0;
+}

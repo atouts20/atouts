@@ -1,0 +1,507 @@
+<div class="col-md-12 col-sm-12">
+    <br />
+    <button nz-button nzType="primary" (click)="open()">
+            <i nz-icon type="laptop" theme="outline"></i>
+            Ajouter
+        </button>
+
+    <div class="row">
+        <div class="col-md-10 col-sm-10">
+            <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="400" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+                <form nz-form [formGroup]="validateFormMobilisation" (ngSubmit)="enregistrerMobilisation()">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Nom du produit
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    <input nz-input formControlName="nom" class="form-control" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                    <nz-form-explain *ngIf="validateFormMobilisation.get('nom')?.dirty
+                                                &&
+                                                validateFormMobilisation.get('nom')?.errors">
+                                        Ce champs est obligatoire !
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Prix
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    <input nz-input type="number" min="0" formControlName="prix" class="form-control">
+                                    <nz-form-explain *ngIf="validateFormMobilisation.get('prix')?.dirty
+                                                &&
+                                                validateFormMobilisation.get('prix')?.errors">
+                                        Ce champs est obligatoire !
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Téléphone
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    <input nz-input formControlName="tel" class="form-control" oninput="this.value=
+                                                        this.value.toUpperCase()">
+                                    <nz-form-explain *ngIf="validateFormMobilisation.get('tel')?.dirty
+                                                        &&
+                                                        validateFormMobilisation.get('tel')?.errors">
+                                        Ce champs est obligatoire !
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-md-12 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Description</h5>
+                                    <textarea rows="3" nz-input formControlName="description" oninput="this.value=
+                                                this.value.toUpperCase()"></textarea>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Photo</h5>
+                                    <input nz-input type="file" #Image name="signature" accept=".jpg, .jpeg, .png" (change)="onSelectFile($event)">
+                                    <!-- <button type="button" (click)="upload()">Upload</button> -->
+                                    <br>
+                                    <img [src]="imageUrl" style="width:200px;height:200px">
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                    </div>
+
+
+                    <div class="footer">
+                        <div nz-row>
+                            <div nz-col nzSpan="8">
+                                <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary"  ant-btn-primary>
+                                            <i nz-icon type="retweet" theme="outline"></i>
+                                            <span>Annuler</span></button>
+                            </div>
+                            <div nz-col nzSpan="8">
+                                <nz-form-item nz-row >
+                                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                        <button nz-button nzType="primary">
+                                                    <i nz-icon type="diff"></i>
+                                                    <span>Ajouter</span></button>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div nz-col nzSpan="8">
+                                <button type="button" (click)="close()" class="ant-btn
+                                            ant-btn-primary">
+                                            <i nz-icon type="logout"></i>
+                                            <span>Fermer</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nz-drawer>
+        </div>
+
+        <nz-card style="width: 100%;">
+            <nz-card-tab>
+                <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
+                    <nz-tab nzTitle="Listes des demandes"></nz-tab>
+                    <nz-tab nzTitle="Liste des reponses"></nz-tab>
+                    <nz-tab nzTitle="Liste des relance"></nz-tab>
+                </nz-tabset>
+            </nz-card-tab>
+            <div *ngIf="selectedIndex==0">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="demandeMobilisationList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                Nom
+                                <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+                                    <i nz-icon type="search" theme="outline" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                                    <div class="custom-filter-dropdown">
+                                        <input type="text" nz-input placeholder="Search Numero" [(ngModel)]="searchValue">
+                                        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+                                    </div>
+                                </nz-dropdown>
+                            </th>
+                            <th nzWidth="15%">Prix</th>
+                            <th nzWidth="20%">Telephone</th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            {{data.nom}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.prix}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.tel}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.createdAt | date: 'dd MM yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterMobilisation(data)"  nzShape="circle">
+                                        <i nz-icon type="info"></i>
+                                      </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteMobilisation(data)">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                        <i nz-icon type="delete"></i>
+                                                    </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+
+
+                                    <ng-container>
+                                        <button title="Voir le (s) réponse (s) de cette demande" nz-button nzType="primary" (click)="reponse(data.id)"  nzShape="circle">
+                                                     <i nz-icon type="form"></i>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <button title="Répondre à cette demande de mobilisation" nz-button nzType="primary" (click)="repondre(data)"  nzShape="circle">
+                                                                 <i nz-icon type="form"></i>
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+            <div *ngIf="selectedIndex==1">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="reponseList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                Montant
+                                <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+                                    <i nz-icon type="search" theme="outline" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                                    <div class="custom-filter-dropdown">
+                                        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                                        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+                                    </div>
+                                </nz-dropdown>
+                            </th>
+                            <th nzWidth="20%">Reponse</th>
+                            <th nzWidth="20%">Date</th>
+                            <th nzWidth="15%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            {{formatNumber(data.prix)}}
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.observation}}
+                                </ng-container>
+                            </td>
+
+                            <td>
+                                <ng-container>
+                                    {{data.createdAt | date: 'dd MM yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterReponse(data)"  nzShape="circle">
+                                        <i nz-icon type="info"></i>
+                                      </button>
+                                    </ng-container>
+                                    relancer
+                                    <ng-container>
+                                        <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteReponse(data)">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                            <i nz-icon type="delete"></i>
+                                                        </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+
+
+                                    <ng-container>
+                                        <button title="Voir le (s) réponse (s) de cette réponse" nz-button nzType="primary" (click)="relance(data.id)"  nzShape="circle">
+                                                         <i nz-icon type="form"></i>
+                                                    </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <button title="Relancer la discussion" nz-button nzType="primary" (click)="relancer(data)"  nzShape="circle">
+                                                                     <i nz-icon type="form"></i>
+                                            </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+            <div *ngIf="selectedIndex==2">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="relanceList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="15%" nzCustomFilter>
+                                Montant
+                                <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+                                    <i nz-icon type="search" theme="outline" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                                    <div class="custom-filter-dropdown">
+                                        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                                        <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+                                    </div>
+                                </nz-dropdown>
+                            </th>
+                            <th nzWidth="15%">Relance</th>
+                            <th nzWidth="20%">Date</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            {{formatNumber(data.prix)}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.observation}}
+                                </ng-container>
+
+                            </td>
+
+                            <td>
+                                <ng-container>
+                                    {{data.createdAt | date: 'medium'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterRelance(data)"  nzShape="circle">
+                                            <i nz-icon type="info"></i>
+                                          </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteRelance(data)">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                                <i nz-icon type="delete"></i>
+                                                            </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+
+
+                                    <ng-container>
+                                        <button title="reponsee" nz-button nzType="primary" (click)="relance(data.id)"  nzShape="circle">
+                                                             <i nz-icon type="form"></i>
+                                                        </button>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </nz-card>
+    </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!--détail reponse-->
+<nz-modal [(nzVisible)]="isVisibleReponse" nzTitle="Detail reponse" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()" [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="500">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div *ngIf="uneReponse != null">
+                <span> Montant : </span>
+                <strong> {{ formatNumber(uneReponse.prix)  }} </strong>
+            </div>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div *ngIf="uneReponse != null">
+                <span> Observation : </span>
+                <strong> {{ uneReponse.observation  }} </strong>
+            </div>
+        </div>
+
+    </div>
+</nz-modal>
+
+<!-- ============================================================== -->
+<!--détail relance-->
+<nz-modal [(nzVisible)]="isVisibleRelance" nzTitle="Detail relance" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()" [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="500">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div *ngIf="uneRelance != null">
+                <span> Montant : </span>
+                <strong> {{ formatNumber(uneRelance.prix)  }} </strong>
+            </div>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div *ngIf="uneRelance != null">
+                <span> Observation : </span>
+                <strong> {{ uneRelance.observation  }} </strong>
+            </div>
+        </div>
+
+    </div>
+</nz-modal>
+
+<!-- ============================================================== -->
+<!-- Formulaire reponse-->
+<nz-modal [(nzVisible)]="isVisibleFormReponse" nzTitle="Formulaire de reponse" [nzClosable]="false" [nzWidth]="500">
+    <form nz-form [formGroup]="validateFormReponse">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <nz-form-item>
+                <nz-form-control>
+                    <h5> Prix <span class="text-danger">*</span></h5>
+                    <input nz-input type="number" min="0" formControlName="prix" class="form-control">
+                    <nz-form-explain *ngIf="validateFormReponse.get('prix')?.dirty
+                                            &&
+                                            validateFormReponse.get('prix')?.errors">
+                        Ce champs est obligatoire !
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <nz-form-item>
+                <nz-form-control>
+                    <h5> Message<span class="text-danger">*</span></h5>
+                    <textarea rows="3" nz-input formControlName="observation" oninput="this.value=
+                                            this.value.toUpperCase()"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div *nzModalFooter>
+            <button nz-button nzType="default" (click)="handleCancelReponse()">Annuler</button>
+            <button nz-button nzType="primary" (click)="enregistrerReponse()" [disabled]="validateFormReponse.invalid">Envoyer Message</button>
+        </div>
+        <!-- <nz-form-item>
+            <nz-form-control>
+                <div style="float: right;">
+                    <button type="button" (click)="handleCancelReponse()" class="btn btn-primary btn-sm"><i class="ti-close">
+                            </i>
+                              Annuler
+                            </button>
+                    <button type="submit" class="btn btn-primary btn-sm" [disabled]="validateFormReponse.invalid" style="margin-left: 10px;"><i class="ti-check"> </i> Enregistrer
+                            </button>
+                </div>
+
+            </nz-form-control>
+        </nz-form-item> -->
+    </form>
+</nz-modal>
+
+<!-- ============================================================== -->
+<!-- Formulaire reponse-->
+<nz-modal [(nzVisible)]="isVisibleFormRelance" nzTitle="Formulaire de relance" [nzClosable]="false" [nzWidth]="500">
+    <form nz-form [formGroup]="validateFormRelance">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <nz-form-item>
+                <nz-form-control>
+                    <h5> Prix <span class="text-danger">*</span></h5>
+                    <input nz-input type="number" min="0" formControlName="prix" class="form-control">
+                    <nz-form-explain *ngIf="validateFormRelance.get('prix')?.dirty
+                                                &&
+                                                validateFormRelance.get('prix')?.errors">
+                        Ce champs est obligatoire !
+                    </nz-form-explain>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <nz-form-item>
+                <nz-form-control>
+                    <h5> Message<span class="text-danger">*</span></h5>
+                    <textarea rows="3" nz-input formControlName="observation" oninput="this.value=
+                                                this.value.toUpperCase()"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+        </div>
+        <div *nzModalFooter>
+            <button nz-button nzType="default" (click)="handleCancelRelance()">Annuler</button>
+            <button nz-button nzType="primary" (click)="enregistrerRelance()" [disabled]="validateFormRelance.invalid">Envoyer Message</button>
+        </div>
+        <!--  <nz-form-item>
+            <nz-form-control>
+                <div style="float: right;">
+                    <button type="button" (click)="handleCancelRelance()" class="btn btn-primary btn-sm"><i class="ti-close">
+                                </i>
+                                  Annuler
+                                </button>
+                    <button type="submit" class="btn btn-primary btn-sm" [disabled]="validateFormRelance.invalid" style="margin-left: 10px;"><i class="ti-check"> </i> Enregistrer
+                                </button>
+                </div>
+
+            </nz-form-control>
+        </nz-form-item> -->
+    </form>
+</nz-modal>

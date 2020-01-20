@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <br />
+        <button nz-button nzType="primary" (click)="open()">
+            <i nz-icon type="laptop" theme="outline"></i>
+            Ajouter
+        </button>
+        <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)',
+            overflow:'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="AJOUTER UN COMPTE EN
+            FAVORI" (nzOnClose)="close()">
+            <div class="col-md-6">
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                    <input type="text" [(ngModel)]="numCompte" nz-input placeholder="input
+                        search text" />
+                </nz-input-group>
+                <ng-template #suffixButton>
+                    <button nz-button nzType="primary" (click)="rechercherCompte()" nzSearch>Search</button>
+                </ng-template>
+            </div>
+            <nz-descriptions nzTitle="User Information" *ngIf="compteRechercher
+                !== null">
+                <div class="row">
+                    <nz-descriptions-item nzTitle="Nom">{{compteRechercher.appUserCompte.nom}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Prenom">{{compteRechercher.appUserCompte.prenom}}</nz-descriptions-item>
+                </div>
+                <div class="row">
+                    <nz-descriptions-item nzTitle="Telephone">{{compteRechercher.appUserCompte.phoneNumber}}</nz-descriptions-item>
+                    <nz-descriptions-item nzTitle="Email">{{compteRechercher.appUserCompte.email}}</nz-descriptions-item>
+                </div>
+                <div class="row">
+                    <nz-descriptions-item nzTitle="Address">{{compteRechercher.appUserCompte.residance}}</nz-descriptions-item>
+                </div>
+            </nz-descriptions>
+
+
+            <div class="footer">
+                <div nz-row>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="resetForm()" class="ant-btn
+                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                            <i nz-icon type="retweet" theme="outline"></i>
+                            <span>Annuler</span></button>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="enregistrerFavori()" class="ant-btn
+                            ant-btn-primary">
+                            <i nz-icon type="diff"></i>
+                            <span>Ajouter Favori</span></button>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="close()" class="ant-btn
+                            ant-btn-primary">
+                            <i nz-icon type="logout"></i>
+                            <span>Fermer</span></button>
+                    </div>
+                </div>
+            </div>
+        </nz-drawer>
+
+
+        <nz-card style="width: 100%;">
+
+            <h3>La listes de mes favorie</h3>
+            <div>
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="mesComptesFavoriList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                Nom
+                            </th>
+                            <th nzWidth="15%">Premon</th>
+                            <th nzWidth="20%">Telephone</th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            {{data.nom}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.nom}}
+                                </ng-container>
+
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.tel}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.createdAt | date: 'dd MM yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <nz-popconfirm [nzTitle]="'Êtes vous
+                                            sûr de supprimer?'" (nzOnConfirm)="delete(data)">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
+                                                <i nz-icon type="delete"></i>
+                                            </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+        </nz-card>
+
+    </div>
+</div>

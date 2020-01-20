@@ -1,0 +1,287 @@
+<br />
+<div nz-row nzGutter="12" class="example-input">
+    <div nz-col nzSpan="12">
+        <button nz-button nzType="primary" (click)="open()">
+      <i nz-icon type="laptop" theme="outline"></i>
+      Ajouter
+    </button>
+    </div>
+</div>
+
+
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+    <nz-tabset>
+        <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+            <ng-template #titleTemplate> <i nz-icon [nzType]="tab.icon"></i>{{ tab.name }} </ng-template>
+
+            <div *ngIf="tab.position == 0">
+
+                <div nz-row nzGutter="12" class="example-input">
+
+                    <div nz-col nzMd="12" nzSm="12" nzXs="12">
+                        <!-- <div nz-col nzSpan="12"> -->
+
+                        <nz-form-item>
+                            <h5>Numero Bon<span class="text-danger">*</span></h5>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input placeholder="Entrer le numéro du bon" [(ngModel)]="numero">
+                            </nz-form-control>
+                        </nz-form-item>
+
+                    </div>
+
+
+                </div>
+
+                <div class="footer">
+
+                    <div nz-row>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                    <i nz-icon type="retweet" theme="outline"></i>
+                    <span>Annuler</span></button>
+                        </div>
+                        <div nz-col nzSpan="8">
+
+                            <nz-form-item nz-row style="margin-bottom:8px;">
+                                <nz-form-control>
+                                    <button nz-button nzType="primary" (click)="rechercherUnBon()"><i nz-icon type="eye"></i>
+                                        <span>Rechercher</span>
+                                    </button>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+                                <i nz-icon type="logout"></i>
+                                    <span>Fermer</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div *ngIf="tab.position == 1">
+
+                <div nz-row nzGutter="12" class="example-input">
+
+                    <div nz-col nzMd="12" nzSm="12" nzXs="12">
+                        <nz-form-item>
+                            <h5>Code de confirmation<span class="text-danger">*</span></h5>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input type="number" placeholder="Entrer le code secret du bon" [(ngModel)]="secret">
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+
+                <div class="footer">
+
+                    <div nz-row>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                        <i nz-icon type="retweet" theme="outline"></i>
+                        <span>Annuler</span></button>
+                        </div>
+                        <div nz-col nzSpan="8">
+
+                            <nz-form-item nz-row style="margin-bottom:8px;">
+                                <nz-form-control>
+                                    <button nz-button nzType="primary" (click)="confirmationBon()"><i nz-icon type="eye"></i>
+                                            <span>Rechercher</span>
+                                        </button>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+                                    <i nz-icon type="logout"></i>
+                                        <span>Fermer</span>
+                                </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" *ngIf="tab.position == 2">
+
+                <div nz-row nzGutter="12" class="example-input" >
+
+                    <div nz-col nzMd="12" nzSm="12" nzXs="12">
+                        
+
+                        <nz-form-item>
+                            <h5>Numero Bon<span class="text-danger">*</span></h5>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input formControlName="numroBon">
+                                <nz-form-explain *ngIf="validateForm.get('numroBon').dirty && validateForm.get('numroBon').errors">
+                                    Le Numero Bon du SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                    </div>
+
+
+                </div>
+
+                <div class="footer">
+
+                    <div nz-row>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                            <i nz-icon type="retweet" theme="outline"></i>
+                            <span>Annuler</span></button>
+                        </div>
+                        <div nz-col nzSpan="8">
+
+                            <nz-form-item nz-row style="margin-bottom:8px;">
+                                <nz-form-control>
+                                    <button nz-button nzType="primary" [disabled]="validateForm.invalid"><i nz-icon type="diff"></i>
+                                                <span>Ajouter</span>
+                                            </button>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+                                        <i nz-icon type="logout"></i>
+                                            <span>Fermer</span>
+                                    </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form> -->
+
+            <!--  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" *ngIf="tab.position == 3">
+
+                <div nz-row nzGutter="12" class="example-input" >
+
+                    <div nz-col nzMd="12" nzSm="12" nzXs="12">
+                       
+
+                        <nz-form-item>
+                            <h5>Numero Bon<span class="text-danger">*</span></h5>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input formControlName="numroBon">
+                                <nz-form-explain *ngIf="validateForm.get('numroBon').dirty && validateForm.get('numroBon').errors">
+                                    Le Numero Bon du SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                    </div>
+
+
+                </div>
+
+                <div class="footer">
+
+                    <div nz-row>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="retweet" theme="outline"></i>
+                                <span>Annuler</span></button>
+                        </div>
+                        <div nz-col nzSpan="8">
+
+                            <nz-form-item nz-row style="margin-bottom:8px;">
+                                <nz-form-control>
+                                    <button nz-button nzType="primary" [disabled]="validateForm.invalid"><i nz-icon type="diff"></i>
+                                                    <span>Ajouter</span>
+                                                </button>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+                                            <i nz-icon type="logout"></i>
+                                                <span>Fermer</span>
+                                        </button>
+                        </div>
+                    </div>
+
+                </div>
+            </form> -->
+
+        </nz-tab>
+    </nz-tabset>
+</nz-drawer>
+
+<nz-card style="width: 100%;">
+    <h4 class="card-title">LISTES DES BONS ENCAISSE</h4>
+    <h6 class="card-subtitle">
+        LISTES DES BONS ENCAISSE<br>
+        <hr>
+    </h6>
+
+    <nz-table #editRowTable nzBordered [nzPageSize]=7 [nzShowPagination]=true [nzData]="dataSet">
+        <thead>
+            <tr>
+                <th nzWidth="20%" nzCustomFilter>
+                    Numero Bon
+                    <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                        <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                    </nz-dropdown>
+                </th>
+                <th nzWidth="10%">Montant</th>
+                <th nzWidth="10%">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data">
+                <td>
+
+                    <ng-container>
+                        {{data.numeroBon}}
+                    </ng-container>
+
+                </td>
+                <td>
+
+                    <ng-container>
+                        {{data.montant}}
+                    </ng-container>
+
+                </td>
+                <td>
+                    <ng-container>
+                        {{data.description}}
+                    </ng-container>
+                </td>
+
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>
+
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!--détail reponse-->
+<nz-modal [(nzVisible)]="isVisibleBon" nzTitle="Detail Bon" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()" [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="500">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+
+            <div *ngIf="uneReponse != null">
+                <span> Montant : </span>
+                <strong> {{ formatNumber(uneReponse.prix)  }} </strong>
+            </div>
+
+        </div>
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div *ngIf="uneReponse != null">
+                <span> Observation : </span>
+                <strong> {{ uneReponse.observation  }} </strong>
+            </div>
+        </div>
+
+    </div>
+</nz-modal>

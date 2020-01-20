@@ -1,0 +1,99 @@
+<div class="limiter">
+    <div class="card">
+        <div class="card-body">
+            <div class="container-login100">
+                <div class="wrap-login100 p-t-85 p-b-20">
+
+                    <form nz-form [formGroup]="validateForm" class="login100-form" (ngSubmit)="submitForm()">
+                        <span class="login100-form-title p-b-70">
+              Welcome to atouts
+            </span>
+                        <span class="login100-form-avatar">
+              <img src="../../../assets/images/banner.jpg" alt="AVATAR">
+            </span>
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please input your
+                username!">
+                                <nz-input-group nzPrefixIcon="user">
+                                    <input type="text" nz-input formControlName="username" placeholder="username" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please input your
+                Password!">
+                                <nz-input-group nzPrefixIcon="lock">
+                                    <input type="password" nz-input formControlName="password" placeholder="Password" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <label nz-checkbox formControlName="remember"> <span>Se souvenir</span>
+                </label>
+                                <a class="login-form-forgot" class="login-form-forgot" routerLink="/forgot-password">Mot de passe oublier</a>
+                                <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Or
+                                <a routerLink="/register">S'enrégistrer!</a>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div nz-row style="margin-top: 2%;">
+
+    <div class="card">
+        <div class="card-body">
+            <div class="alert alert-danger" *ngIf="mode==1">
+                <strong>Informations d'identification incorrectes ...</strong>
+            </div>
+
+            <h1 class="panel-heading">Authentification</h1><br>
+
+            <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your
+                                    username!">
+                        <nz-input-group nzPrefixIcon="user">
+                            <input type="text" nz-input formControlName="username" placeholder="username" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your
+                                    Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control>
+                        <label nz-checkbox formControlName="remember">
+                                        <span>Remember me</span>
+                                    </label>
+                        <a class="login-form-forgot" class="login-form-forgot">Mot
+                                        de passe
+                                        oublier</a>
+                        <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Or
+                        <a routerLink="/register">S'enrégistrer!</a>
+                    </nz-form-control>
+                </nz-form-item>
+            </form>
+        </div>
+    </div>
+</div> -->

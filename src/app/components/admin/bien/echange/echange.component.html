@@ -1,0 +1,290 @@
+<br>
+<div nz-row nzGutter="12" class="example-input">
+    <div nz-col nzSpan="12">
+        <button nz-button nzType="primary" (click)="ajout()">
+            <i nz-icon type="user-add" theme="outline"></i>
+            Ajouter
+        </button>
+    </div>
+    <!-- <div nz-col nzSpan="12">
+        <button nz-button nzType="primary" (click)="edition()">
+          <i nz-icon type="printer" theme="outline"></i>
+          Editer
+        </button>
+      </div> -->
+</div>
+
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto',
+    'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible
+    ?
+    180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <div nz-row nzGutter="12" class="example-input">
+            <div nz-col nzSpan="12">
+                <!-- *ngIf="!edit" -->
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
+                        <span>
+                            Nom
+                            <i nz-icon nz-tooltip nzTitle="Le nom SVP."
+                                type="question-circle"
+                                theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="nom" formControlName="nom" nzSize="small" placeholder="Nom" oninput="this.value=
+                            this.value.toUpperCase()">
+                        <nz-form-explain *ngIf="validateForm.get('nom').dirty &&
+                            validateForm.get('nom').errors">
+                            Votre nom SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nickname" nzRequired>
+                        <span>
+                            Description
+                            <i nz-icon nz-tooltip nzTitle="La Description SVP"
+                                type="question-circle" theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="description" formControlName="description" nzSize="small" placeholder="Description" oninput="this.value=
+                            this.value.toUpperCase()">
+                        <nz-form-explain *ngIf="validateForm.get('description').dirty &&
+                            validateForm.get('description').errors">
+                            Votre Description SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row nzGutter="12" class="example-input">
+            <div nz-col nzSpan="12">
+                <!-- *ngIf="!edit" -->
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
+                        <span>
+                            Téléphone
+                            <i nz-icon nz-tooltip nzTitle="Le téléphone SVP."
+                                type="question-circle" theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="tel" formControlName="tel" nzSize="small" placeholder="Téléphone" oninput="this.value= this.value.toUpperCase()">
+                        <nz-form-explain *ngIf="validateForm.get('tel').dirty &&
+                            validateForm.get('tel').errors">
+                            Votre Téléphone SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+
+
+        <div nz-row nzGutter="12" class="example-input">
+
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo</nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+
+                        <input nz-input nzSize="small" type="file" #Image name="file" id="file" accept=".jpg, .jpeg, .png" (change)="onSelectFile($event)">
+                        <!--<button type="button" (click)="upload()">Upload</button>-->
+                        <p>
+                            <p>
+                                <img [src]="imageUrl" style="width:200px;height:200px">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+        </div>
+
+        <div class="footer">
+
+            <div nz-row>
+                <div nz-col nzSpan="8">
+                    <button type="button" (click)="resetForm()" class="ant-btn
+                                ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="retweet" theme="outline"></i>
+                                <span>Annuler</span></button>
+                </div>
+                <div nz-col nzSpan="8">
+
+                    <nz-form-item nz-row style="margin-bottom:8px;">
+                        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                            <button nz-button nzType="primary">
+                                        <i nz-icon type="save"></i>
+                                        <span>Ajouter</span></button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div nz-col nzSpan="8">
+                    <button type="button" (click)="close()" class="ant-btn
+                                ant-btn-primary">
+                                <i nz-icon type="logout"></i>
+                                <span>Fermer</span></button>
+                </div>
+            </div>
+
+
+        </div>
+    </form>
+</nz-drawer>
+
+<nz-card style="width: 100%;">
+    <nz-card-tab>
+        <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
+            <nz-tab nzTitle="Mes échanges"></nz-tab>
+            <nz-tab nzTitle="Mes échanges accepter"></nz-tab>
+            <nz-tab nzTitle="Mes demandes d'échanges"></nz-tab>
+        </nz-tabset>
+    </nz-card-tab>
+    <!-- content{{ selectedIndex }} -->
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==0">
+        <div class="col-md-6">
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+                <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" nzSize="large" (click)="chercherEchange()" nzSearch>Search</button>
+            </ng-template>
+        </div>
+        <br>
+        <nz-list [nzDataSource]="echangesList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+                    gutter: 16, xs: 24, sm: 12, md: 8,
+                    lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney,
+                            actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                </ng-template>
+                <ng-template #actionMonney>
+                    <i nz-icon type="money-collect"></i>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+                    <a><i nz-icon type="shopping-cart"></i></a>
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pages" [nzPageSize]="pageSize" (nzPageIndexChange)="gotoLoadDataEchange($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+
+    </div>
+
+
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==1">
+        <div class="col-md-6">
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+                <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" nzSize="large" (click)="chercherEchange()" nzSearch>Search</button>
+            </ng-template>
+        </div>
+        <br>
+        <nz-list [nzDataSource]="echangesAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+                    gutter: 16, xs: 24, sm: 12, md: 8,
+                    lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney,
+                            actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                </ng-template>
+                <ng-template #actionMonney>
+                    <i nz-icon type="money-collect"></i>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+                    <a><i nz-icon type="shopping-cart"></i></a>
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pages" [nzPageSize]="pageSize" (nzPageIndexChange)="gotoLoadDataAccepter($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+
+    </div>
+
+
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==2">
+        <div class="col-md-6">
+            <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+                <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" nzSize="large" (click)="chercherEchange()" nzSearch>Search</button>
+            </ng-template>
+        </div>
+        <br>
+        <nz-list [nzDataSource]="echangesDemandeList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+                    gutter: 16, xs: 24, sm: 12, md: 8,
+                    lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney,
+                            actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                </ng-template>
+                <ng-template #actionMonney>
+                    <i nz-icon type="money-collect"></i>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+                    <a><i nz-icon type="shopping-cart"></i></a>
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pages" [nzPageSize]="pageSize" (nzPageIndexChange)="gotoLoadDataDemande($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+
+    </div>
+
+
+
+
+
+
+</nz-card>

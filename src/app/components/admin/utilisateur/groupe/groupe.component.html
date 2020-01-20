@@ -1,0 +1,569 @@
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <br>
+        <div nz-row nzGutter="12" class="example-input">
+            <button nz-button nzType="primary" (click)="ajout()">
+                <i nz-icon type="laptop" theme="outline"></i>
+                Ajouter
+            </button>
+        </div>
+
+        <br/>
+
+        <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
+                'auto',
+                'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN NOUVEAU GROUPE" (nzOnClose)="close()">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+                <div nz-row nzGutter="12" class="example-input">
+                    <div nz-col nzSpan="12">
+                        <!-- *ngIf="!edit" -->
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
+                                <span>
+                                        Numero Groupe
+                                        <i nz-icon nz-tooltip nzTitle="Le numero du Groupe SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="id" disabled style="width:  200px;" formControlName="id" placeholder="Numero Groupe">
+                               
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <div nz-col nzSpan="12" *ngIf="!edit">
+                        <!-- *ngIf="!edit" -->
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="nomGroupe" nzRequired>
+                                <span>
+                                        Nom Groupe
+                                        <i nz-icon nz-tooltip nzTitle="Le nom du Groupe SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="nomGroupe" style="width: 200px;" formControlName="nomGroupe" placeholder="Nom Groupe" oninput="this.value=
+                                    this.value.toUpperCase()">
+                                <nz-form-explain *ngIf="validateForm.get('nomGroupe').dirty
+                                        &&
+                                        validateForm.get('nomGroupe').errors">
+                                    Le Nom Groupe SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="12" *ngIf="edit">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="nomGroupe" nzRequired>
+                                <span>
+                                        Nom Groupe
+                                        <i nz-icon nz-tooltip nzTitle="Le nom du Groupe SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="nomGroupe" disabled style="width: 200px;" formControlName="nomGroupe" placeholder="Nom
+                                        Groupe">
+                                <!-- <input nz-input id="nomGroupe"  style="width: 200px;" formControlName="nomGroupe" placeholder="Nom Groupe"> -->
+                                <nz-form-explain *ngIf="validateForm.get('id').dirty && validateForm.get('id').errors">
+                                    Le Numero Facture SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+
+                <div nz-row nzGutter="12" class="example-input">
+                    <!--  *ngIf="!edit"   -->
+
+                    <div nz-col nzSpan="6">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="appUser" nzRequired>Membre</nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <nz-select id="appUser" style="width: 150px;" formControlName="appUser" nzShowSearch nzAllowClear nzPlaceHolder="---Choix d'un Utilisateur SVP---">
+                                    <nz-option *ngFor="let option of optionsC" [nzLabel]="option.nom" [nzValue]="option"></nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+                    <div nz-col nzSpan="6">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="partmn" nzRequired>Part Monnaie</nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <nz-input-number style="width: 150px;" formControlName="partmn" [nzMin]="0" [nzStep]="0.1" [nzMax]="1" [(ngModel)]="partmn" placeholder="---part monnaie---"></nz-input-number>
+                                <!-- <input nz-input id="partmn" style="width:
+                                        150px;" formControlName="partmn" [(ngModel)]="partmn" placeholder="---part monnaie---"> -->
+                            </nz-form-control>
+
+                        </nz-form-item>
+
+                    </div>
+
+
+                    <div nz-col nzSpan="6">
+
+                        <nz-form-item>
+
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="partvl" nzRequired>Part Valeur</nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+<nz-input-number style="width: 150px;" formControlName="partvl" [nzMin]="0" [nzStep]="0.1" [nzMax]="1" [(ngModel)]="partvl" placeholder="---part valeur---"></nz-input-number>
+                                <!-- <input nz-input id="partvl" style="width:
+                                        150px;" formControlName="partvl" [(ngModel)]="partvl" placeholder="---part valeur---"> -->
+                            </nz-form-control>
+
+                        </nz-form-item>
+
+                    </div>
+
+
+
+                    <div nz-col nzSpan="6">
+                        <nz-form-item nz-row style="margin-bottom:8px;">
+                            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                <button nz-button nzType="primary">
+                                        <i nz-icon type="diff"></i>
+                                        <span>Ajouter</span></button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+
+
+
+                </div>
+
+
+
+            </form>
+
+
+
+            <!-- <button nz-button (click)="addRow()" class="editable-add-btn">Add</button> -->
+            <div *ngIf="!cent">
+                <nz-alert nzType="error" nzMessage="Attention somme des partages supérieure  à 1" *ngIf="depass"></nz-alert>
+                <nz-alert nzType="warning" nzMessage="Attention somme des partages inférieure  à 1" *ngIf="nocent"></nz-alert>
+            </div>
+
+
+            <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet" *ngIf="!edit">
+                <!-- *ngIf="nouv" -->
+                <thead>
+                    <tr>
+                        <th nzWidth="5%" nzCustomFilter>
+                            Id User
+                        </th>
+                        <th nzWidth="10%">Nom</th>
+                        <th nzWidth="10%">Prenom</th>
+                        <th nzWidth="10%">Téléphone</th>
+                        <th nzWidth="10%">Part Monnaie</th>
+                        <th nzWidth="10%">Part Valeur</th>
+                        <th nzWidth="10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data">
+                        <td>
+                            <div class="editable-cell">
+                                <div class="editable-cell-text-wrapper">
+                                    <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                        <!-- *ngIf="!editCache[data.pkFacturer.bien_id].edit" -->
+                                        {{data.appUser.id}}
+                                    </ng-container>
+                                    <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                        <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.id">
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.nom}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.nom">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.prenom}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.prenom">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.tel}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.tel">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.partmn}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.partmn">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.partvl}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.partvl">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <div class="editable-row-operations">
+                                <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                            <i nz-icon type="edit"></i>
+                                        </button>
+                                </ng-container>
+
+
+
+                                <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
+                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="delete"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+
+
+                                <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                            <i nz-icon type="form"></i>
+                                        </button>
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            l\'annulation?'" (nzOnConfirm)="cancelEdit(data.pkGrouper.appUser_id)">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="close"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                </tbody>
+
+            </nz-table>
+            <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet" *ngIf="edit">
+                <!-- *ngIf="nouv" -->
+                <thead>
+                    <tr>
+                        <th nzWidth="5%" nzCustomFilter>
+                            Id User
+
+                        </th>
+                        <th nzWidth="10%">Nom</th>
+                        <th nzWidth="10%">Prenom</th>
+                        <th nzWidth="10%">Téléphone</th>
+                        <th nzWidth="10%">Part Monnaie</th>
+                        <th nzWidth="10%">Part Valeur</th>
+                        <th nzWidth="10%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data">
+                        <td>
+                            <div class="editable-cell">
+                                <div class="editable-cell-text-wrapper">
+                                    <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                        <!-- *ngIf="!editCache[data.pkFacturer.bien_id].edit" -->
+                                        {{data.appUser.id}}
+                                    </ng-container>
+                                    <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                        <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.id">
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.nom}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.nom">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.prenom}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.prenom">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.appUser.tel}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.tel">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.partmn}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.partmn">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                {{data.partvl}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.partvl">
+                            </ng-container>
+                        </td>
+                        <td>
+                            <div class="editable-row-operations">
+                                <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                            <i nz-icon type="edit"></i>
+                                        </button>
+                                </ng-container>
+
+
+
+                                <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
+                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="delete"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+
+
+                                <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                            <i nz-icon type="form"></i>
+                                        </button>
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            l\'annulation?'" (nzOnConfirm)="cancelEdit(data.pkGrouper.appUser_id)">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="close"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- <tr >
+      <td hidden>
+        <div class="editable-cell">
+          <div class="editable-cell-text-wrapper">
+           sdsdsd
+          </div>
+        </div>
+      </td>
+      <td>
+        dsdsdsdsd
+      </td>
+      <td hidden>
+        ssdsdsdsd
+      </td>
+      <td >
+          {{somme}}
+      </td>    
+      
+    </tr> -->
+                </tbody>
+
+            </nz-table>
+            <!-- <div nz-row >
+    <div nz-col nzSpan="6" nzOffset="12">
+        TOTAL
+    </div>   
+    <div nz-col nzSpan="6">
+        {{somme}}
+    </div>   
+</div> -->
+            <div nz-row>
+                <!-- *ngIf="!edit" -->
+                <div nz-col nzSpan="6">
+                    <!--  nzOffset="12" -->
+                    TOTAL MN
+                </div>
+                <div nz-col nzSpan="6">
+                    {{sommemn}}
+                </div>
+
+                <div nz-col nzSpan="6">
+                    TOTAL VL
+                </div>
+                <div nz-col nzSpan="6">
+                    {{sommevl}}
+                </div>
+            </div>
+
+            <br><br>
+            <div nz-row nzGutter="12" class="example-input">
+                <div nz-col nzSpan="6" *ngIf="!edit">
+                    <button type="button" (click)="valider()" class="ant-btn
+                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                            <i nz-icon type="save" theme="outline"></i>
+                            <span>Valider</span></button>
+                </div>
+                <div nz-col nzSpan="6" *ngIf="edit">
+                    <button type="button" (click)="valider()" class="ant-btn
+                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                            <i nz-icon type="save" theme="outline"></i>
+                            <span>Modifier</span></button>
+                </div>
+                <div nz-col nzSpan="6" *ngIf="!edit">
+                    <!-- *ngIf="!edit" -->
+                    <button type="button" (click)="resegroupe()" class="ant-btn
+                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                            <i nz-icon type="retweet" theme="outline"></i>
+                            <span>Annuler Groupe</span></button>
+                </div>
+                <div nz-col nzSpan="8">
+                    <button type="button" (click)="close()" class="ant-btn
+                            ant-btn-primary">
+                            <i nz-icon type="logout"></i>
+                            <span>Fermer</span></button>
+                </div>
+            </div>
+
+
+
+            <!-- <div class="footer">
+      <div nz-row>
+         <div nz-col nzSpan="8">
+          <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;"
+                  ant-btn-primary>
+            <i nz-icon type="retweet" theme="outline"></i>
+            <span>Annuler</span></button>
+        </div>
+        <div nz-col nzSpan="8">
+
+          <nz-form-item nz-row style="margin-bottom:8px;">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+
+              <button nz-button nzType="primary">
+                <i nz-icon type="diff"></i>
+                <span>Ajouter</span></button>
+
+            </nz-form-control>
+          </nz-form-item>
+
+        </div> 
+        <div nz-col nzSpan="8">
+          <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+            <i nz-icon type="logout"></i>
+            <span>Fermer</span></button>
+        </div>
+      </div>
+
+
+    </div> -->
+        </nz-drawer>
+
+
+        <nz-card style="width: 100%;">
+             <h4 class="card-title">LISTES DES GROUPES ACTIFS ATOUTS</h4>
+            <h6 class="card-subtitle">
+            LISTES DES GROUPES<br>
+                <hr>
+            </h6>
+            <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet1">
+                <thead>
+                    <tr>
+                        <th nzWidth="20%" nzCustomFilter>
+                            Numero Groupe
+                            <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+                                <i nz-icon type="search" theme="outline" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                                <div class="custom-filter-dropdown">
+                                    <input type="text" nz-input placeholder="recherche
+                                            numero" [(ngModel)]="searchValue">
+                                    <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+                                </div>
+                            </nz-dropdown>
+                        </th>
+                        <th nzWidth="30%">Nom Groupe</th>
+                        <th nzWidth="15%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data">
+                        <td>
+                            <div class="editable-cell">
+                                <div class="editable-cell-text-wrapper">
+                                    <ng-container *ngIf="!editCache1[data.id].edit">
+                                        {{data.id}}
+                                    </ng-container>
+                                    <ng-container *ngIf="editCache1[data.id].edit">
+                                        <input type="text" disabled nz-input [(ngModel)]="editCache1[data.id].data.id">
+                                    </ng-container>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <ng-container *ngIf="!editCache1[data.id].edit">
+                                {{data.nomGroupe}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache1[data.id].edit">
+                                <!-- <input type="text" disabled nz-input [(ngModel)]="editCache1[data.id].data.nomGroupe"> -->
+                                <input type="text" nz-input [(ngModel)]="editCache1[data.id].data.nomGroupe">
+                            </ng-container>
+                        </td>
+
+                        <td>
+                            <div class="editable-row-operations">
+                                <ng-container *ngIf="!editCache1[data.id].edit">
+                                    <nz-popconfirm [nzTitle]="'Edition
+                                            avancée?'" (nzOnConfirm)="avance(data.id)" (nzOnCancel)="startEdit1(data.id)">
+                                        <button nz-button title="Editer" nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="edit"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+
+                                <ng-container *ngIf="!editCache1[data.id].edit">
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            supprimer?'" (nzOnConfirm)="delete1(data.id)">
+                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="delete"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+
+
+                                <ng-container *ngIf="editCache1[data.id].edit">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit1(data.id)"  nzShape="circle">
+                                            <i nz-icon type="form"></i>
+                                        </button>
+                                    <nz-popconfirm [nzTitle]="'Êtes vous sûr
+                                            de
+                                            l\'annulation?'" (nzOnConfirm)="cancelEdit1(data.id)">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="close"></i>
+                                            </button>
+                                    </nz-popconfirm>
+                                </ng-container>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>

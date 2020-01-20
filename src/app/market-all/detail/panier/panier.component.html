@@ -1,0 +1,176 @@
+<div class="container" style="margin-top: 2%; background-color: #ededed">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 style="text-align: center">Panier-Atouts</h3>
+        </div>
+        <div class="panel-body">
+            <!-- <table class="table table-striped border" style="width: 100%!important;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nom</th>
+                                <th>Quantité</th>
+                                <th>Prix</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let pi of panier.items let i=index">
+                                <td> {{ i+1 }}</td>
+                                <td> {{ pi.nom }}</td>
+                                <td> {{ pi.quantite }}</td>
+                                <td> {{ pi.prix }}</td>
+                                <td>
+                                    <div class="editable-row-operations">
+            
+                                        <ng-container>
+                                            <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="onRemoveProductFromCaddy(pi)" [nzOkText]="'Oui'"
+                                                [nzCancelText]="'Non'">
+            
+                                                <button type="button" nz-popconfirm class="btn btn-danger btn-circle  btn-sm">
+                                                    <i class="ti-close"></i>
+                                                </button>
+            
+                                            </nz-popconfirm>
+                                        </ng-container>
+            
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">Total</td>
+                                <td>{{ panierService.getTotal() }}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>                      -->
+            <div class="table-responsive">
+                <nz-table #editRowTable nzBordered [nzShowPagination]=false [nzPageSize]=7 [nzData]="panier.items">
+                    <thead>
+                        <tr>
+                            <th nzWidth="5%"> # </th>
+                            <th nzWidth="20%" nzCustomFilter>
+                                Désignation
+                                <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                                    <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                                    <div class="search-box">
+                                        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                                        <button nz-button nzType="primary" (click)="search()" class="search-button">Search</button>
+                                        <button nz-button (click)="reset()">Reset</button>
+                                    </div>
+                                </nz-dropdown>
+                            </th>
+                            <th nzWidth="10%">Quantité</th>
+                            <th nzWidth="10%">TBCCV</th>
+                            <th nzWidth="10%">Prix</th>
+                            <th nzWidth="5%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data let i=index">
+                            <td>
+                                <ng-container>
+                                    {{ i+1 }}
+                                </ng-container>
+                            </td>
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            {{data.nom}}
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <!-- <ng-container>
+                                            {{data.quantite}}
+                                    </ng-container> -->
+                                <ng-container *ngIf="!editCache[data.id].edit">
+                                    {{data.quantite}}
+                                </ng-container>
+                                <ng-container *ngIf="editCache[data.id].edit">
+                                    <!-- <input nz-input  type="number" min="1" max="2"  [(ngModel)]="editCache[data.id].data.quantite">   style="width: 60px;"  name="quantite" ngModel -->
+                                    <nz-input-number [(ngModel)]="editCache[data.id].data.quantite" [nzMin]="1" [nzMax]="2" [nzStep]="1"></nz-input-number>
+                                </ng-container>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{ data.tBCCV }}
+                                </ng-container>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{ data.prix }}
+                                </ng-container>
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container *ngIf="!editCache[data.id].edit">
+                                        <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.id)"  nzShape="circle">
+                                            <i nz-icon type="edit"></i>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="!editCache[data.id].edit">
+                                        <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="startDelete (data.id)">
+                                            <button nz-popconfirm title="Enlever" nz-button nzType="danger"  nzShape="circle">
+                                                <i nz-icon type="close"></i>
+                                            </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+
+
+                                    <ng-container *ngIf="editCache[data.id].edit">
+                                        <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.id)"  nzShape="circle">
+                                            <i nz-icon type="form"></i>
+                                        </button>
+                                        <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit(data.id)">
+                                            <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <i nz-icon type="close"></i>
+                                            </button>
+                                        </nz-popconfirm>
+                                    </ng-container>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <ng-container>
+                                    <h5 style="text-align: center">Total</h5>
+                                </ng-container>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{ panierService.getTotal() }}
+                                </ng-container>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+
+                </nz-table>
+                <!-- <button nz-button nzType="primary" nzSize="default"  (click)="onNewCommande()" >Commander</button> -->
+                
+                <br>
+                <p style="text-align: center; margin:2px;">
+                        <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0"  (click)="onNewCommande()" >Commander</button>
+                        <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0"  (click)="onViderPanier()" >Vider panier</button>
+                        <button nz-button nzType="primary" nzSize="default" (click)="onReturnMarket()" ><i nz-icon>Retour marché</i></button>
+                    <!-- <i nz-icon type="shopping"></i>
+                        <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onNewCommande()">Commander</button>
+                    <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onViderPanier()">Vider panier</button>
+                    <button class="btn btn-success" (click)="onReturnMarket()">
+                        <i nz-icon>retour</i>
+                        <i nz-icon type="shopping"></i>
+                    </button> -->
+                </p>
+                <!-- <p style="text-align: center">                   
+                <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onNewCommande()">Commander</button>
+                <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onViderPanier()">Vider panier</button>
+                <button class="btn btn-success" (click)="onReturnMarket()"><i nz-icon>retour</i><i nz-icon type="shopping"></i></button>
+                </p> -->
+            </div>
+        </div>
+    </div>
+</div>

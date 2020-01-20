@@ -1,0 +1,173 @@
+<div class="col-md-12 col-sm-12">
+    <br />
+
+    <div class="row">
+        <nz-card style="width: 100%;">
+            <nz-card-tab>
+                <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex">
+                    <nz-tab nzTitle="Listes des commandes de services non acceptées"></nz-tab>
+                    <nz-tab nzTitle="Liste des commandes de services acceptées"></nz-tab>
+                </nz-tabset>
+            </nz-card-tab>
+            <div *ngIf="selectedIndex==0">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="commandesServiceNonAccepteList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                #
+                            </th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Service</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data let i=index">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            <!-- {{i+1}} -->
+                                            {{data.id}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.date | date: 'dd-MM-yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.service.nom}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Détail" nzType="info" (click)="inspecterCommandeService(data)"  nzShape="circle">
+                                            <i nz-icon type="info"></i>
+                                        </button>
+                                    </ng-container>
+                                    <ng-container>
+                                        <button nz-button title="supprimer" nzType="delete" (click)="supprimerCommandeServiceNA(data)"  nzShape="circle">
+                                            <i nz-icon type="delete"></i>
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+            <div *ngIf="selectedIndex==1">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="commandesServiceAccepteList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                #
+                            </th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Service</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data let i=index">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            <!-- {{i+1}} -->
+                                            {{data.id}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.date | date: 'dd-MM-yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.service.nom}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Détail" nzType="info" (click)="inspecterCommandeService(data)"  nzShape="circle">
+                                            <i nz-icon type="info"></i>
+                                        </button>
+                                    </ng-container>
+                                    <ng-container>
+                                        <button nz-button title="supprimer" nzType="delete" (click)="supprimerCommandeServiceA(data)"  nzShape="circle">
+                                            <i nz-icon type="delete"></i>
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+           
+        </nz-card>
+    </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!--détail commandes-->
+<nz-modal [(nzVisible)]="isVisibleCommandeService" nzTitle="Detail commande service" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()"
+    [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="700">
+    <div class="row">
+
+        <div class="col-md-6 col-sm-12">
+            Commande ID :
+            <strong>{{ unecommandeService.id }}</strong>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            Date Commande :
+            <strong>{{ unecommandeService.date | date:'medium' }}</strong>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12">
+                Description de la rêquete :
+            <p><strong>{{ unecommandeService.detail }}</strong></p>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <br>
+
+
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Désignation</th>
+                <th>description</th>
+            </tr>
+            <tr>
+                <td>{{service.id}}</td>
+                <td>{{service.nom}}</td>
+                <td>{{service.description}}</td>
+            </tr>
+        </table>
+
+    </div>
+</nz-modal>

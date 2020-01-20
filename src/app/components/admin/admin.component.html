@@ -1,0 +1,230 @@
+<nz-layout class="app-layout">
+    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzTheme="light" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
+        <div class="sidebar-logo">
+            <a routerLink="/admin" target="_blank">
+                <!-- <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo"> -->
+                <img src="../../../assets/images/banner.jpg" alt="logo">
+                <h1>Afrique Atout</h1>
+            </a>
+        </div>
+        <!--  <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/welcome">Welcome</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Monitor</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Workplace</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/welcome">Welcome</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Monitor</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Workplace</a>
+                    </li>
+                </ul>
+            </li>
+        </ul> -->
+        <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')" nzTitle="Gestion des
+                membres" nzIcon="user">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['utilisateur/crud-utilisateur']">Liste
+                            des membres</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['utilisateur/crud-utilisateur-final']">Liste
+                            des membres à finaliser</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['utilisateur/crud-goupe']">Groupe</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Workplace</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub2" (nzOpenChange)="openHandler('sub2')" nzTitle="Gestion des
+                Comptes" nzIcon="user">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['compte/crud-compte']">Liste des
+                            comptes</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['compte/crud-sous-comptes']">Liste des
+                            comptes</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub3" (nzOpenChange)="openHandler('sub3')" nzTitle="Gestions des
+                Biens" nzIcon="shopping-cart">
+                <ul>
+                    <li nz-menu-item [routerLink]="['bien/crud-bien']">Liste des biens
+                    </li>
+                    <li nz-menu-item [routerLink]="['bien/acception-produit']">Acceptation Produit
+                    </li>
+                    <li nz-menu-item [routerLink]="['bien/acception-service']">Acceptation Service
+                    </li>
+                    <li nz-menu-item [routerLink]="['bien/demande-bien-user']">Mes ventes
+                    </li>
+
+                    <li nz-menu-item [routerLink]="['bien/echange']">Mes échanges
+                    </li>
+
+                    <li nz-menu-item [routerLink]="['bien/accepte-echange']">Listes des Echanges</li>
+
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub7" (nzOpenChange)="openHandler('sub7')" nzTitle="Gestions des
+                Commandes-Payements" nzIcon="shopping-cart">
+                <ul>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande']">Commande-Admin</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/user-commande']">Commande-User</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande-service']">admin-commande-service</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/user-commande-service']">user-commande-service</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-payment']">Payment-Admin</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/user-payment']">Payment-User</li>
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub4" (nzOpenChange)="openHandler('sub4')" nzTitle="Gestions des
+                Opérations" nzIcon="setting">
+
+                <ul>
+                    <li nz-menu-group nzTitle="Gestions des opérations">
+                        <ul>
+                            <li nz-menu-item nzSelected [routerLink]="['operation/operations-depot-retrait-virement']">Opération de mobilisation</li>
+                            <li nz-menu-item [routerLink]="['operation/operation-en']">Autorisation opération
+                            </li>
+                        </ul>
+                    </li>
+                    <li nz-menu-group nzTitle="Gestions des VOD">
+                        <ul>
+                            <li nz-menu-item nzSelected [routerLink]="['operation/tresor']">Tresor</li>
+                            <li nz-menu-item [routerLink]="['operation/ed']">Epargne différé
+                            </li>
+                        </ul>
+                    </li>
+                    <li nz-menu-group nzTitle="Gestions de mes opérations">
+                        <ul>
+                            <li nz-menu-item>Mes dépot</li>
+                            <li nz-menu-item [routerLink]="['operation/operation-virement-user']">Mes virements
+                            </li>
+                            <li nz-menu-item [routerLink]="['operation/operation-virement-user/compte-favori']">Compte Favori
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub5" (nzOpenChange)="openHandler('sub5')" nzTitle="Gestions des
+                Mobilisation" nzIcon="setting">
+                <ul>
+                    <li nz-menu-item [routerLink]="['mobilisation']">Gestions des Mobilisation
+                    </li>
+                    <li nz-menu-item>Option 10</li>
+                    <!--  <li nz-menu-item>Option 11</li> -->
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Gestion des
+                Bon" nzIcon="user">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['bon/crud-bon']">Liste des bons</a>
+                    </li>
+                    <li nz-menu-item [routerLink]="['bon/encaisse-bon']">Liste des encaisses"
+                    </li>
+                    <li nz-menu-item [routerLink]="['bon/liquidation-bon']">Liste des liquidations
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+                <div nz-col nzSpan="8">
+                    <span class="header-trigger" (click)="isCollapsed=
+                        !isCollapsed">
+                        <i class="trigger"
+                            nz-icon
+                            [nzType]="isCollapsed ? 'menu-unfold' :
+                            'menu-fold'"></i>
+                    </span>
+                </div>
+
+                <div nz-col nzSpan="8" nzOffset="8" class="profil">
+
+                    <div class="imageUser">
+                        <a nz-dropdown [nzDropdownMenu]="menu">
+
+                            <nz-avatar nzSrc="../../../assets/images/diko.png" nzAlt="content" [nzSize]="50" nzIcon="user"></nz-avatar>
+                            <span>AMADOU DIKO</span>
+
+                            <i nz-icon nzType="down"></i>
+                        </a>
+                    </div>
+                    <div class="infoUser">
+                        <nz-dropdown-menu #menu="nzDropdownMenu">
+                            <li class="user-header" style="text-align: center">
+                                <p style="text-align:right">
+                                    Alexander Pierce - Web Developer
+                                    <small>Member since Nov. 2012</small>
+                                </p>
+                            </li>
+                            <ul nz-menu nzSelectable>
+                                <li nz-menu-item><i nz-icon nzType="user" nzTheme="outline"></i> My Profile</li>
+                                <li nz-menu-item><i nz-icon nzType="mail" nzTheme="outline"></i> My Inbox</li>
+                                <li nz-menu-item>
+                                    <nz-badge [nzCount]="5"><i nz-icon nzType="notification" nzTheme="outline"></i></nz-badge>Notifications</li>
+                                <li nz-menu-item (click)="logout()"><i nz-icon nzType="lock" nzTheme="outline"></i> Déconnexion
+                                </li>
+                            </ul>
+                        </nz-dropdown-menu>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </nz-header>
+
+        <!--  <nz-page-header class="app-header">
+            <nz-page-header-content>
+                <div>
+                    <span class="header-trigger" (click)="isCollapsed=
+                                            !isCollapsed">
+                                            <i class="trigger"
+                                                nz-icon
+                                                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></i>
+                                        </span>
+                    <nz-avatar style="background-color:#87d068;" [nzSize]="64" nzIcon="user"></nz-avatar>
+                    <img src="../../../assets/images/favicon.png" alt="content" />
+                </div>
+            </nz-page-header-content>
+        </nz-page-header> -->
+        <nz-content>
+            <div class="inner-content">
+                <!--  <nz-breadcrumb [nzAutoGenerate]="true" nz-page-header-breadcrumb>
+                </nz-breadcrumb> -->
+
+                <router-outlet>
+
+                </router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

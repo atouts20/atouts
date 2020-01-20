@@ -1,0 +1,172 @@
+<nz-card style="width: 100%;">
+    <div>            
+        <nz-card-tab>
+            <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
+                <nz-tab nzTitle="Nos Echanges"></nz-tab>
+                <nz-tab nzTitle="Nos Services"></nz-tab>
+                <nz-tab nzTitle="Nos Produits"></nz-tab>
+                <nz-tab nzTitle="Accueil"></nz-tab>
+            </nz-tabset>
+        </nz-card-tab>
+
+    </div>
+
+    <!-- content{{ selectedIndex }} -->
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==2">
+
+        <div class="row">
+            <div class="col-md-3 col-sm-3">
+                <nz-input-group nzSearch nzSize="small" [nzAddOnAfter]="suffixButton">
+                    <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+                </nz-input-group>
+                <ng-template #suffixButton>
+                    <button nz-button nzType="primary" nzSize="small" (click)="chercherProduit()" nzSearch>Search</button>
+                </ng-template>
+
+            </div>
+            <div class="col-md-9 col-sm-3" style="text-align: right">
+                <button nz-button nzType="primary" nzSize="small" (click)="goToPanier()" style="text-align:end"><i nz-icon type="shopping-cart"></i>Votre panier</button>
+            </div>
+            <!-- <div class="col-md-3" *ngIf="panierService.val == 1">
+                        <nz-progress *ngIf="!isFinish()" nzStrokeLinecap="round" nzType="circle" [nzPercent]="percent"></nz-progress>
+                    </div> -->
+        </div>
+
+        <br>
+        <nz-list [nzDataSource]="produitsActiverList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 8, lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney, actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <a (click)="gotoDetail(item.id)"><img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" /></a>
+                </ng-template>
+                <ng-template #actionMonney>
+                    <strong>{{formatNumber(item.prix)}}</strong>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit" (click)="gotoDetail(item.id)"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+
+                    {{item.tBCCV}} %
+
+                    <!-- <form #f="ngForm" (ngSubmit)="addToCart(item)">
+                        <input type="number" min="1" max="2" name="quantite" ngModel style="width: 40px; height: 20px;" [(ngModel)]="item.quantite">
+                        <a placement="top" mdbTooltip="Add to Cart" container="body">
+                            <i nz-icon type="shopping-cart"></i>
+                        </a>
+                        <button>ff</button>
+                    </form> -->
+
+
+
+                    <!-- <i nz-icon  *ngIf="!favoris"   type="heart" (click)="setFavoris(item.id)"></i>
+                    <i nz-icon  *ngIf="favoris"    [nzType]="'heart'"   (click)="setFavoris(item.id)"   [nzTheme]="'twotone'" [nzTwotoneColor]="'#eb2f96'"></i> -->
+
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pages" [nzPageSize]="pageSize" (nzPageIndexChange)="gotoPageProduit($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+    </div>
+
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==1">
+
+        <div class="col-md-3 col-sm-3">
+            <nz-input-group nzSearch nzSize="small" [nzAddOnAfter]="suffixButton">
+                <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" nzSize="small" (click)="chercherService()" nzSearch>Search</button>
+            </ng-template>
+        </div>
+        <br>
+        <nz-list [nzDataSource]="servicesActiverList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 8, lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney, actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <a (click)="gotoDetailService(item.id)"><img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" /></a>
+                </ng-template>
+                <ng-template #actionMonney>
+                    <i nz-icon type="money-collect"></i>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit" (click)="gotoDetailService(item.id)"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+                    <!-- <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="addToCartService(item)">
+                        <i nz-icon type="shopping-cart"></i>
+                    </a> -->
+                    <a placement="top" mdbTooltip="Add to Cart" container="body" (click)="onNewCommande(item)">
+                        <i nz-icon type="shopping-cart"></i>
+                    </a>
+
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pagesService" [nzPageSize]="pageSizeService" (nzPageIndexChange)="gotoPageService($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+
+        <!-- <nz-pagination [nzPageIndex]="1" [nzTotal]="50"></nz-pagination> -->
+    </div>
+
+    <div style="background: hsl(0, 0%, 93%);padding:30px;" *ngIf="selectedIndex==0">
+
+        <div class="col-md-3 col-sm-3">
+            <nz-input-group nzSearch nzSize="small" [nzAddOnAfter]="suffixButton">
+                <input type="text" [(ngModel)]="motCle" nz-input placeholder="input search text" />
+            </nz-input-group>
+            <ng-template #suffixButton>
+                <button nz-button nzType="primary" nzSize="small" (click)="chercherEchange()" nzSearch>Search</button>
+            </ng-template>
+        </div>
+        <br>
+        <nz-list [nzDataSource]="echangesList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{ gutter: 16, xs: 24, sm: 12, md: 8, lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
+            <ng-template #item let-item>
+                <nz-card [nzCover]="coverTemplate" [nzActions]="[actionMonney, actionEdit, actionShopping]">
+                    <nz-card-meta [nzTitle]="item.nom" [nzDescription]="item.description" [nzAvatar]="avatarTemplate">
+                    </nz-card-meta>
+                </nz-card>
+                <ng-template #avatarTemplate>
+                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                </ng-template>
+                <ng-template #coverTemplate>
+                    <a (click)="gotoDetailEchange(item.id)"><img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" /></a>
+                </ng-template>
+                <ng-template #actionMonney>
+                    <i nz-icon type="money-collect"></i>
+                </ng-template>
+                <ng-template #actionEdit>
+                    <i nz-icon type="edit" (click)="gotoDetailEchange(item.id)"></i>
+                </ng-template>
+                <ng-template #actionShopping>
+                    <a><i nz-icon type="shopping-cart"></i></a>
+                </ng-template>
+                <br />
+            </ng-template>
+            <ng-template #pagination>
+                <nz-pagination [nzPageIndex]="1" [nzTotal]="pagesEchange" [nzPageSize]="pageSizeEchange" (nzPageIndexChange)="gotoPageEchange($event)"></nz-pagination>
+            </ng-template>
+        </nz-list>
+
+    </div>
+
+
+</nz-card>

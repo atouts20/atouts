@@ -1,0 +1,104 @@
+<br>
+<!-- <div class="row">
+    <div class="col-md-6" *ngIf="panierService.val == 1">
+        <nz-progress *ngIf="!isFinish()" nzStrokeLinecap="round" nzType="circle" [nzPercent]="percent"></nz-progress>
+    </div>
+</div> -->
+<div class="container" style="margin-top: 2%; background-color: #ededed">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="produit-image">
+                <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+                    <!-- <img [src]="http://localhost:8080/files/{{item.photo}}" [alt]="produit.productName" width="100%" class="img-fluid rounded"> -->
+                    <img alt="example" src="http://localhost:8080/files/{{produit.photo}}" />
+                </div>
+                <div class="" style="margin-top:15px">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Produit Price</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important"> {{produit.prix}}</span>
+                        </li>
+                        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Produit Seller</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{produit.productSeller}}</span>
+                        </li> -->
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Quantité choisie</h6>
+                            </div>
+                            <!-- <span class="text-muted" style="color:crimson !important">{{ panierService.returnQtPn(produit) }}</span> -->
+                            <span class="text-muted" style="color:crimson !important">{{ returnQtPn() }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Montant Total</h6>
+                            </div>
+                            <!-- <span class="text-muted" style="color:crimson !important">{{formatNumber(produit.prix * quantiteChoisi)}}</span> -->
+                            <span class="text-muted" style="color:crimson !important">{{ produit.prix * returnQtPn() }}</span>
+                        </li>
+                    </ul>
+                    <!-- <button nz-button nzType="primary" (click)="addToCart()">Ajouter au panier</button> -->
+                    <div class="row">
+                        <div class="col-sm-8">
+                                <div class="row">
+                                        <div class="col-sm-8">
+                                                <form #f="ngForm" (ngSubmit)="addToCart(produit)">
+                                                       <!--  <input nz-input type="number" min="1" max="2" name="quantite" ngModel style="width: 60px; height: 30px;" [(ngModel)]="produit.quantite"> -->
+                                                       <nz-input-number [(ngModel)]="produit.quantite" [nzMin]="1" [nzMax]="2" [nzStep]="1" style="width: 60px;"  name="quantite" ngModel></nz-input-number>
+                                                        
+                                                        <button nz-button><i nz-icon type="plus"></i><i nz-icon type="shopping-cart"></i></button>
+                                                </form>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                                <button nz-button (click)="diminuerFromCart(produit)"><i nz-icon type="minus"></i><i nz-icon type="shopping-cart"></i></button>
+                                            
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <button nz-button nzType="primary" (click)="onReturnMarket()"><i nz-icon>retour</i><i nz-icon type="shopping"></i></button>
+                        </div>
+                    </div>
+                    <!-- <button nz-button nzType="primary" (click)="removeFromCart()">Retirer du panier</button> -->
+                    
+                    <!-- <button nz-button nzType="primary" (click)="onNewCommande()">Commande</button> -->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="produit-detail">
+                <h5 class="produit-head">Product Details</h5>
+                <table class="table" cellspacing="0" style="max-height: 28px">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Product Name</th>
+                            <td>{{produit.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Product Description</th>
+                            <td>{{produit.description}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Taux BCCV</th>
+                            <td>{{produit.tBCCV}}</td>
+                        </tr>
+                        <!-- <tr>
+                            <th scope="row">No. of quantity available</th>
+                            <td>{{produit.stock}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Product Added on</th>
+                            <td>{{produit.stock * 1000 | date}}</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

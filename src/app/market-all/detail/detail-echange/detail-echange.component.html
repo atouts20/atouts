@@ -1,0 +1,113 @@
+<br>
+<div class="container" style="margin-top: 2%">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="produit-image">
+                <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+                    <!-- <img [src]="http://localhost:8080/files/{{item.photo}}" [alt]="produit.productName" width="100%" class="img-fluid rounded"> -->
+                    <img alt="example" src="http://localhost:8080/files/{{echange.photo}}" />
+                </div>
+                <div class="" style="margin-top:15px">
+                    <ul class="list-group mb-3">
+                        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Echange Price</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important"> {{produit.prix}}</span>
+                        </li> -->
+                        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Produit Seller</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{produit.productSeller}}</span>
+                        </li> -->
+                        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Quantité choisie</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{ panierService.returnQtPn(produit) }}</span>
+                            <span class="text-muted" style="color:crimson !important">{{ returnQtPn() }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Montant Total</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{formatNumber(produit.prix * quantiteChoisi)}}</span>
+                            <span class="text-muted" style="color:crimson !important">{{ produit.prix * returnQtPn() }}</span>
+                        </li> -->
+                    </ul>
+                    <!-- <button nz-button nzType="primary" (click)="addToCart()">Ajouter au panier</button> -->
+                    <div class="row">
+                        <!-- <div class="col-sm-8"> -->
+                                <!-- <div class="row">
+                                        <div class="col-sm-8">
+                                                <form #f="ngForm" (ngSubmit)="addToCart(produit)">
+                                                        <input nz-input type="number" min="1" max="2" name="quantite" ngModel style="width: 60px; height: 30px;" [(ngModel)]="produit.quantite">
+                                                        
+                                                        <button nz-button><i nz-icon type="plus"></i><i nz-icon type="shopping-cart"></i></button>
+                                                </form>
+
+                                        </div>
+                                        <div class="col-sm-4">
+                                                <button nz-button (click)="diminuerFromCart()"><i nz-icon type="minus"></i><i nz-icon type="shopping-cart"></i></button>
+                                            
+                                        </div>
+                                </div> -->
+                        <!-- </div> -->  
+
+
+                            <!-- <button nz-button nzType="primary" (click)="onReturnMarket()"><i nz-icon>retour</i><i nz-icon type="shopping"></i></button> -->
+
+                        <!-- <div class="col-sm-4">
+                                <a (click)="onReturnMarket()"><i nz-icon>retour</i><i nz-icon type="shopping"></i></a>
+                            </div> -->
+                        <div class="col-sm-8">
+                                <!-- <button nz-button nzType="default" (click)="gotoWatsapp()"><img height="60" alt="example" src="assets/images/watsapp.jpg" /></button> -->
+                            <!-- <a (click)="onReturnMarket()"><i nz-icon>retour</i><i nz-icon type="shopping"></i></a> -->
+                            <a (click)="gotoWatsapp()"><img height="50" alt="example" src="assets/images/phone.jpg" /></a>
+                            <a (click)="gotoWatsapp()"><img height="60" alt="example" src="assets/images/watsapp.jpg" /></a>
+                            <a (click)="gotoWatsapp()"><img height="50" alt="example" src="assets/images/sms.png" /></a>
+                        </div>
+                        <div class="col-sm-8">
+                                <!-- <button nz-button nzType="default" (click)="gotoWatsapp()"><img height="60" alt="example" src="assets/images/watsapp.jpg" /></button> <i nz-icon type="shopping"></i>-->
+                            <!-- <a (click)="onReturnMarket()"><b><img height="70" alt="example" src="assets/images/rev1.png" /> <h5>au marché</h5></b></a> --> 
+                            <br>
+                            <button nz-button nzType="primary" style="margin-left:15px;" nzSize="default" (click)="onReturnMarket()"><i nz-icon>retour au marché</i></button>  
+                                                     
+                        </div>
+                    </div>
+                    <!-- <button nz-button nzType="primary" (click)="removeFromCart()">Retirer du panier</button>    <i nz-icon type="shopping"></i> -->
+                    
+                    <!-- <button nz-button nzType="primary" (click)="onNewCommande()">Commande</button> -->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="produit-detail">
+                <h5 class="produit-head">Details du produit</h5>
+                <table class="table" cellspacing="0" style="max-height: 28px">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Désignation</th>
+                            <td>{{echange.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Description</th>
+                            <td>{{echange.description}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Nom et prénom de l'échangeur</th>
+                            <td>{{prorietaire.nom}}</td>
+                            <td>{{prorietaire.prenom}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Contact de l'échangeur</th>
+                            <td>{{prorietaire.phoneNumber}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

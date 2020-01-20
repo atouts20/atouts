@@ -1,0 +1,284 @@
+<div class="row">
+    <br />
+    <div>
+        <button nz-button nzType="primary" (click)="open()">
+            <!-- <i nz-icon type="info" theme="outline"></i> -->
+            Vérifier Payement
+        </button>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+
+
+
+    <!-- <div class="col-md-10 col-sm-10"> -->
+    <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false"
+        [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Formulaire de vérification d'un payment"
+        (nzOnClose)="close()">
+        <form nz-form [formGroup]="validateFormVerifierPayment" (ngSubmit)="verifierPayment()">
+            <div class="row">
+                <div class="col-md-12 col-sm-6 col-xs-12">
+                    <nz-form-item>
+                        <nz-form-control>
+                            <h5> Entrer le code de payement
+                                <span class="text-danger">*</span>
+                            </h5>
+                            <input nz-input formControlName="codePayment" class="form-control" oninput="this.value=
+                                                            this.value.toUpperCase()">
+                            <nz-form-explain *ngIf="validateFormVerifierPayment.get('codePayment')?.dirty
+                                                            &&
+                                                            validateFormVerifierPayment.get('codePayment')?.errors">
+                                Ce champs est obligatoire !
+                            </nz-form-explain>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div nz-row>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right:
+                                                        8px;" ant-btn-primary>
+                            <i nz-icon type="retweet" theme="outline"></i>
+                            <span>Annuler</span>
+                        </button>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <nz-form-item nz-row style="margin-bottom:8px;">
+                            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                <button nz-button nzType="primary">
+                                    <i nz-icon type="diff"></i>
+                                    <span>Valider</span>
+                                </button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="close()" class="ant-btn
+                                                        ant-btn-primary">
+                            <i nz-icon type="logout"></i>
+                            <span>Fermer</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </nz-drawer>
+    <!-- </div> -->
+
+    <div class="col-md-12 col-sm-12">
+        <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="paymentAdminList">
+            <thead>
+                <tr>
+                    <th nzWidth="20%" nzCustomFilter>
+                        #
+                    </th>
+                    <th nzWidth="15%">Date</th>
+                    <th nzWidth="20%">Montant</th>
+                    <th nzWidth="20%">contrepartieFcfa</th>
+                    <th nzWidth="20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of editRowTable.data let i=index">
+                    <td>
+                        <div class="editable-cell">
+                            <div class="editable-cell-text-wrapper">
+                                <ng-container>
+                                    <!-- {{i+1}} -->
+                                    {{data.id}}
+                                </ng-container>
+
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <ng-container>
+                            {{data.datePayment | date: 'dd-MM-yyyy'}}
+                        </ng-container>
+
+                    </td>
+                    <td>
+                        <ng-container>
+                            {{data.montant}}
+                        </ng-container>
+
+                    </td>
+                    <td>
+                        <ng-container>
+                            {{data.contrepartieFcfa}}
+                        </ng-container>
+
+                    </td>
+                    <td>
+                        <div class="editable-row-operations">
+                            <ng-container>
+                                <button nz-button title="Détail" nzType="info" (click)="inspecterPayment(data)"  nzShape="circle">
+                                    <i nz-icon type="info"></i>
+                                </button>
+                            </ng-container>
+                            <ng-container>
+                                <button nz-button title="Opétations" nzType="check" (click)="inspecterOperations(data)"  nzShape="circle">
+                                    <i nz-icon type="check"></i>
+                                </button>
+                            </ng-container>
+
+                            <!-- <ng-container>
+                                    <button nz-button title="Supprimer" nzType="delete" (click)="supprimerPayment(data)"  nzShape="circle">
+                                        <i nz-icon type="delete"></i>
+                                    </button>
+                                </ng-container> -->
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+
+    </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!--détail commandes-->
+<nz-modal [(nzVisible)]="isVisiblePayment" nzTitle="Detail Payment" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()"
+    [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="900">
+    <div class="row">
+
+        <div class="col-md-4 col-sm-12">
+            ID Payment :
+            <strong>{{ unPayment.id }}</strong>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            Date Payment :
+            <strong>{{ unPayment.datePayment | date:'medium' }}</strong>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            Montant :
+            <strong>{{ unPayment.montant }}</strong>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-4 col-sm-12">
+            Contrepartie Fcfa :
+            <strong>{{ unPayment.contrepartieFcfa }}</strong>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            Badge Livreur :
+            <strong>{{ unPayment.badgeLivreur }}</strong>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            Code Payment :
+            <strong>{{ unPayment.codePayment }}</strong>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12">
+            Observation :
+            <strong>{{ unPayment.observation }}</strong>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12">
+            <hr>
+            <h6 align="center">Commande Associée</h6>
+            <hr>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <div class="col-md-6 col-sm-12">
+            Commande ID :
+            <strong>{{ uneCommande.id }}</strong>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            Date Commande :
+            <strong>{{ uneCommande.date | date:'medium' }}</strong>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <div class="col-md-12 col-sm-12">
+            <hr>
+            <h6 align="center">Infos Client</h6>
+            <hr>
+        </div>                    
+        <br>
+        <br>
+        <div class="col-md-6 col-sm-12">
+            Nom :
+            <strong>{{ uneCommande.client.nom }}</strong>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            Prénom :
+            <strong>{{ uneCommande.client.prenom }}</strong>
+        </div>
+        <br>
+        <br>
+        <div class="col-md-6 col-sm-12">
+            Téléphone :
+            <strong>{{ uneCommande.client.phoneNumber }}</strong>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            Adresse de livraison :
+            <strong>{{ uneCommande.livraison }}</strong>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Désignation</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+            </tr>
+            <tr *ngFor="let c of commanders">
+                <td>{{c.id}}</td>
+                <td>{{c.produit.nom}}</td>
+                <td>{{c.quantite|number:'0.2'}}</td>
+                <td>{{c.prix|number:'0.2'}}</td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Total:</strong></td>
+                
+                <td><strong>{{ uneCommande.totalAmount|number:'0.2' }}</strong></td>
+                <!-- <td>{{uneCommande.totalAmount|number:'0.2'}}</td> -->
+            </tr>
+        </table>
+    </div>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleOperation" nzTitle="Comptabilisation" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()"
+    [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="900">
+    <div class="row"> 
+        <!-- <h5 align="center">Liste des dépots après payement</h5> -->
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Num compte</th>
+                <th>Nom du bénéficière</th>
+                <th>Prénom du bénéficière</th>
+                <th>Monant dépot</th>
+            </tr>
+            <tr *ngFor="let d of depotTrList">
+                <td>{{d.id}}</td>
+                <td>{{d.compteTr.numCompte}}</td>
+                <td>{{d.compteTr.appUserCompte.nom}}</td>
+                <td>{{d.compteTr.appUserCompte.prenom}}</td>
+                <td>{{d.montantOp|number:'0.2'}}</td>
+            </tr>
+        </table>
+    </div>
+</nz-modal>

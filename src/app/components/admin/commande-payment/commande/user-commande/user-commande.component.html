@@ -1,0 +1,267 @@
+<div class="col-md-12 col-sm-12">
+    <br />
+
+    <div class="row">
+        <div class="col-md-10 col-sm-10">
+            <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false"
+                [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Formulaire de payment" (nzOnClose)="close()">
+                <form nz-form [formGroup]="validateFormPayment" (ngSubmit)="enregistrerPayment()">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Badge Livreur
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    <input nz-input formControlName="badgeLivreur" class="form-control" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                    <nz-form-explain *ngIf="validateFormPayment.get('badgeLivreur')?.dirty
+                                                &&
+                                                validateFormPayment.get('badgeLivreur')?.errors">
+                                        Ce champs est obligatoire !
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Contrepartie Fcfa
+                                        <span class="text-danger">*</span>
+                                    </h5>
+                                    <input nz-input type="number" min="0" formControlName="contrepartieFcfa" class="form-control">
+                                    <nz-form-explain *ngIf="validateFormPayment.get('contrepartieFcfa')?.dirty
+                                                &&
+                                                validateFormPayment.get('contrepartieFcfa')?.errors">
+                                        Ce champs est obligatoire !
+                                    </nz-form-explain>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <nz-form-item>
+                                <nz-form-control>
+                                    <h5> Observation</h5>
+                                    <textarea rows="3" nz-input formControlName="observation" oninput="this.value=
+                                                this.value.toUpperCase()"></textarea>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+
+                    <div class="footer">
+                        <div nz-row>
+                            <div nz-col nzSpan="8">
+                                <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right:
+                                            8px;" ant-btn-primary>
+                                    <i nz-icon type="retweet" theme="outline"></i>
+                                    <span>Annuler</span>
+                                </button>
+                            </div>
+                            <div nz-col nzSpan="8">
+                                <nz-form-item nz-row style="margin-bottom:8px;">
+                                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                        <button nz-button nzType="primary">
+                                            <i nz-icon type="diff"></i>
+                                            <span>Valider</span>
+                                        </button>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                            <div nz-col nzSpan="8">
+                                <button type="button" (click)="close()" class="ant-btn
+                                            ant-btn-primary">
+                                    <i nz-icon type="logout"></i>
+                                    <span>Fermer</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </nz-drawer>
+        </div>
+
+        <nz-card style="width: 100%;">
+            <nz-card-tab>
+                <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex">
+                    <nz-tab nzTitle="Listes des commandes non payées"></nz-tab>
+                    <nz-tab nzTitle="Liste des commandes payées"></nz-tab>
+                </nz-tabset>
+            </nz-card-tab>
+            <div *ngIf="selectedIndex==0">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="commandesNonPayerList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                #
+                            </th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Total</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data let i=index">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            <!-- {{i+1}} -->
+                                            {{data.id}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.date | date: 'dd-MM-yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.totalAmount}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Détail" nzType="info" (click)="inspecterCommande(data)"  nzShape="circle">
+                                            <i nz-icon type="info"></i>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <button nz-button title="Payer" nzType="check" (click)="payerCommande(data)"  nzShape="circle">
+                                            <i nz-icon type="check"></i>
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+            <div *ngIf="selectedIndex==1">
+                <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="commandesPayerList">
+                    <thead>
+                        <tr>
+                            <th nzWidth="20%" nzCustomFilter>
+                                #
+                            </th>
+                            <th nzWidth="15%">Date</th>
+                            <th nzWidth="20%">Total</th>
+                            <th nzWidth="20%">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let data of editRowTable.data let i=index">
+                            <td>
+                                <div class="editable-cell">
+                                    <div class="editable-cell-text-wrapper">
+                                        <ng-container>
+                                            <!-- {{i+1}} -->
+                                            {{data.id}}
+                                        </ng-container>
+
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.date | date: 'dd-MM-yyyy'}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <ng-container>
+                                    {{data.totalAmount}}
+                                </ng-container>
+
+                            </td>
+                            <td>
+                                <div class="editable-row-operations">
+                                    <ng-container>
+                                        <button nz-button title="Détail" nzType="info" (click)="inspecterCommande(data)"  nzShape="circle">
+                                            <i nz-icon type="info"></i>
+                                        </button>
+                                    </ng-container>
+
+                                    <ng-container>
+                                        <button nz-button title="Supprimer" nzType="delete" (click)="supprimerCommande(data)"  nzShape="circle">
+                                            <i nz-icon type="delete"></i>
+                                        </button>
+                                    </ng-container>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </div>
+
+
+        </nz-card>
+    </div>
+</div>
+
+
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->
+<!--détail commandes-->
+<nz-modal [(nzVisible)]="isVisibleCommande" nzTitle="Detail commande" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()"
+    [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="700">
+    <div class="row">
+
+        
+        <div class="col-md-6 col-sm-12">
+                Commande ID :
+                <strong>{{ uneCommande.id }}</strong>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                Date Commande :
+                <strong>{{ uneCommande.date | date:'medium' }}</strong>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            
+            <table class="table table-striped">
+                    <tr>
+                        <th>ID</th>
+                        <th>Désignation</th>
+                        <th>Quantité</th>
+                        <th>Prix</th>
+                    </tr>
+                    <tr *ngFor="let c of commanders">
+                        <td>{{c.id}}</td>
+                        <td>{{c.produit.nom}}</td>
+                        <td>{{c.quantite|number:'0.2'}}</td>
+                        <td>{{c.prix|number:'0.2'}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <strong>Total:</strong>
+                        </td>
+        
+                        <td>
+                            <strong>{{ uneCommande.totalAmount|number:'0.2' }}</strong>
+                        </td>
+                    </tr>
+            </table>
+
+        </div>
+</nz-modal>

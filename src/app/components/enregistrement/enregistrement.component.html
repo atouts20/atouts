@@ -1,0 +1,906 @@
+<!-- <h2 align="center">ENREGISTREMENT</h2> -->
+
+
+<!--  <ul nz-menu [nzMode]="'horizontal'">
+            <li nz-menu-item (click)=blank()>
+                <i nz-icon type="mail"></i> <b>Acceuil</b>
+            </li>
+            <li nz-menu-item (click)=apropos()>
+                <i nz-icon type="appstore"></i><b>A Propos</b>
+            </li>
+            <li nz-menu-item (click)=market()>
+                <i nz-icon type="setting"></i> <b>Services</b>
+            </li>
+            <li nz-menu-item (click)=login()>
+                <i nz-icon type="user"></i><b>Connexion</b>
+            </li>
+
+        </ul> -->
+<nz-layout class="layout white-bg ant-layout">
+
+    <nz-header class="white-bg header-border fixed ant-layout-header">
+
+        <div class="container">
+            <div class="logo" style="text-align: left;">
+                <img alt="logo de atouts" src="../../../assets/images/banner.jpg">
+            </div>
+
+
+            <nz-tabset nzSize="small" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
+                <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
+                    <ng-template #titleTemplate> <i nz-icon [nzType]="tab.icon"></i>{{ tab.name }} </ng-template>
+                </nz-tab>
+            </nz-tabset>
+        </div>
+
+    </nz-header>
+
+
+
+
+    <nz-content class="container white-bg ant-layout-content">
+        <div class="padding-top-100">
+            <div>
+
+
+                <div class="steps-content1 col-md-12">
+                    <h2><span>ENREGISTREMENT</span></h2>
+                </div>
+                <div class="col-md-12">
+                    <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
+                        <nz-steps [nzCurrent]="current">
+                            <nz-step nzTitle="Etape 1" class="ant-steps-item "></nz-step>
+                            <nz-step nzTitle="Etape 2" class="ant-steps-item "></nz-step>
+                            <nz-step nzTitle="Etape 3" class="ant-steps-item "></nz-step>
+                            <nz-step nzTitle="Etape 4" class="ant-steps-item "></nz-step>
+                            <nz-step nzTitle="Etape 5" class="ant-steps-item "></nz-step>
+                        </nz-steps>
+                    </div>
+                </div>
+
+
+                <div class="steps-content col-md-12">
+
+                    <form nz-form [formGroup]="validateFormUser_Etape1" *ngIf="current == 0">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="nickname" nzRequired>
+                                        <span>
+                                                Nom <i nz-icon nz-tooltip nzTitle="Le Nom SVP" type="question-circle" theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+
+                                        <input nz-input id="nom" formControlName="nom" placeholder="Nom" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('nom').dirty 
+                                                &&
+                                                validateFormUser_Etape1.get('nom').errors">
+                                            Votre Nom SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="prenoms" nzRequired>
+                                        <span>Prénoms
+                                                <i nz-icon nz-tooltip nzTitle="Le Prénom
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="prenom" formControlName="prenom" placeholder="prénoms" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('prenom').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('prenom').errors">
+                                            Votre prénom SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="dateNaissance" nzRequired>
+                                        <span> Date naissance
+                                            <i nz-icon nz-tooltip nzTitle="Votre date de naissance" type="question-circle" theme="outline"></i>
+                                        </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="dateNaissance" type="date" formControlName="dateNaissance">
+                                        <!-- <nz-date-picker style="width:200px;" formControlName="dateNaissance"></nz-date-picker> (blur)="monAge(dateNaissance) >= 15" -->
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('dateNaissance').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('dateNaissance').errors">
+                                            Votre date naissance SVP!
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="lieu" nzRequired>
+                                        <span>Lieu de naissance
+                                                <i nz-icon nz-tooltip nzTitle="Le Lieu de
+                                                    naissance SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="lieu" formControlName="lieu" placeholder="Lieu de naissance" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('lieu').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('lieu').errors">
+                                            Votre lieu de naissance SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="departement" nzRequired>
+                                        <span>Département
+                                                <i nz-icon nz-tooltip nzTitle="Le
+                                                    département SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="departement" formControlName="departement" placeholder="département" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('departement').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('departement').errors">
+                                            Votre département SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="residance" nzRequired>
+                                        <span>Résidance
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    résidance SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="residance" formControlName="residance" placeholder="residance" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('residance').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('residance').errors">
+                                            Votre résidance SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="nationalite" nzRequired>
+                                        <span>Nationalité
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    nationalite SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <!--  <input nz-input id="nationalite" formControlName="nationalite" placeholder="nationalité" oninput="this.value=
+                                                            this.value.toUpperCase()"> -->
+                                        <nz-select nzShowSearch nzAllowClear id="nationalite" formControlName="nationalite">
+                                            <nz-option *ngFor="let pays of paysList" [nzLabel]="pays.capital" [nzValue]="pays" oninput="this.value=
+                                                    this.value.toUpperCase()">
+                                            </nz-option>
+                                        </nz-select>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape1.get('nationalite').dirty
+                                                &&
+                                                validateFormUser_Etape1.get('nationalite').errors">
+                                            Votre nationalité SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="sexe" nzRequired>
+                                        <span> Sexe
+                                            <i nz-icon nz-tooltip nzTitle="Le sexe SVP" type="question-circle" theme="outline"></i>
+                                        </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <nz-select id="sexe" formControlName="sexe" name="select-type" [ngModel]="'homme'">
+                                            <nz-option nzValue="HOMME" nzLabel="HOMME"></nz-option>
+                                            <nz-option nzValue="FEMME" nzLabel="FEMME"></nz-option>
+                                        </nz-select>
+
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+                    </form>
+                    <form nz-form [formGroup]="validateFormUser_Etape2" *ngIf="current == 1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="matrimoniale" nzRequired>
+                                        <span> Situation matrimoniale
+                                                <i nz-icon nz-tooltip nzTitle="votre Situation
+                                                    matrimoniale SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="matrimoniale" formControlName="matrimoniale" placeholder="Situation matrimoniale" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('matrimoniale').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('matrimoniale').errors">
+                                            matrimoniale SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="nomEtPrenomConjoint" nzRequired>
+                                        <span> Nom et Prenom Conjoint
+                                                <i nz-icon nz-tooltip nzTitle="Nom Et Prenom
+                                                    Conjoint SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="nomEtPrenomConjoint" formControlName="nomEtPrenomConjoint" placeholder="Nom Et Prenom Conjoint" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('nomEtPrenomConjoint').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('nomEtPrenomConjoint').errors">
+                                            Nom Et Prenom Conjoint SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="nbrEnfant" nzRequired>
+                                        <span>Nombre enfant
+                                                <i nz-icon nz-tooltip nzTitle="Nombre enfant
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="nbrEnfant" type="number" min="0" formControlName="nbrEnfant" placeholder="nombre enfant" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('nbrEnfant').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('nbrEnfant').errors">
+                                            Nombre enfant SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <!--  <div  class="col-md-6">
+                                    <nz-form-item class="ant-row ant-form-item">
+                                        <nz-form-label [nzSpan]="'vertical'" nzFor="profession" nzRequired>
+                                            <span>Profession
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    profession SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                        </nz-form-label>
+                                        <nz-form-control class="ant-form-item-control-wrapper">
+                                            <input nz-input id="profession" formControlName="profession" placeholder="profession" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                            <nz-form-explain *ngIf="validateFormUser_Etape2.get('profession').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('profession').errors">
+                                                Votre profession SVP
+                                            </nz-form-explain>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div> -->
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="categorie" nzRequired>
+                                        <span>Catégorie
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    catégorie SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="categorie" formControlName="categorie" placeholder="catégorie" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('categorie').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('categorie').errors">
+                                            Votre résidance SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="naturePiece" nzRequired>
+                                        <span>Nature Piece
+                                                <i nz-icon nz-tooltip nzTitle="Nature Piece
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="naturePiece" formControlName="naturePiece" placeholder="Nature Piece" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('naturePiece').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('naturePiece').errors">
+                                            Nature Piece SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="nci" nzRequired>
+                                        <span>Numero Pièce d'identitée
+                                                <i nz-icon nz-tooltip nzTitle="Numero Carte
+                                                    identité SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="nci" minlength="7" formControlName="nci" placeholder="nci" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('nci').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('nci').errors">
+                                            Votre nationalité SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="dateExpiration" nzRequired>
+                                        <span>Date expiration carte
+                                                <i nz-icon nz-tooltip nzTitle="Date
+                                                    expiration carte SVP"
+                                                    type="question-circle" theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="dateExpiration" type="date" formControlName="dateExpiration">
+                                        <!--        <nz-date-picker id="dateExpiration" formControlName="dateExpiration"></nz-date-picker> -->
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('dateExpiration').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('dateExpiration').errors">
+                                            Date expiration de votre carte SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="metier" nzRequired>
+                                        <span>Profession
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    metier SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <!--  <input nz-input id="nationalite" formControlName="nationalite" placeholder="nationalité" oninput="this.value=
+                                                            this.value.toUpperCase()"> -->
+                                        <nz-select nzShowSearch nzAllowClear id="metier" formControlName="metier">
+                                            <nz-option *ngFor="let metier of metierList" [nzLabel]="metier.libelle" [nzValue]="metier" oninput="this.value=
+                                                    this.value.toUpperCase()">
+                                            </nz-option>
+                                        </nz-select>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('metier').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('metier').errors">
+                                            Votre nationalité SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="metiers" nzRequired>
+                                        <span>Autres Métiés
+                                                <i nz-icon nz-tooltip nzTitle="Votre
+                                                    nationalite SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <!--  <input nz-input id="nationalite" formControlName="nationalite" placeholder="nationalité" oninput="this.value=
+                                                            this.value.toUpperCase()"> -->
+                                        <nz-select nzShowSearch nzAllowClear id="metiers" formControlName="metiers" nzMode="multiple">
+                                            <nz-option *ngFor="let metier of metierList" [nzLabel]="metier.libelle" [nzValue]="metier" oninput="this.value=
+                                                    this.value.toUpperCase()">
+                                            </nz-option>
+                                        </nz-select>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape2.get('metiers').dirty
+                                                &&
+                                                validateFormUser_Etape2.get('metiers').errors">
+                                            Votre nationalité SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+
+                        </div>
+                    </form>
+                    <form nz-form [formGroup]="validateFormUser_Etape3" *ngIf="current == 2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="personneContacter">
+                                        <span>Personne Contacter
+                                                <i nz-icon nz-tooltip nzTitle="Personne
+                                                    Contacter SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="personneContacter" formControlName="personneContacter" placeholder="Personne Contacter" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('personneContacter').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('personneContacter').errors">
+                                            Personne contacter SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactPersonneContacter">
+                                        <span>Contact Personne Contacter
+                                                <i nz-icon nz-tooltip nzTitle="contact
+                                                    Personne Contacter SVP"
+                                                    type="question-circle" theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="contactPersonneContacter" formControlName="contactPersonneContacter" placeholder="contact Personne Contacter" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('contactPersonneContacter').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('contactPersonneContacter').errors">
+                                            contact de la personne à contacter SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="relationPersonne">
+                                        <span> Relation Personne
+                                                <i nz-icon nz-tooltip nzTitle="Relation
+                                                    Personne SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="relationPersonne" formControlName="relationPersonne" placeholder="Relation Personne" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('relationPersonne').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('relationPersonne').errors">
+                                            Votre relation avec la personne SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="nomPere">
+                                        <span>Nom père
+                                                <i nz-icon nz-tooltip nzTitle="Nom père SVP"
+                                                    type="question-circle" theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="nomPere" formControlName="nomPere" placeholder="nom
+                                                père" oninput="this.value=this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('nomPere').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('nomPere').errors">
+                                            Le nom de votre père SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactPere">
+                                        <span>Contact Père
+                                                <i nz-icon nz-tooltip nzTitle="contact Pere
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="contactPere" formControlName="contactPere" placeholder="contact Pere" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('nomPere').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('nomPere').errors">
+                                            Contact de votre père SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="nomMere">
+                                        <span>Nom Mère
+                                                <i nz-icon nz-tooltip nzTitle="Nom Mère SVP"
+                                                    type="question-circle" theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="nomMere" formControlName="nomMere" placeholder="Nom
+                                                Mère" oninput="this.value=this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('nomMere').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('nomMere').errors">
+                                            Nom de votre mère SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactMere">
+                                        <span> Contact Mère
+                                                <i nz-icon nz-tooltip nzTitle="Contact Mère
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="contactMere" formControlName="contactMere" placeholder="Contact Mère" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape3.get('contactMere').dirty
+                                                &&
+                                                validateFormUser_Etape3.get('contactMere').errors">
+                                            Contact de votre mère SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <form nz-form [formGroup]="validateFormUser_Etape4" *ngIf="current
+                            == 3">
+                        <div class="row">
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber" nzRequired>
+                                        <span>Téléphone
+                                                <i nz-icon nz-tooltip nzTitle="Le Téléphone
+                                                    SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input formControlName="phoneNumber" id="'phoneNumber'" placeholder="SVP numero
+                                                de téléphone" nz-input>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('phoneNumber').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('phoneNumber').errors">
+                                            Votre numero de Téléphone SVP!
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber1">
+                                        <span>Téléphone 1
+                                                <i nz-icon nz-tooltip nzTitle="SVP numero de
+                                                    téléphone 1" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input formControlName="phoneNumber1" id="'phoneNumber1'" placeholder="SVP numero
+                                                de téléphone 2" nz-input>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('phoneNumber1').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('phoneNumber1').errors">
+                                            Votre numero de Téléphone 1 SVP!
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber2">
+                                        <span>Téléphone 2
+                                                <i nz-icon nz-tooltip nzTitle="Le Téléphone
+                                                    2 SVP" type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input formControlName="phoneNumber2" id="'phoneNumber2'" placeholder="SVP numero
+                                                de téléphone 2" nz-input>
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('phoneNumber2').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('phoneNumber2').errors">
+                                            Votre numero de Téléphone 2 SVP!
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzRequired nzFor="email">E-mail</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input formControlName="email" id="email" placeholder="Mail Valide SVP" oninput="this.value=
+                                                this.value.toUpperCase()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('email').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('email').errors">L'E-mail n'est pas valide
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="username" nzRequired>
+                                        <span>Identifiant
+                                                <i nz-icon nz-tooltip nzTitle="L'Identifiant
+                                                    SVP." type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input id="username" formControlName="username" placeholder="Identifiant">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('username').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('username').errors">
+                                            Votre Identifiant SVP
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="password" nzRequired>Password</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('password').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('password').errors">
+                                            Votre Passe Word SVP !
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div class="col-md-6">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="repassword" nzRequired>Confirmation</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input type="password" formControlName="repassword" id="repassword">
+                                        <nz-form-explain *ngIf="validateFormUser_Etape4.get('repassword').dirty
+                                                &&
+                                                validateFormUser_Etape4.get('repassword').errors">
+                                            <ng-container *ngIf="validateFormUser_Etape4.get('repassword').hasError('required')">
+                                                Confirmation de PasseWord SVP!
+                                            </ng-container>
+                                            <ng-container *ngIf="validateFormUser_Etape4.get('repassword').hasError('confirm')">
+                                                Mot de Passe non identique!
+                                            </ng-container>
+                                        </nz-form-explain>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input type="file" #Image name="file" id="file" accept=".jpg, .jpeg, .png" (change)="onSelectFile($event)">
+                                        <p>
+                                            <p>
+                                                <img [src]="imageUrl" style="width:200px;height:200px">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file1" nzRequired>Photo CNI Scané</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+                                        <input nz-input type="file" #Image name="file1" id="file1" accept=".jpg, .jpeg, .png" (change)="onSelectFile1($event)">
+                                        <p>
+                                            <p>
+                                                <img [src]="imageUrl1" style="width:200px;height:200px">
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                            <div nz-col nzSm="8" nzMd="8">
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file2" nzRequired>Signature</nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper">
+
+                                        <input nz-input type="file" #Image name="file2" id="file2" accept=".jpg,
+                                                                .jpeg, .png" (change)="onSelectFile2($event)">
+                                        <p>
+                                            <p>
+                                                <img [src]="imageUrl2" style="width:200px;height:200px">
+                                                <!-- formControlName="file" -->
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+                    </form>
+                    <form nz-form [formGroup]="validateFormUser_Etape5" *ngIf="current == 4">
+                        <div class="row">
+                            <div class="scrollable-container">
+                                <!--  <p>
+                                    Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
+                                    lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non
+                                    metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus
+                                    magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur
+                                    et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur
+                                    ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent
+                                    commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
+                                    in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor
+                                    auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla. Cras mattis consectetur
+                                    purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+                                    Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper
+                                    nulla non metus auctor fringilla. Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent
+                                    commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel scelerisque
+                                    nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus auctor fringilla.
+                                </p> -->
+                                <div class="pdf-viewer-area mg-b-15">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            </div>
+                                            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                                                <div class="pdf-single-pro">
+                                                    <a class="media" href="assets/disagne/pdf/mamunur.pdf"></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <nz-form-item nz-row style="margin-bottom:8px;">
+                                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                        <label nz-checkbox formControlName="agree"><span>I
+                                                                            have read the<a>agreement</a></span>
+                                                                    </label>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <!--  <div  class="row">
+                            <div nz-col nzSpan="8" nzOffset="8">
+                                <a routerLink="/connexion" class="text-center">Déjà
+                                                            enrégistré</a>
+                            </div>
+                        </div> -->
+                </div>
+
+                <div class="steps-action col-md-12" style="text-align: right; margin: 1px;">
+
+                    <button nz-button nzType="default" (click)="pre()" *ngIf="current> 0">
+                        <i nz-icon nzType="arrow-left" nzTheme="outline"></i> <span>Précédent</span>
+                    </button>
+                    <button nz-button nzType="default" (click)="next()" *ngIf="current <4" style="margin-left: 10px; font-size: 16px !important; display: inline-block;">
+                         <span>Suivant</span> <i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+                     </button>
+
+                    <button nz-button nzType="primary" [disabled]="validateFormUser_Etape5.get('agree').value
+                         == false" (click)="done()" *ngIf="current === 4" style="margin-left: 10px;">
+                        <i nz-icon type="check"> </i> <span>Enregistrer</span>
+                    </button>
+                </div>
+
+
+
+
+
+
+            </div>
+        </div>
+    </nz-content>
+    <nz-footer style="text-align: center;">
+        <strong>Copyright &copy; 2018-2019
+            <a href="https://adminlte.io">Aatout Cotonou Bénin</a>.
+        </strong> All rights
+    </nz-footer>
+</nz-layout>

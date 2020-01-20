@@ -1,0 +1,114 @@
+<!-- ============================================================== -->
+<!-- Start Page Content -->
+<!-- ============================================================== -->
+<div class="row">
+
+    <div class="col-md-12 col-sm-12">
+
+        <div class="material-card card">
+            <div class="card-body">
+                <h4 class="card-title">Répertoire des opérations en attente d'autorisation
+                </h4>
+                <h6 class="card-subtitle">
+                    Liste des opérations à authorisé <br>
+                    <hr>
+                </h6>
+
+
+                <div class="table-responsive">
+
+                    <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="listOperation">
+                        <thead>
+                            <tr>
+                                <th> TYPE </th>
+                                <th> COMPTE </th>
+                                <th> MONTANT </th>
+                                <th> DATE </th>
+                                <th> Etat </th>
+                                <th>Actions</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of editRowTable.data">
+                                <td>
+                                    <ng-container>
+                                        {{ data.type }}
+                                    </ng-container>
+                                </td>
+
+                                <td>
+                                    <ng-container>
+                                        {{ data.compte.numCompte }}
+                                    </ng-container>
+                                </td>
+                                <td>
+                                    <ng-container>
+                                        {{formatNumber(data.montantOp)}}
+                                    </ng-container>
+
+                                </td>
+                                <td>
+                                    <ng-container>
+                                        {{ data.dateOp | date: 'medium' }}
+                                    </ng-container>
+
+                                </td>
+
+                                <td class="center text-center">
+                                    <ng-container>
+                                        <span class="badge badge-secondary
+                                            badge-pill" *ngIf="data.etat=='NON_AUTORISEE'" style="font-size: 12px;font-weight:
+                                            bold;">demande en cours ..</span>
+                                        <span class="badge badge-danger
+                                            badge-pill" *ngIf="data.etat=='REJETEE'" style="font-size: 12px;font-weight:
+                                            bold;">rejetéé</span>
+                                        <span class="badge badge-success
+                                            badge-pill" *ngIf="data.etat=='AUTORISEE'" style="font-size: 12px;font-weight:
+                                            bold;">autorisée</span>
+                                    </ng-container>
+
+                                </td>
+                                <td>
+                                    <div class="editable-row-operations">
+                                        <ng-container>
+                                            <!-- <div class="btn-group">
+                                                <button type="button" class="btn btn-secondary btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                          Status
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item"  (click)="rejecter(data)">Rejecter</a>
+                                                    <a class="dropdown-item"  (click)="accepter(data)">Accepter</a>
+                                                </div>
+                                            </div> -->
+                                            <button nz-button nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                                                Status
+                                                <i nz-icon nzType="down"></i>
+                                            </button>
+                                            <!--  <a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu">
+                                                    Click me
+                                                    <i nz-icon nzType="down"></i>
+                                            </a> -->
+                                            <nz-dropdown-menu #menu="nzDropdownMenu">
+                                                <ul nz-menu>
+                                                    <li nz-menu-item (click)="rejecter(data)" style="color: red;">Rejecter</li>
+                                                    <li nz-menu-item (click)="accepter(data)" style="color:green;">Accepter</li>
+                                                </ul>
+                                            </nz-dropdown-menu>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </nz-table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- ============================================================== -->
+<!-- End PAge Content -->
+<!-- ============================================================== -->

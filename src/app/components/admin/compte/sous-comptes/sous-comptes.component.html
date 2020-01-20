@@ -1,0 +1,187 @@
+<div></div>
+<div nz-row nzGutter="12" class="example-input">
+    <div nz-col nzSpan="12">
+        <button nz-button nzType="primary" (click)="open()">
+            <i nz-icon type="laptop" theme="outline"></i>
+            Ajouter
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
+            'auto',
+            'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="FORMULAIRE DE CREATION DES SOUS
+            COMPTES" (nzOnClose)="close()">
+            <form nz-form [formGroup]="validateFormSousCompte" (ngSubmit)="enregistreSousCompte()">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h5> Type de compte<span class="text-danger">*</span></h5>
+                        <nz-select formControlName="type" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select
+                            type" nzAllowClear>
+                            <nz-option *ngFor="let o of typeList" [nzValue]="o" [nzLabel]="o"></nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please write something
+                                here!">
+                                <h5> Numero de sous Compte<span class="text-danger">*</span></h5>
+                                <input nz-input formControlName="numCompte" placeholder="write
+                                    any thing" oninput="this.value=
+                                    this.value.toUpperCase()" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <h5> Propriétaire du sous compte<span class="text-danger">*</span></h5>
+                        <nz-select formControlName="appUserSousCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select
+                            Propriétaire" nzAllowClear>
+
+                            <nz-option *ngFor="let o of optionList" [nzValue]="o" [nzLabel]="o.nom"></nz-option>
+                            <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                                <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please write something
+                                here!">
+                                <h5> Montant (en valeurs)<span class="text-danger">*</span></h5>
+                                <input nz-input type="number" min="0" formControlName="solde" placeholder="write
+                                    any thing" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </div>
+                <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please write something here!">
+                                <h5> Intitulé<span class="text-danger">*</span></h5>
+                                <input nz-input formControlName="solde" placeholder="write any thing" />
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div> -->
+                <div class="row">
+
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please write something
+                                here!">
+                                <h5> Narrative <span class="text-danger">*</span></h5>
+                                <textarea formControlName="narrative" nz-input rows="2" placeholder="write any thing" oninput="this.value=
+                                    this.value.toUpperCase()"></textarea>
+                            </nz-form-control>
+                        </nz-form-item>
+
+                    </div>
+                </div>
+                <div class="footer">
+
+                    <div nz-row>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="resetForm($event)" class="ant-btn
+                                ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="retweet" theme="outline"></i>
+                                <span>Annuler</span></button>
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <nz-form-item nz-row style="margin-bottom:8px;">
+                                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                    <button nz-button nzType="primary" [disabled]="!validateFormSousCompte.valid"><i
+                                            nz-icon
+                                            type="diff"></i><span>Enregistrer</span>
+                                    </button>
+                                </nz-form-control>
+                            </nz-form-item>
+
+                        </div>
+                        <div nz-col nzSpan="8">
+                            <button type="button" (click)="close()" class="ant-btn
+                                ant-btn-primary">
+                                <i nz-icon type="logout"></i><span>Fermer</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </nz-drawer>
+
+
+
+
+        <nz-card style="width: 100%;">
+            <h4 class="card-title">REPERTOIR DES SOUS COMPTES ACTIFS ATOUTS
+            </h4>
+            <h6 class="card-subtitle">
+                LES SOUS COMPTES ACTIFS <br>
+                <hr>
+            </h6>
+            <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="sousCompteList">
+                <thead>
+                    <tr>
+                        <th nzWidth="20%">
+                            Numero de compte
+                        </th>
+                        <th nzWidth="20%">Type sous compte</th>
+                        <th nzWidth="20%">Montant</th>
+                        <th nzWidth="15%">Date</th>
+                        <th nzWidth="20%">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let data of editRowTable.data">
+                        <td>
+                            {{data.numCompte}}
+
+                        </td>
+                        <td>
+                            {{data.type}}
+                        </td>
+                        <td>
+                            {{data.solde}}
+                        </td>
+                        <td>
+                            {{data.createdAt | date: 'dd MM yyyy'}}
+
+                        </td>
+                        <td>
+                            <div class="editable-row-operations">
+
+                                <button nz-button title="Inspecter" nzType="info" (click)="inspecterMobilisation(data)" nzShape="circle">
+                                    <i nz-icon type="info"></i>
+                                </button>
+
+
+
+                                <nz-popconfirm [nzTitle]="'Êtes vous sûr de
+                                    supprimer?'" (nzOnConfirm)="deleteElement(data)">
+                                    <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
+                                        <i nz-icon type="delete"></i>
+                                    </button>
+                                </nz-popconfirm>
+
+                                <button title="Voir le (s) réponse (s) de cette
+                                    demande" nz-button nzType="primary" (click)="reponse(data.id)" nzShape="circle">
+                                    <i nz-icon type="form"></i>
+                                </button>
+
+
+
+                                <button title="Répondre à cette demande de
+                                    mobilisation" nz-button nzType="primary" (click)="repondre(data)" nzShape="circle">
+                                    <i nz-icon type="form"></i>
+                                </button>
+
+
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </nz-table>
+        </nz-card>
+    </div>
+</div>

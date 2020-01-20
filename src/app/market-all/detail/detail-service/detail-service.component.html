@@ -1,0 +1,76 @@
+<br>
+<div class="container" style="margin-top: 2%; background-color: #ededed">
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="produit-image">
+                <div class="view hm-zoom z-depth-2" style="cursor: pointer">
+                    <!-- <img [src]="http://localhost:8080/files/{{item.photo}}" [alt]="produit.productName" width="100%" class="img-fluid rounded"> -->
+                    <img height="100" alt="example" src="http://localhost:8080/files/{{service.photo}}" />
+                </div>
+                <div class="" style="margin-top:15px">
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Service prix</h6>
+                            </div>
+                            <!-- <span class="text-muted" style="color:crimson !important"> {{service.prix}}</span> -->
+                        </li>
+                        <!-- <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Service Seller</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{service.productSeller}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Quantité Acheté</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{quantiteChoisi}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed">
+                            <div>
+                                <h6 class="my-0">Montant Total</h6>
+                            </div>
+                            <span class="text-muted" style="color:crimson !important">{{formatNumber(service.prix * quantiteChoisi)}}</span>
+                        </li> -->
+                    </ul>
+                    <!-- <button nz-button nzType="primary" (click)="addToCart(service)">Add to Cart</button>
+                    <button nz-button nzType="primary" (click)="addToCart(service)">Remove to Cart</button> -->
+                    <button nz-button nzType="primary" style="margin-right:10px;" (click)="onNewCommande()">Commande</button>
+                    <button nz-button nzType="primary" (click)="onReturnMarket()">Retour Marché</button>
+                    <!-- <button class="btn btn-success" (click)="onReturnMarket()">Retour Marché</button> -->
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="produit-detail">
+                <h5 class="produit-head">Service Details</h5>
+                <table class="table" cellspacing="0" style="max-height: 28px">
+                    <tbody>
+                        <tr>
+                            <th scope="row">Service Nom</th>
+                            <td>{{service.nom}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">Service Description</th>
+                            <td>{{service.description}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"></th>
+                            <td></td>
+                        </tr>
+                        <!--  <tr>
+                            <th scope="row">No. of quantity available</th>
+                            <td>{{service.stock}}</td>
+                        </tr> -->
+                        <!-- <tr>
+                            <th scope="row">Service Added on</th>
+                            <td>{{service.stock * 1000 | date}}</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

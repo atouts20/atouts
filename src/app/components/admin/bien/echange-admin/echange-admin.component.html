@@ -1,0 +1,480 @@
+<br />
+<!-- <button nz-button nzType="primary" (click)="ajout()">
+  <i nz-icon type="laptop" theme="outline"></i>
+  Ajouter
+</button> -->
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }"
+  [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create"
+  (nzOnClose)="close()">
+
+  <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+     <div nz-row nzGutter="12" class="example-input">
+            <div nz-col nzSpan="12">
+                <!-- *ngIf="!edit" -->
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
+                        <span>
+                            Nom
+                            <i nz-icon nz-tooltip nzTitle="Le nom SVP."
+                                type="question-circle"
+                                theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="nom" formControlName="nom"  placeholder="Nom" oninput="this.value=
+                            this.value.toUpperCase()">
+                        <nz-form-explain *ngIf="validateForm.get('nom').dirty &&
+                            validateForm.get('nom').errors">
+                            Votre nom SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nickname" nzRequired>
+                        <span>
+                            Description
+                            <i nz-icon nz-tooltip nzTitle="La Description SVP"
+                                type="question-circle" theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="description" formControlName="description"  placeholder="Description" oninput="this.value=
+                            this.value.toUpperCase()">
+                        <nz-form-explain *ngIf="validateForm.get('description').dirty &&
+                            validateForm.get('description').errors">
+                            Votre Description SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+        </div>
+        <div nz-row nzGutter="12" class="example-input">
+            <div nz-col nzSpan="12">
+                <!-- *ngIf="!edit" -->
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
+                        <span>
+                            Téléphone
+                            <i nz-icon nz-tooltip nzTitle="Le téléphone SVP."
+                                type="question-circle" theme="outline"></i>
+                        </span>
+                    </nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+                        <input nz-input id="tel" formControlName="tel"  placeholder="Téléphone" >
+                        <nz-form-explain *ngIf="validateForm.get('tel').dirty &&
+                            validateForm.get('tel').errors">
+                            Votre Téléphone SVP
+                        </nz-form-explain>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </div>
+
+
+        <div nz-row nzGutter="12" class="example-input">
+
+
+            <div nz-col nzSpan="12">
+                <nz-form-item>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo</nz-form-label>
+                    <nz-form-control [nzSpan]="'vertical'">
+
+                        <input nz-input  type="file" #Image name="file" id="file" accept=".jpg, .jpeg, .png" (change)="onSelectFile($event)">
+                        <!--<button type="button" (click)="upload()">Upload</button>-->
+                        <p>
+                            <p>
+                                <img [src]="imageUrl" style="width:200px;height:200px">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+
+
+        </div>
+
+
+    <div class="footer">
+
+      <div nz-row>
+        <div nz-col nzSpan="8">
+          <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;"
+            ant-btn-primary>
+            <i nz-icon type="retweet" theme="outline"></i>
+            <span>Annuler</span></button>
+        </div>
+        <div nz-col nzSpan="8">
+
+          <nz-form-item nz-row style="margin-bottom:8px;">
+            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+
+              <button nz-button nzType="primary">
+                <i nz-icon type="save"></i>
+                <span>Ajouter</span></button>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div nz-col nzSpan="8">
+          <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+            <i nz-icon type="logout"></i>
+            <span>Fermer</span></button>
+        </div>
+      </div>
+
+
+    </div>
+  </form>
+</nz-drawer>
+
+<nz-card style="width: 100%;">
+  <nz-card-tab>
+    <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
+      <nz-tab nzTitle="Liste des Echanges"></nz-tab>
+      <nz-tab nzTitle="Liste des Echanges à activer"></nz-tab>
+      <nz-tab nzTitle="Liste des Echanges à accepter"></nz-tab>
+    </nz-tabset>
+  </nz-card-tab>
+  <div *ngIf="selectedIndex==0">
+    <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet1">
+      <thead>
+        <tr>
+          <th nzWidth="20%" nzCustomFilter>
+            Numero
+            <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+              <i nz-icon type="search" theme="outline" class="ant-table-filter-icon"
+                [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+              <div class="custom-filter-dropdown">
+                <input type="text" nz-input placeholder="Search Numero" [(ngModel)]="searchValue">
+                <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+              </div>
+            </nz-dropdown>
+          </th>
+          <th nzWidth="20%">Nom</th>
+          <th nzWidth="20%">Description</th>
+          <th nzWidth="20%">Date</th>
+          <th nzWidth="15%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <td>
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container *ngIf="!editCache1[data.id].edit">
+                  {{data.id}}
+                </ng-container>
+                <ng-container *ngIf="editCache1[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache1[data.id].data.id">
+                </ng-container>
+              </div>
+            </div>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache1[data.id].edit">
+              {{data.nom}}
+            </ng-container>
+            <ng-container *ngIf="editCache1[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache1[data.id].data.nom">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache1[data.id].edit">
+              {{data.description}}
+            </ng-container>
+            <ng-container *ngIf="editCache1[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache1[data.id].data.description">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache1[data.id].edit">
+              {{data.createdAt | date: 'medium'}}
+            </ng-container>
+            <ng-container *ngIf="editCache1[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache1[data.id].data.createdAt">
+            </ng-container>
+          </td>
+          <td>
+            <div class="editable-row-operations">
+              <ng-container *ngIf="!editCache1[data.id].edit">
+                <button nz-button title="Inspecter" nzType="info" (click)="startInspecte1(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="info"></i>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache1[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Edition avancée?'" (nzOnConfirm)="avance1(data.id)">
+                  <button nz-button title="Editer" nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="edit"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+              <!-- <ng-container *ngIf="!editCache3[data.id].edit">
+              <button title="Supprimer" nz-button nzType="primary" (click)="startEdit(data.id)" 
+                      nzShape="circle">
+                <i nz-icon type="delete"></i>
+              </button>
+            </ng-container> -->
+
+              <ng-container *ngIf="!editCache1[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="startDelete1(data.id)">
+                  <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="delete"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container> 
+
+
+              <ng-container *ngIf="editCache1[data.id].edit">
+                <button title="Modifier" nz-button nzType="primary" (click)="saveEdit1(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="form"></i>
+                </button>
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit1(data.id)">
+                  <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="close"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div *ngIf="selectedIndex==1">
+    <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet2">
+      <thead>
+        <tr>
+          <th nzWidth="20%" nzCustomFilter>
+            Numero
+            <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+              <i nz-icon type="search" theme="outline" class="ant-table-filter-icon"
+                [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+              <div class="custom-filter-dropdown">
+                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+              </div>
+            </nz-dropdown>
+          </th>
+          <th nzWidth="20%">Nom</th>
+          <th nzWidth="20%">Description</th>
+          <th nzWidth="20%">Date</th>
+          <th nzWidth="15%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <td>
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container *ngIf="!editCache2[data.id].edit">
+                  {{data.id}}
+                </ng-container>
+                <ng-container *ngIf="editCache2[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.id">
+                </ng-container>
+              </div>
+            </div>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache2[data.id].edit">
+              {{data.nom}}
+            </ng-container>
+            <ng-container *ngIf="editCache2[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.nom">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache2[data.id].edit">
+              {{data.description}}
+            </ng-container>
+            <ng-container *ngIf="editCache2[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.description">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache2[data.id].edit">
+              {{data.createdAt | date: 'medium'}}
+            </ng-container>
+            <ng-container *ngIf="editCache2[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache2[data.id].data.createdAt">
+            </ng-container>
+          </td>
+          <td>
+            <div class="editable-row-operations">
+              <ng-container *ngIf="!editCache2[data.id].edit">
+                <button nz-button title="Inspecter" nzType="info" (click)="startInspecte2(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="info"></i>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache2[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Edition avancée?'" (nzOnConfirm)="avance2(data.id)">
+                  <button nz-button title="Editer" nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="edit"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache2[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'activer?'" (nzOnConfirm)="startActiver(data.id)">
+                  <button title="Activer" nz-button nzType="success" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="check"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache2[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="startDelete2(data.id)">
+                  <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="delete"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+
+              <ng-container *ngIf="editCache2[data.id].edit">
+                <button title="Modifier" nz-button nzType="primary" (click)="saveEdit2(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="form"></i>
+                </button>
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit2(data.id)">
+                  <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="close"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+
+  <div *ngIf="selectedIndex==2">
+    <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet3">
+      <thead>
+        <tr>
+          <th nzWidth="15%" nzCustomFilter>
+            Numero
+            <nz-dropdown nzTrigger="click" [nzClickHide]="false" #dropdown>
+
+              <i nz-icon type="search" theme="outline" class="ant-table-filter-icon"
+                [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+              <div class="custom-filter-dropdown">
+                <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                <button nz-button [nzType]="'primary'" (click)="search()">Search</button>
+              </div>
+            </nz-dropdown>
+          </th>
+          <th nzWidth="15%">Nom</th>
+          <th nzWidth="30%">Description</th>
+          <th nzWidth="20%">Date</th>
+          <th nzWidth="20%">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of editRowTable.data">
+          <td>
+            <div class="editable-cell">
+              <div class="editable-cell-text-wrapper">
+                <ng-container *ngIf="!editCache3[data.id].edit">
+                  {{data.id}}
+                </ng-container>
+                <ng-container *ngIf="editCache3[data.id].edit">
+                  <input type="text" nz-input [(ngModel)]="editCache3[data.id].data.id">
+                </ng-container>
+              </div>
+            </div>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache3[data.id].edit">
+              {{data.nom}}
+            </ng-container>
+            <ng-container *ngIf="editCache3[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache3[data.id].data.nom">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache3[data.id].edit">
+              {{data.description}}
+            </ng-container>
+            <ng-container *ngIf="editCache3[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache3[data.id].data.description">
+            </ng-container>
+          </td>
+          <td>
+            <ng-container *ngIf="!editCache3[data.id].edit">
+              {{data.createdAt | date: 'medium'}}
+            </ng-container>
+            <ng-container *ngIf="editCache3[data.id].edit">
+              <input type="text" nz-input [(ngModel)]="editCache3[data.id].data.createdAt">
+            </ng-container>
+          </td>
+          <td>
+            <div class="editable-row-operations">
+              <ng-container *ngIf="!editCache3[data.id].edit">
+                <button nz-button title="Inspecter" nzType="success" (click)="startInspecte3(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="info"></i>
+                </button>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache3[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Edition avancée?'" (nzOnConfirm)="avance3(data.id)"
+                  (nzOnCancel)="startEdit3(data.id)">
+                  <button nz-button title="Editer" nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="edit"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+              <!-- <ng-container *ngIf="!editCache3[data.id].edit">
+                <button title="Accepter" nz-button nzType="success" (click)="startAccepter(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="check"></i>
+                </button>
+              </ng-container> -->
+              <ng-container *ngIf="!editCache3[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'accepter?'" (nzOnConfirm)="startAccepter(data.id)">
+                  <button title="Accepter" nz-button nzType="success" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="check"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+              <ng-container *ngIf="!editCache3[data.id].edit">
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="startDelete3(data.id)">
+                  <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="delete"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+
+
+              <ng-container *ngIf="editCache3[data.id].edit">
+                <button title="Modifier" nz-button nzType="primary" (click)="saveEdit3(data.id)" 
+                  nzShape="circle">
+                  <i nz-icon type="form"></i>
+                </button>
+                <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit3(data.id)">
+                  <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="close"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</nz-card>

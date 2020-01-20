@@ -1,0 +1,388 @@
+<br />
+<div nz-row nzGutter="12" class="example-input">
+    <div class="row">
+        <div class="col-md-3">
+            <button nz-button nzType="primary" (click)="open()">
+                        <i nz-icon type="laptop" theme="outline"></i>
+                        Ajouter 
+                   </button>
+        </div>
+        <div class="col-md-3">
+            <button nz-button nzType="primary" (click)="consulter()">
+                        <i nz-icon type="laptop" theme="outline"></i>
+                        consulter 
+                </button>
+        </div>
+
+
+
+
+
+        <div nz-col nzSpan="12">
+            <nz-form-label [nzSpan]="'vertical'">Type Compte</nz-form-label>
+            <nz-select style="width: 200px;" nzShowSearch nzAllowClear nzPlaceHolder="Choisir un type de compte" [(ngModel)]="selectedValueBis" (ngModelChange)="log(selectedValueBis)">
+                <nz-option nzLabel="Les deux Comptes" nzValue="compte"></nz-option>
+                <nz-option nzLabel="Compte Valeurs" nzValue="valeur"></nz-option>
+                <nz-option nzLabel="Compte Monnaie" nzValue="monnaie"></nz-option>
+            </nz-select>
+        </div>
+    </div>
+
+
+
+    <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+
+
+        <form nz-form [formGroup]="validateForm">
+
+            <div *ngIf="ajouter == true">
+                <div nz-row nzGutter="12" class="example-input" *ngIf="!edit">
+                    <div nz-col nzSpan="12">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="type" nzRequired>Type</nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <nz-select id="type" formControlName="type" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select a compte" [(ngModel)]="selectedValue">
+                                    <nz-option nzLabel="CPMN" nzValue="CPMN"></nz-option>
+                                    <nz-option nzLabel="CPVL" nzValue="CPVL"></nz-option>
+                                </nz-select>
+
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="Proprietaire" nzRequired>
+                        <span>
+                      Propriétaire Compte
+                      <i nz-icon nz-tooltip nzTitle="Le Propriétaire de compte SVP." type="question-circle" theme="outline"></i>
+                    </span>
+                    </nz-form-label>
+                    <div nz-col nzSpan="12">
+                        <nz-select *ngIf="selectedValue =='CPMN'" id="appUserCompte" formControlName="appUserCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select Propriétaire" nzAllowClear>
+                            <nz-option *ngFor="let o of optionList" [nzValue]="o" [nzLabel]="o.nom"></nz-option>
+                            <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                                <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
+                            </nz-option>
+                        </nz-select>
+                    </div>
+                    <!-- <div nz-col nzSpan="12" *ngIf="!edit">
+                            <nz-select *ngIf="selectedValue =='CPVL'" id="appUserCompte" formControlName="appUserCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select Propriétaire" nzAllowClear>
+                                <nz-option *ngFor="let o of optionList" [nzValue]="o.id" [nzLabel]="o.nom"></nz-option>
+                                <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
+                                    <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
+                                </nz-option>
+                            </nz-select>
+                        </div> -->
+                </div>
+
+
+
+
+
+                <div nz-row nzGutter="12" class="example-input">
+                    <div nz-col nzSpan="12" *ngIf="!edit">
+
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="numCompte" nzRequired>
+                                <span>
+                                     Numero Compte
+                                     <i nz-icon nz-tooltip nzTitle="Le numero de compte SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="numCompte" formControlName="numCompte" placeholder="Numero Compte">
+                                <nz-form-explain *ngIf="validateForm.get('numCompte').dirty && validateForm.get('numCompte').errors">
+                                    Votre Numero Compte SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="12" *ngIf="edit">
+                        <!-- *ngIf="!edit" -->
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="numCompte" nzRequired>
+                                <span>
+                                        Numero Compte
+                                        <i nz-icon nz-tooltip nzTitle="Le numero de compte SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="numCompte" formControlName="numCompte" placeholder="Numero Compte">
+                                <nz-form-explain *ngIf="validateForm.get('numCompte').dirty && validateForm.get('numCompte').errors">
+                                    Votre Numero Compte SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="12">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'" nzFor="dateCreation" nzRequired>
+                                <span>
+                                        Date creation
+                                        <i nz-icon nz-tooltip nzTitle="La Date de creation SVP" type="question-circle" theme="outline"></i>
+                                    </span>
+                            </nz-form-label>
+                            <nz-form-control [nzSpan]="'vertical'">
+                                <input nz-input id="dateCreation" formControlName="dateCreation" type="date" placeholder="Date de creation">
+                                <nz-form-explain *ngIf="validateForm.get('dateCreation').dirty && validateForm.get('dateCreation').errors">
+                                    La Date de creation SVP
+                                </nz-form-explain>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <nz-form-item>
+                        <nz-form-label [nzSpan]="'vertical'" nzFor="provision" nzRequired>
+                            <span>
+                                    Provision
+                                    <i nz-icon nz-tooltip nzTitle="La provision SVP" type="question-circle" theme="outline"></i>
+                                </span>
+                        </nz-form-label>
+                        <nz-form-control [nzSpan]="'vertical'">
+                            <nz-tooltip nzTrigger="focus" nzPlacement="topLeft" nzOverlayClassName="numeric-input" [nzTitle]="title1">
+                                <input #inputElements nz-input id="provision" min="0" type="number" formControlName="provision" nz-tooltip placeholder="Input a number" [ngModel]="provision" (ngModelChange)="onChangess($event)" (blur)="onBlurProvision()">
+                            </nz-tooltip>
+                            <!--<input nz-input id="solde" formControlName="solde"  placeholder="crédit">-->
+                            <nz-form-explain *ngIf="validateForm.get('provision').dirty && validateForm.get('provision').errors">
+                                Le Solde SVP
+                            </nz-form-explain>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+
+
+                <div nz-row nzGutter="12" class="example-input">
+                    <!-- <div nz-col nzSpan="12"> -->
+
+                    <nz-form-item *ngIf="selectedValue =='CPMN'">
+                        <nz-form-label [nzSpan]="'vertical'" nzFor="solde" nzRequired>
+                            <span>
+                          Solde du compte
+                          <i nz-icon nz-tooltip nzTitle="Le sole SVP" type="question-circle" theme="outline"></i>
+                        </span>
+                        </nz-form-label>
+                        <nz-form-control [nzSpan]="'vertical'">
+                            <nz-tooltip nzTrigger="focus" nzPlacement="topLeft" nzOverlayClassName="numeric-input" [nzTitle]="title">
+                                <input #inputElement nz-input id="solde" min="0" type="number" formControlName="solde" nz-tooltip placeholder="Input a number" [ngModel]="value" (ngModelChange)="onChange($event)" (blur)="onBlur()">
+                            </nz-tooltip>
+                            <!--<input nz-input id="solde" formControlName="solde"  placeholder="crédit">-->
+                            <nz-form-explain *ngIf="validateForm.get('solde').dirty && validateForm.get('solde').errors">
+                                Le Solde SVP
+                            </nz-form-explain>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <nz-form-item *ngIf="selectedValue ==='CPVL'">
+                        <nz-form-label [nzSpan]="'vertical'" nzFor="solde" nzRequired>
+                            <span>
+                          Valeur du compte
+                          <i nz-icon nz-tooltip nzTitle="Le valeur SVP" type="question-circle" theme="outline"></i>
+                        </span>
+                        </nz-form-label>
+                        <nz-form-control [nzSpan]="'vertical'">
+                            <nz-tooltip nzTrigger="focus" nzPlacement="topLeft" nzOverlayClassName="numeric-input" [nzTitle]="title">
+                                <input #inputElement nz-input id="valeur" min="0" type="number" formControlName="valeur" nz-tooltip placeholder="Input a number" [ngModel]="value" (ngModelChange)="onChange($event)" (blur)="onBlur()">
+                            </nz-tooltip>
+                            <nz-form-explain *ngIf="validateForm.get('valeur').dirty && validateForm.get('valeur').errors">
+                                Le Valeur SVP
+                            </nz-form-explain>
+                        </nz-form-control>
+                    </nz-form-item>
+
+                    <!-- </div> -->
+                </div>
+
+
+            </div>
+            <div *ngIf="consulte == true">
+                <div class="col-12">
+                    <nz-form-label [nzSpan]="'vertical'" nzFor="Proprietaire" nzRequired>
+                        <span>
+                                      Numero Compte
+                                      <i nz-icon nz-tooltip nzTitle="Le Propriétaire de compte SVP." type="question-circle" theme="outline"></i>
+                                    </span>
+                    </nz-form-label>
+                    <nz-input-group nzSearch nzSize="small" [nzAddOnAfter]="suffixButton">
+                        <input type="text" nz-input placeholder="input search text" />
+                    </nz-input-group>
+                    <ng-template #suffixButton>
+                        <button nz-button nzType="primary" nzSize="small" (click)="consulteCompter()" nzSearch>Search</button>
+                    </ng-template>
+                </div>
+                <div class="col-12">
+                    Nom: Prénom: Numero de compte: Solde: Provision:
+                </div>
+                <div class="col-12">
+
+                </div>
+
+            </div>
+
+
+            <div class="footer">
+
+                <div nz-row>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+            <i nz-icon type="retweet" theme="outline"></i>
+            <span>Annuler</span></button>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <nz-form-item nz-row style="margin-bottom:8px;">
+                            <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                <button nz-button nzType="primary" (click)="submitForm()">
+                                    <i nz-icon type="diff"></i>
+                                    <span>Ajouter</span>
+                                </button>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
+                            <i nz-icon type="logout"></i>
+                            <span>Fermer</span></button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </form>
+    </nz-drawer>
+
+
+    <nz-table #editRowTable nzBordered [nzPageSize]=100 [nzShowPagination]=true [nzData]="dataSet" [nzScroll]="{ y: '240px' }">
+        <thead>
+            <tr>
+                <th nzWidth="20%" nzCustomFilter nzLeft="0px">
+                    Numero compte
+                    <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
+                        <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
+                        <div class="search-box">
+                            <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
+                            <button nz-button nzType="primary" (click)="search()" class="search-button">Search</button>
+                            <button nz-button (click)="reset()">Reset</button>
+                        </div>
+                    </nz-dropdown>
+                </th>
+                <th nzWidth="10%">Type</th>
+                <th nzWidth="10%">Solde</th>
+                <!--  <th nzWidth="10%">Valeurs</th> -->
+                <th nzWidth="10%">provision</th>
+                <th nzWidth="10%">Propriétaire</th>
+                <th nzWidth="15%" nzRight="0%">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of editRowTable.data">
+                <td nzLeft="0%">
+                    <div class="editable-cell">
+                        <div class="editable-cell-text-wrapper">
+                            <ng-container *ngIf="!editCache[data.numCompte].edit">
+                                {{data.numCompte}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.numCompte].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.numCompte">
+                            </ng-container>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="editable-cell">
+                        <div class="editable-cell-text-wrapper">
+                            <ng-container *ngIf="!editCache[data.numCompte].edit">
+                                {{data.type}}
+                            </ng-container>
+                            <ng-container *ngIf="editCache[data.numCompte].edit">
+                                <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.type">
+                            </ng-container>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.numCompte].edit">
+                        {{data.solde}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.numCompte].edit">
+                        <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.solde">
+                    </ng-container>
+                </td>
+                <!--  <td>
+        <ng-container *ngIf="!editCache[data.numCompte].edit">
+          {{data.valeur}}
+        </ng-container>
+        <ng-container *ngIf="editCache[data.numCompte].edit">
+          <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.valeur">
+        </ng-container>
+      </td> -->
+                <td>
+                    <ng-container *ngIf="!editCache[data.numCompte].edit">
+                        {{data.provision}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.numCompte].edit">
+                        <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.provision">
+                    </ng-container>
+                </td>
+                <td>
+                    <ng-container *ngIf="!editCache[data.numCompte].edit">
+                        {{data.appUserCompte.username}}
+                    </ng-container>
+                    <ng-container *ngIf="editCache[data.numCompte].edit">
+                        <input type="text" nz-input [(ngModel)]="editCache[data.numCompte].data.username">
+                    </ng-container>
+                </td>
+                <td nzRight="0%" nzAlign="center">
+                    <div class="editable-row-operations">
+                        <ng-container *ngIf="!editCache[data.numCompte].edit">
+                            <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.numCompte)" nzShape="circle">
+              <i nz-icon type="edit"></i>
+            </button>
+                        </ng-container>
+
+                        <!--  <ng-container *ngIf="editCache[data.numCompte].edit && !data.active">
+                <nz-popconfirm [nzTitle]="'Voulez-vous activer cet compte?'" (nzOnConfirm)="activer(data.id)">
+                  <button title="Activer" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                    <i nz-icon type="check"></i>
+                  </button>
+                </nz-popconfirm>
+              </ng-container> -->
+
+                        <ng-container *ngIf="!editCache[data.numCompte].edit && !editCache[data.numCompte].data.active">
+                            <nz-popconfirm [nzTitle]="'Voulez-vous activer cet compte?'" (nzOnConfirm)="activer(data.id)">
+                                <button title="Activer" nz-button nzType="primary" nz-popconfirm nzShape="circle">
+                    <i nz-icon type="check"></i>
+                  </button>
+                            </nz-popconfirm>
+                        </ng-container>
+
+                        <ng-container *ngIf="!editCache[data.numCompte].edit && editCache[data.numCompte].data.active">
+                            <nz-popconfirm [nzTitle]="'Voulez-vous désactiver cet compte?'" (nzOnConfirm)="desactiver(data.id)">
+                                <button title="Désactiver" nz-button nzType="dashed" nz-popconfirm nzShape="circle">
+                    <i nz-icon type="check"></i>
+                  </button>
+                            </nz-popconfirm>
+                        </ng-container>
+
+                        <ng-container *ngIf="!editCache[data.numCompte].edit">
+                            <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="startDelete (data.numCompte)">
+                                <button nz-popconfirm title="Supprimer" nz-button nzType="danger" nzShape="circle">
+                <i nz-icon type="delete"></i>
+              </button>
+                            </nz-popconfirm>
+                        </ng-container>
+
+
+                        <ng-container *ngIf="editCache[data.numCompte].edit">
+                            <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.numCompte)" nzShape="circle">
+              <i nz-icon type="form"></i>
+            </button>
+                            <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit(data.numCompte)">
+                                <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
+                <i nz-icon type="close"></i>
+              </button>
+                            </nz-popconfirm>
+                        </ng-container>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
