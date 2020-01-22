@@ -4,41 +4,47 @@
             <ng-template #titleTemplate> <i nz-icon [nzType]="tab.icon"></i>{{ tab.name }} </ng-template>
         </nz-tab>
     </nz-tabset>
-</nz-header>
-<nz-content>
-    <div class="top-content">
-        <div class="container-fluid">
-            <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner row w-100 mx-auto">
-                    <nz-carousel nzAutoPlay class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                        <div nz-carousel-content *ngFor="let index of array">
-                            <img src={{index}}>
-                        </div>
-                    </nz-carousel>
-                    <!--  <div class="carousel-item col-12 col-sm-6 col-md-4 col-lg-3">
-                        <img src={{index}} class="img-fluid mx-auto d-block" alt="img5">
-                    </div> -->
-                </div>
+    <br>
+    <div class="container-fluid">
+        <nz-carousel nzAutoPlay>
+            <div nz-carousel-content *ngFor="let index of array">
+                <img src={{index}} class="img-fluid mx-auto d-block">
             </div>
-        </div>
+        </nz-carousel>
     </div>
 
 
+
+</nz-header>
+<nz-content>
 
     <!-- Section 1 -->
     <div class="section-1-container section-container">
         <div class="container">
             <div class="row">
+
                 <div class="col section-1 section-description wow fadeIn">
-                    <h1>Plateforme de consommation collaborative</h1>
+
+                    <h1 style="color: cornflowerblue;">PLATEFORME DE CONSOMMATION COLLABORATIVE</h1>
                     <div class="divider-1 wow fadeInUp"><span></span></div>
                     <p>
                         Avec <strong>atouts</strong> votre <strong>bien être</strong> est <strong>Garantir</strong>. Soyons tous atouts !
                     </p>
                 </div>
             </div>
+
+            <!--  <div class="col section-1 section-description wow">
+    
+                    <h3 style="color: cornflowerblue;">PLATEFORME DE CONSOMMATION COLLABORATIVE</h3>
+                    <div class="divider-1 wow"><span></span></div>
+                    <p>
+                        Avec <strong>atouts</strong> votre <strong>bien être</strong> est <strong>Garantir</strong>. Soyons tous atouts !
+                    </p>
+                </div> -->
+
+
             <div class="row">
-                <div class="col-md-4 section-1-box wow fadeInUp">
+                <div class="col-md-4 section-1-box wow ">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="section-1-box-icon">
@@ -47,9 +53,16 @@
                         </div>
                         <div class="col-md-8">
                             <h3 style="color: cornflowerblue;">PRODUITS</h3>
-                            <p style="text-align: justify;">Les valeurs mat&eacute;rielles de consommation sont caract&eacute;ris&eacute;es par un stock et destin&eacute;es &agrave; satisfaire diff&eacute;rentes cat&eacute;gories de besoins de bien-&ecirc;tre : les produits. Ils sont
-                                offerts en bccv et en flotte continue afin d&rsquo;accro&icirc;tre leur comp&eacute;titivit&eacute; et r&eacute;duire les pertes potentielles de valeurs.Mieux la demande est planifi&eacute;e, mieux les paniers sont abordables
-                                et mieux les populations sont satisfaites.Si un article est inexistante sur le march&eacute;, envoyez une requ&ecirc;te &agrave; <a href="mailto:ecoute@atouts.com">ecoute@atouts.com</a> et un retour vous sera fait.</p>
+                            <p style="text-align: justify;">Les valeurs mat&eacute;rielles de consommation sont caract&eacute;ris&eacute;es par et un retour vous sera fait.</p>
+                            <style type="text/css">
+                                #lirelasuite {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p id="lirelasuite" style="text-align: justify;">un stock et destin&eacute;es &agrave; satisfaire diff&eacute;rentes cat&eacute;gories de besoins de bien-&ecirc;tre : les produits. Ils sont offerts en bccv et en flotte continue afin d&rsquo;accro&icirc;tre leur comp&eacute;titivit&eacute;
+                                et r&eacute;duire les pertes potentielles de valeurs.Mieux la demande est planifi&eacute;e, mieux les paniers sont abordables et mieux les populations sont satisfaites.Si un article est inexistante sur le march&eacute;,
+                                envoyez une requ&ecirc;te &agrave; <a href="mailto:ecoute@atouts.com">ecoute@atouts.com</a></p>
                         </div>
                     </div>
                 </div>
@@ -60,35 +73,48 @@
                                 <i class="fas fa-cog"></i>
                             </div>
                         </div>
+
                         <div class="col-md-8">
                             <h3 style="color: cornflowerblue;">SERVICES</h3>
-                            <p style="text-align: justify;">Ils constituent des valeurs immat&eacute;rielles directes offertes aux membres en vue s&rsquo;assoupir une faim. Leur tbccv est d&rsquo;au moins 30% et les prestataires commis sont certifi&eacute;s par le Conseil d&rsquo;Administration.
-                                Les transactions sont sold&eacute;es via les virements ou par bons apr&egrave;s satisfaction du b&eacute;n&eacute;ficiaire. En ordonnant<span id="dots">...</span><span id="more">votre conseiller &agrave; effectuer
-                                les soldes, vous garantissez la prestation sur une dur&eacute;e n&rsquo;exc&eacute;dant pas le dixi&egrave;me du temps d&rsquo;amortissement de l&rsquo;ouvrage.</span></p>
-                            <button onclick="myFunction()" id="myBtn">Lire plus</button>
+                            <p style="text-align: justify;">Ils constituent des valeurs immat&eacute;rielles directes offertes aux membres en vue s&rsquo;assoupir une faim.</p>
+                            <style type="text/css">
+                                #lirelasuite2 {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite2').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p id="lirelasuite2" style="text-align: justify;">Leur tbccv est d&rsquo;au moins 30% et les prestataires commis sont certifi&eacute;s par le Conseil d&rsquo;Administration. Les transactions sont sold&eacute;es via les virements ou par bons apr&egrave;s satisfaction du b&eacute;n&eacute;ficiaire.
+                                En ordonnant votre conseiller &agrave; effectuer les soldes, vous garantissez la prestation sur une dur&eacute;e n&rsquo;exc&eacute;dant pas le dixi&egrave;me du temps d&rsquo;amortissement de l&rsquo;ouvrage.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 section-1-box wow fadeInUp">
+                <div class="col-md-4 section-1-box wow ">
                     <div class="row">
                         <div class="col-md-4">
                             <div class="section-1-box-icon">
                                 <i class="fab fa-twitter"></i>
                             </div>
                         </div>
+
                         <div class="col-md-8">
                             <h3 style="color: cornflowerblue;">ECHANGES</h3>
-
-                            <p style="text-align: justify;">Il existe des valeurs de consommation ou de production dont la mobilisation par ATOUTS nous est impossible soit &agrave; cause de l&rsquo;urgence de notre projet car le cr&eacute;dit du compte mettra plus de temps, soit &agrave;
-                                cause d&rsquo;une difficult&eacute; de conformit&eacute;. Nous faisons alors recours &agrave; ce march&eacute; de circuit court. Les articles ne jouissent d&rsquo;aucune couverture et la responsabilit&eacute; de ATOUTS
-                                ne peut &ecirc;tre engag&eacute;e. Il est vivement conseill&eacute; &agrave; tout troqueur de bien v&eacute;rifier la valeur de contrepartie avant de c&eacute;der le sien.</p>
+                            <p style="text-align: justify;">Il existe des valeurs de consommation ou de production dont la mobilisation</p>
+                            <style type="text/css">
+                                #lirelasuite3 {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite3').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p id="lirelasuite3" style="text-align: justify;">par ATOUTS nous est impossible soit &agrave; cause de l&rsquo;urgence de notre projet car le cr&eacute;dit du compte mettra plus de temps, soit &agrave; cause d&rsquo;une difficult&eacute; de conformit&eacute;. Nous faisons
+                                alors recours &agrave; ce march&eacute; de circuit court. Les articles ne jouissent d&rsquo;aucune couverture et la responsabilit&eacute; de ATOUTS ne peut &ecirc;tre engag&eacute;e. Il est vivement conseill&eacute; &agrave;
+                                tout troqueur de bien v&eacute;rifier la valeur de contrepartie avant de c&eacute;der le sien.</p>
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 
     <!-- Section 3 -->
     <div class="section-3-container section-container">
@@ -97,7 +123,7 @@
             <div class="row">
                 <div class="col section-3 section-description wow fadeIn">
                     <h2 style="color: cornflowerblue;">Condition générale de atouts</h2>
-                    <div class="divider-1 wow fadeInUp"><span></span></div>
+                    <div class="divider-1 wow "><span></span></div>
                 </div>
             </div>
 
@@ -111,7 +137,33 @@
                         </div>
                         <div class="col-md-9">
                             <h3 style="color: cornflowerblue;">LES VALEURS MOBILISABLES</h3>
-                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';">Denr&eacute;es alimentaires, les sons de farine, les machines, les appareils de production, les engins, les instruments, les terres, les terrains, les maisons, les locaux, les brevets, les inventions, les techniques de production, les objets historiques irrempla&ccedil;ables, les moteurs et valeurs similaires, les outillages, les dons, les emballages en verre et en plastiques, les animaux comestibles, les exp&eacute;riences et expertises, les mati&egrave;res de production, les productions et encours de production, les provendes, l&rsquo;&eacute;nergie &eacute;lectrique, les enseignements et formations, le savoir-faire, les bois et madriers, les arbres, les plantations, les tuyaux d&rsquo;irrigation, les arrosoirs, le ciment, la main d&rsquo;&oelig;uvre, les renseignements et informations, les proc&eacute;dures, les r&eacute;sultats de recherches sp&eacute;cifiques, les statistiques et donn&eacute;es sp&eacute;ciales, les services informatiques, les mat&eacute;riels de construction, les pi&egrave;ces d&eacute;tach&eacute;es m&eacute;caniques et &eacute;lectroniques, les bouteilles de gaz, les mat&eacute;riels agricoles, les semences certifi&eacute;es, les panneaux solaires, les maquettes, les d&eacute;chets transformables, les autres services l&eacute;gaux, les moulins, les grillages, les gravillons, etc...</span></p>
+                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';"> Denr&eacute;es alimentaires, les sons de farine, les machines, 
+                                    les appareils de production, les engins, les instruments, les terres, 
+                                    les terrains, les maisons, les locaux, les brevets, les inventions, les 
+                                    techniques de production, les objets historiques irrempla&ccedil;ables, 
+                                    les moteurs et valeurs similaires, les outillages, les dons,</span></p>
+                            <style type="text/css">
+                                #lirelasuite5 {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite5').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';" id="lirelasuite5">
+                                    les 
+                                    emballages en verre et en plastiques, les animaux comestibles, 
+                                    les exp&eacute;riences et expertises, les mati&egrave;res de production, 
+                                    les productions et encours de production, les provendes, 
+                                    l&rsquo;&eacute;nergie &eacute;lectrique, les enseignements et formations, 
+                                    le savoir-faire, les bois et madriers, les arbres, les plantations, 
+                                    les tuyaux d&rsquo;irrigation, les arrosoirs, le ciment, 
+                                    la main d&rsquo;&oelig;uvre, les renseignements et informations, 
+                                    les proc&eacute;dures, les r&eacute;sultats de recherches sp&eacute;cifiques, 
+                                    les statistiques et donn&eacute;es sp&eacute;ciales, les services informatiques, 
+                                    les mat&eacute;riels de construction, les pi&egrave;ces d&eacute;tach&eacute;es m&eacute;caniques et &eacute;lectroniques, 
+                                    les bouteilles de gaz, les mat&eacute;riels agricoles, les semences certifi&eacute;es, 
+                                    les panneaux solaires, les maquettes, les d&eacute;chets transformables, les autres services l&eacute;gaux, 
+                                    les moulins, les grillages, les gravillons, etc...</span></p>
+
                         </div>
                     </div>
                 </div>
@@ -124,7 +176,20 @@
                         </div>
                         <div class="col-md-9">
                             <h3 style="color: cornflowerblue;">VALEURS NON MOBILISABLES</h3>
-                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';">Les chaussures, les v&ecirc;tements cousus, les biens ill&eacute;gaux ou non authentiques ou frauduleux, les valeurs spirituelles, les pommades, les objets d&rsquo;art, les insecticides, les pesticides, les produits pharmaceutiques, les fausses coupures de billets de banques, les compteurs &eacute;lectriques, les contrats de bail, les dipl&ocirc;mes, les produits th&eacute;rapeutiques, les armes (couteaux, armes &agrave; feu), les ossements et chairs humaines, les personnes humaines, les bijoux, les produits cosm&eacute;tiques, les perruques et m&egrave;ches, les perles, les outils et manuels religieux, les graines, les herbes, les lunettes m&eacute;dicales, les objets douteux , les biens inutilisables (les lits, les placards, les &eacute;tag&egrave;res, les gu&eacute;ridons, les montres, les nattes, les tapis, les frigos), les pi&egrave;ces d&rsquo;identit&eacute;s, les tickets de voyages, les ch&egrave;ques de banques, les cartes bancaires, les objets perdus, les routes, les biens publics, les excr&eacute;ments, le sexe, les produits p&eacute;troliers et assimil&eacute;s (produits inflammables), les d&eacute;chets non transformables, les cercueils, les services ill&eacute;gaux, les c&acirc;bles &eacute;lectriques, le sable, les k&eacute;pis, les casquettes, les agendas, les virus, les ustensiles de cuisine,&nbsp; les pagnes non cousus, les bons d&rsquo;achat, &hellip;</span></p>
+                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';"> 
+                                    Les chaussures, les v&ecirc;tements cousus, les biens ill&eacute;gaux ou non authentiques ou frauduleux,
+                                    les valeurs spirituelles, les pommades, les objets d&rsquo;art, les insecticides, les pesticides, 
+                                    les produits pharmaceutiques, les fausses coupures de billets de banques, 
+                                    les compteurs &eacute;lectriques,</span></p>
+                            <style type="text/css">
+                                #lirelasuite6 {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite6').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p style="text-align: justify; line-height: 150%;"><span style="font-family: 'Arial','sans-serif';" id="lirelasuite6">
+                                les contrats de bail, 
+                                les dipl&ocirc;mes, les produits th&eacute;rapeutiques, les armes (couteaux, armes &agrave; feu), les ossements et chairs humaines, les personnes humaines, les bijoux, les produits cosm&eacute;tiques, les perruques et m&egrave;ches, les perles, les outils et manuels religieux, les graines, les herbes, les lunettes m&eacute;dicales, les objets douteux , les biens inutilisables (les lits, les placards, les &eacute;tag&egrave;res, les gu&eacute;ridons, les montres, les nattes, les tapis, les frigos), les pi&egrave;ces d&rsquo;identit&eacute;s, les tickets de voyages, les ch&egrave;ques de banques, les cartes bancaires, les objets perdus, les routes, les biens publics, les excr&eacute;ments, le sexe, les produits p&eacute;troliers et assimil&eacute;s (produits inflammables), les d&eacute;chets non transformables, les cercueils, les services ill&eacute;gaux, les c&acirc;bles &eacute;lectriques, le sable, les k&eacute;pis, les casquettes, les agendas, les virus, les ustensiles de cuisine,&nbsp; les pagnes non cousus, les bons d&rsquo;achat, &hellip;</span></p>
 
                         </div>
                     </div>
@@ -141,12 +206,18 @@
                         </div>
                         <div class="col-md-9">
                             <h3 style="color: cornflowerblue;">LA CLAUSE BCCV</h3>
-                            <p>Elle r&eacute;git l'ensemble des Biens &agrave; Cr&eacute;dit, au Comptant et en Valeurs &eacute;chang&eacute;s au sein de la communaut&eacute; ATOUTS.&nbsp;</p>
-                            <p>Les &eacute;changes effectu&eacute;s sont &eacute;valu&eacute;es en atouts symbolis&eacute; par <span style="text-decoration: line-through;">oo</span>.&nbsp; Pour tout article publi&eacute;, son prix est compos&eacute; en 2
+                            <p style="text-align: justify;">Elle r&eacute;git l'ensemble des Biens &agrave; Cr&eacute;dit, au Comptant et en Valeurs &eacute;chang&eacute;s au sein de la communaut&eacute; ATOUTS.</p>
+                            <style type="text/css">
+                                #lirelasuite4 {
+                                    display: none;
+                                }
+                            </style>
+                            <p><button onclick="document.getElementById('lirelasuite4').style.display = 'block'; this.style.display = 'none';">Lire la suite...</button></p>
+                            <p id="lirelasuite4" style="text-align: justify;">Les &eacute;changes effectu&eacute;s sont &eacute;valu&eacute;es en atouts symbolis&eacute; par <span style="text-decoration: line-through;">oo</span>.&nbsp; Pour tout article publi&eacute;, son prix est compos&eacute; en 2
                                 parties: une premi&egrave;re en monnaie courante et une seconde en&nbsp;<span style="text-decoration: line-through;">oo</span>. La derni&egrave;re tranche est celle qui impacte le compte en valeur du membre op&eacute;rant
                                 et obtenue en multipliant le montant affich&eacute; par le taux BCCV (tbccv).</p>
-
                         </div>
+
                     </div>
                 </div>
                 <div class="col-md-6 section-3-box wow fadeInLeft">
@@ -218,6 +289,7 @@
     
     
             </div> -->
+
 </nz-content>
 
 <nz-footer style="text-align: center;">

@@ -30,7 +30,7 @@ export class PasswordForgotComponent implements OnInit {
         this.modalService.success({
           nzTitle: 'Information',
           nzContent: '<p>Un lien de récupération de votre mot de passe vous a été envoyé !</p>',
-          nzOnOk: () => console.log('Info OK')
+          nzOnOk: () => console.log('Info OK')   
         });
 
       }, (eror: HttpErrorResponse) => {

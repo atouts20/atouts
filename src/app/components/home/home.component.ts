@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   array = ['../assets/images/1.jpg', '../assets/images/2.jpg', '../assets/images/3.jpg', '../assets/images/4.jpg'];
-  effect = 'scrollx';
+  /* effect = 'scrollx'; */
   tabs = [
     {
       active: false,
@@ -36,9 +36,9 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    setTimeout(() => {
+   /*  setTimeout(() => {
       this.effect = 'fade';
-    }, 100000);
+    }, 100000); */
   }
 
   log(index: number): void {

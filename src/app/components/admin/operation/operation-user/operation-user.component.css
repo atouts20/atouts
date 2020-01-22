@@ -9,6 +9,15 @@
     background: #fff;
 }
 
+.botom1 {
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    padding: 2px 5px;
+    text-align: center;
+    left: 0px;
+}
+
 nz-date-picker,
 nz-month-picker,
 nz-range-picker,

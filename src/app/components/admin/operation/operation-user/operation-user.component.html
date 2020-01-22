@@ -84,14 +84,19 @@
 
 
         <nz-card style="width: 100%;">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="col">
+            <h4 class="card-title">LISTES DE MES OPERATIONS EFFECTUEE</h4>
+            <h6 class="card-subtitle">
+                LISTES DE MES OPERATIONS<br>
+                <hr>
+            </h6>
+            <div class="botom1">
+                <div class="row">
+                    <div class="col-md-1 col-sm-1">
                         <button nz-button nzType="primary" (click)="betwen()"><i
-                                nz-icon nzType="search"></i>OP entre 2 dates
-                        </button>
+                            nz-icon nzType="search"></i>2 dates
+                    </button>
                     </div>
-                    <div class="col">
+                    <div class="col-md-5 col-sm-5">
                         <nz-range-picker [nzDateRender]="tplRender" [(ngModel)]="dateBetwen"></nz-range-picker>
                         <ng-template #tplRender let-current>
                             <div class="ant-calendar-date" [class.border]="current.getDate() === 1">
@@ -99,24 +104,25 @@
                             </div>
                         </ng-template>
                     </div>
-                </div>
 
-                <div class="col-md-6">
-                    <div class="col">
+
+
+                    <div class="col-md-1 col-sm-1">
                         <button nz-button nzType="primary" (click)="lessOp()"><i
-                                nz-icon
-                                nzType="search"></i>less
-                        </button>
+                            nz-icon
+                            nzType="search"></i>Avant
+                    </button>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4 col-sm-4">
                         <nz-date-picker [nzDateRender]="tplRender" [(ngModel)]="dateLessGreaterThan" nzFormat="yyyy-MM-dd HH:mm:ss"></nz-date-picker>
                     </div>
-                    <div class="col">
+                    <div class="col-md-1 col-sm-1">
                         <button nz-button nzType="primary" (click)="greaterOp()"><i nz-icon
-                                nzType="search"></i>greater
-                        </button>
+                            nzType="search"></i>Apres
+                    </button>
                     </div>
                 </div>
+
             </div>
             <div>
                 <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet">

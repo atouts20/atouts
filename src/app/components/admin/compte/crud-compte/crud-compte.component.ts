@@ -9,6 +9,10 @@ import { Compte } from '../../../../model/model.compte';
 import { UtilisateurService } from '../../../../service/UtilisateurService';
 import { CompteService } from '../../../../service/compte.service';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
+import { HttpErrorResponse } from '@angular/common/http';
+import { RecepteCompte } from 'src/app/model/model.recepte-compte';
+import { OperationBanqueService } from './../../../../service/operationBanque.service';
+import { Operation } from './../../../../model/model.operation';
 
 @Component({
   selector: 'app-crud-compte',
@@ -72,6 +76,21 @@ export class CrudCompteComponent implements OnInit {
   dataSetM = [];
 
   visible = false;
+  dateBetwen: Array<Date> = [];
+  numeroCompte: string ;
+  comptConsulter: RecepteCompte = null;
+
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private fb: FormBuilder,
+    private utilisateurService: UtilisateurService,
+    private message: NzMessageService,
+    private modalService: NzModalService,
+    private compteService: CompteService,
+    private operationBanqueService: OperationBanqueService,
+    private authenService: AuthenticationService,
+  ) { }
 
   /* le selecteur */
   /*  optionListBis = [
@@ -122,16 +141,6 @@ export class CrudCompteComponent implements OnInit {
     this.ngOnInit();
     this.open();
   } */
-  constructor(
-    private http: HttpClient,
-    private router: Router,
-    private fb: FormBuilder,
-    private utilisateurService: UtilisateurService,
-    private message: NzMessageService,
-    private modalService: NzModalService,
-    private compteService: CompteService,
-    private authenService: AuthenticationService,
-  ) { }
 
   ngOnInit(): void {
     //this.loadCompteGenerale();  
@@ -202,7 +211,18 @@ export class CrudCompteComponent implements OnInit {
     this.visible = false;
   }
   consulteCompter() {
-console.log('consultation');
+    console.log(this.numeroCompte);
+    if (this.numeroCompte != null) {
+      this.compteService.consulterUnCompte(this.numeroCompte)
+        .subscribe(  (data: Compte) => {
+          this.comptConsulter = data;
+          console.log(this.comptConsulter);
+           
+          },
+          (error: HttpErrorResponse) => {
+            this.message.error('Erreur de numero de compte');
+          });
+    }
   }
 
   submitForm(): void {
@@ -302,20 +322,20 @@ console.log('consultation');
 
 
 
-  
- activer(key: string): void {
 
- this.compteService.activerCompte(key)
-     .subscribe(
-       res => {
-         console.log(res);
-         this.ngOnInit();
-       },
-       err => {
-         console.log("Error occured");
-       });
+  activer(key: string): void {
 
- }
+    this.compteService.activerCompte(key)
+      .subscribe(
+        res => {
+          console.log(res);
+          this.ngOnInit();
+        },
+        err => {
+          console.log("Error occured");
+        });
+
+  }
 
 
   desactiver(key: string): void {
@@ -656,6 +676,17 @@ console.log('consultation');
   private deleteMonnaie(compte: Compte) {
     this.compteService.deleteCompte(compte).subscribe(response => this.loadCompte);
 
+  }
+
+
+  betwen() {
+    this.operationBanqueService.geOp2Date(this.dateBetwen, this.comptConsulter.numCompte)
+      .subscribe((data: Array<Operation>) => {
+        this.dataSet = data;
+        console.log(this.dataSet);
+      }, (err: HttpErrorResponse) => {
+        console.log(err);
+      });
   }
 
 }

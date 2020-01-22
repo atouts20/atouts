@@ -35,6 +35,7 @@ import { PasswordForgotComponent } from './components/password-forgot/password-f
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { PanierComponent } from './market-all/detail/panier/panier.component';
 import { AproposComponent } from './apropos/apropos.component';
+import { ReadMoreComponent } from './components/read-more/read-more.component';
 
 
 registerLocaleData(fr);
@@ -57,6 +58,7 @@ registerLocaleData(fr);
     PasswordForgotComponent,
     PasswordResetComponent,
     AproposComponent,
+    ReadMoreComponent,
   ],
   imports: [
     BrowserModule,

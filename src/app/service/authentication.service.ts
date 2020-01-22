@@ -11,6 +11,7 @@ import { TokenStorage } from '../utils/token.storage';
 export class AuthenticationService {
     private host: string = environment.backend;
     private jwtToken = null;
+    private AuthToken = null;
     private roles: Array<any>;
     private newAppUser = new Subject<string>();
 
@@ -127,22 +128,22 @@ export class AuthenticationService {
         return this.http.post(this.host + '/register', dataForm, { observe: 'response' });
     }
 
-    postUsersSaveFinal(dataForm: FormData,id:any) {
+    postUsersSaveFinal(dataForm: FormData, id: any) {
 
-        return this.http.post(this.host + '/register-final/'+id, dataForm, { observe: 'response' });
+        return this.http.post(this.host + '/register-final/' + id, dataForm, { observe: 'response' });
     }
 
 
-    getRoles(id:any): Observable<object> {        
-        return this.http.get(this.host + '/roles/'+id);
-      }
+    getRoles(id: any): Observable<object> {
+        return this.http.get(this.host + '/roles/' + id);
+    }
 
     //Fait avec httpClient et jwt
     postAppUser(dataForm: FormData): Observable<Object> {
         return this.http.post(this.host + '/register', dataForm);
     }
 
-    
+
 
     retrieveCurrentUser(username: string) {
         return this.http.get(this.host + '/me/' + username);
@@ -159,7 +160,7 @@ export class AuthenticationService {
 
     getRole(): Observable<object> {
 
-        return this.http.get(this.host + '/listRoles'); 
+        return this.http.get(this.host + '/listRoles');
     }
 
     getPays(): Observable<object> {
@@ -200,14 +201,24 @@ export class AuthenticationService {
 
 
     isAdmin() {
-        if (this.jwtToken != null) {
+        if (this.AuthToken != null) {
             for (let r of this.roles) {
-                if (r.authority == 'ADMIN') return true;
+                if (r.authority === 'ADMIN') { return true; }
             }
         }
 
         return false;
     }
+    isUser() {
+        if (this.AuthToken != null) {
+            for (let r of this.roles) {
+                if (r.authority === 'USER') { return true; }
+            }
+        }
+
+        return false;
+    }
+
     grtUtilisateur(): Observable<object> {
         if (this.jwtToken == null) this.loadToken();
         return this.http.get(this.host + '/listAppUsers');

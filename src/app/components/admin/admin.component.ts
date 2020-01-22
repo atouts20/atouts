@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorage } from '../../utils/token.storage';
 import { Router } from '@angular/router';
+import { AuthenticationService } from './../../service/authentication.service';
 
 @Component({
   selector: 'app-admin',
@@ -20,12 +21,15 @@ export class AdminComponent implements OnInit {
     sub6: false,
     sub7: false
   };
+  isAdmin: boolean = false;
   constructor(
     private tokenStorage: TokenStorage,
     private router: Router,
+    private auth: AuthenticationService,
   ) { }
 
   ngOnInit() {
+    this.isAdmin = this.auth.isAdmin();
   }
 
   openHandler(value: string): void {

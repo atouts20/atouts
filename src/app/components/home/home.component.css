@@ -11,8 +11,20 @@ nz-card-tab {
     position: fixed;
 }
 
+nz-content {
+    background: #fff;
+}
+
 #more {
     display: none;
+}
+
+nz-tabset {
+    background: #fff;
+    padding: 0;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
 }
 
 nz-header {
@@ -20,9 +32,17 @@ nz-header {
     color: #fff;
     padding: 0;
     width: 100%;
+}
+
+
+/* nz-header {
+    background: #fff;
+    color: #fff;
+    padding: 0;
+    width: 100%;
     z-index: 2;
     position: fixed;
-}
+} */
 
 nz-footer {
     line-height: 1.5;
@@ -33,26 +53,61 @@ nz-sider {
     line-height: 120px;
 }
 
-nz-content {
-    min-height: 10px;
-    line-height: 1.5;
+nz-carousel {
+    margin-bottom: 0px;
+    height: 350px;
+    margin: 10px;
 }
 
-[nz-carousel-content] {
+
+/* nz-content {
+    min-height: 10px;
+    line-height: 1.5;
+} */
+
+
+/* [nz-carousel-content] {
     text-align: center;
-    height: 350px;
-    color: #5f5964;
+    height: 160px;
+    line-height: 160px;
+    color: #fff;
     overflow: hidden;
 }
+ */
 
 h3 {
     color: #fff;
 }
 
-nz-layout {
+
+/* nz-layout {
     margin-bottom: 48px;
 }
 
 nz-layout:last-child {
     margin: 0;
+} */
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .section-1-container {
+        margin-top: 150px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .section-1-container {
+        margin-top: 130px;
+    }
+}
+
+@media (max-width: 767px) {
+    .section-1-container {
+        margin-top: 80px;
+    }
+}
+
+@media (max-width: 415px) {
+    .section-1-container {
+        margin-top: 30px;
+    }
 }

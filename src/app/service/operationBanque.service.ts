@@ -91,7 +91,11 @@ export class OperationBanqueService {
     );
   }
 
-  //@@@@@@ Recupération des opérations par Date @@@@//
+  //@@@@@@ Recupération des opérations par Date @@@@// 
+
+  geOp2Date(dateOp: Date[],  num): Observable<object> {
+    return this.httpClient.get(this.host + '/op-2-dates/' + dateOp, num);
+  }
 
   getMesOperationByDateBetween(dateOp: Date[]): Observable<object> {
     return this.httpClient.get(this.host + '/mes-operation-by-date-between/' + dateOp);

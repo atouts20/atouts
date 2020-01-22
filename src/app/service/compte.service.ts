@@ -72,4 +72,8 @@ export class CompteService {
   getComptesValeursPourFavori(numcompte: string): Observable<object> {
     return this.httpClient.get(this.host + '/un/' + numcompte);
   }
+
+  consulterUnCompte(numcompte: string): Observable<object> {
+    return this.httpClient.get(this.host + '/consulte/' + numcompte);
+  }
 }

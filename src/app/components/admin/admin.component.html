@@ -37,17 +37,17 @@
         </ul> -->
         <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
             <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')" nzTitle="Gestion des
-                membres" nzIcon="user">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
+                membres" nzIcon="user" *ngIf="isAdmin == true">
+                <ul *ngIf="isAdmin == true">
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['utilisateur/crud-utilisateur']">Liste
                             des membres</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['utilisateur/crud-utilisateur-final']">Liste
                             des membres à finaliser</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['utilisateur/crud-goupe']">Groupe</a>
                     </li>
                     <li nz-menu-item nzMatchRouter>
@@ -56,13 +56,13 @@
                 </ul>
             </li>
             <li nz-submenu [(nzOpen)]="openMap.sub2" (nzOpenChange)="openHandler('sub2')" nzTitle="Gestion des
-                Comptes" nzIcon="user">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
+                Comptes" nzIcon="user" *ngIf="isAdmin == true">
+                <ul *ngIf="isAdmin == true">
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['compte/crud-compte']">Liste des
                             comptes</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['compte/crud-sous-comptes']">Liste des
                             comptes</a>
                     </li>
@@ -72,11 +72,11 @@
             <li nz-submenu [(nzOpen)]="openMap.sub3" (nzOpenChange)="openHandler('sub3')" nzTitle="Gestions des
                 Biens" nzIcon="shopping-cart">
                 <ul>
-                    <li nz-menu-item [routerLink]="['bien/crud-bien']">Liste des biens
+                    <li nz-menu-item [routerLink]="['bien/crud-bien']" *ngIf="isAdmin == true">Liste des biens
                     </li>
-                    <li nz-menu-item [routerLink]="['bien/acception-produit']">Acceptation Produit
+                    <li nz-menu-item [routerLink]="['bien/acception-produit']" *ngIf="isAdmin == true">Acceptation Produit
                     </li>
-                    <li nz-menu-item [routerLink]="['bien/acception-service']">Acceptation Service
+                    <li nz-menu-item [routerLink]="['bien/acception-service']" *ngIf="isAdmin == true">Acceptation Service
                     </li>
                     <li nz-menu-item [routerLink]="['bien/demande-bien-user']">Mes ventes
                     </li>
@@ -91,11 +91,11 @@
             <li nz-submenu [(nzOpen)]="openMap.sub7" (nzOpenChange)="openHandler('sub7')" nzTitle="Gestions des
                 Commandes-Payements" nzIcon="shopping-cart">
                 <ul>
-                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande']">Commande-Admin</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande']" *ngIf="isAdmin == true">Commande-Admin</li>
                     <li nz-menu-item [routerLink]="['commande-payment/user-commande']">Commande-User</li>
-                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande-service']">admin-commande-service</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-commande-service']" *ngIf="isAdmin == true">admin-commande-service</li>
                     <li nz-menu-item [routerLink]="['commande-payment/user-commande-service']">user-commande-service</li>
-                    <li nz-menu-item [routerLink]="['commande-payment/admin-payment']">Payment-Admin</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/admin-payment']" *ngIf="isAdmin == true">Payment-Admin</li>
                     <li nz-menu-item [routerLink]="['commande-payment/user-payment']">Payment-User</li>
                 </ul>
             </li>
@@ -103,14 +103,14 @@
                 Opérations" nzIcon="setting">
 
                 <ul>
-                    <li nz-menu-group nzTitle="Gestions des opérations">
+                    <li nz-menu-group nzTitle="Gestions des opérations" *ngIf="isAdmin == true">
                         <ul>
-                            <li nz-menu-item nzSelected [routerLink]="['operation/operations-depot-retrait-virement']">Opération de mobilisation</li>
-                            <li nz-menu-item [routerLink]="['operation/operation-en']">Autorisation opération
+                            <li nz-menu-item nzSelected [routerLink]="['operation/operations-depot-retrait-virement']" *ngIf="isAdmin == true">Opération de mobilisation</li>
+                            <li nz-menu-item [routerLink]="['operation/operation-en']" *ngIf="isAdmin == true">Autorisation opération
                             </li>
                         </ul>
                     </li>
-                    <li nz-menu-group nzTitle="Gestions des VOD">
+                    <li nz-menu-group nzTitle="Gestions des VOD" *ngIf="isAdmin == true">
                         <ul>
                             <li nz-menu-item nzSelected [routerLink]="['operation/tresor']">Tresor</li>
                             <li nz-menu-item [routerLink]="['operation/ed']">Epargne différé
@@ -120,7 +120,7 @@
                     <li nz-menu-group nzTitle="Gestions de mes opérations">
                         <ul>
                             <li nz-menu-item>Mes dépot</li>
-                            <li nz-menu-item [routerLink]="['operation/operation-virement-user']">Mes virements
+                            <li nz-menu-item [routerLink]="['operation/operation-virement-user']">Mes opérations
                             </li>
                             <li nz-menu-item [routerLink]="['operation/operation-virement-user/compte-favori']">Compte Favori
                             </li>
