@@ -27,7 +27,7 @@ export class MarketAllComponent implements OnInit {
 
   listOfDisplayData2 = [];
   pages: number = 0;
-  pagesEchange: number = 0;
+  pagesEchange: number = 0; 
   pagesService: number = 0;
 
   pagesNo: number = 0;

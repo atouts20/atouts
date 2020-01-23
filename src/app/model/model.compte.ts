@@ -1,5 +1,6 @@
 import { AppUser } from './model.AppUser';
 export abstract class Compte {
+    id: number;
     numCompte: string;
     solde: string;
     provision: string;

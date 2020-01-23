@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  array = ['../assets/images/1.jpg', '../assets/images/2.jpg', '../assets/images/3.jpg', '../assets/images/4.jpg'];
+  array = ['assets/images/1.jpg', 'assets/images/2.jpg', 'assets/images/3.jpg', 'assets/images/4.jpg'];
   /* effect = 'scrollx'; */
   tabs = [
     {

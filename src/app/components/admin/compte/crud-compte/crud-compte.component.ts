@@ -74,11 +74,11 @@ export class CrudCompteComponent implements OnInit {
   dataSetG = [];
   dataSetV = [];
   dataSetM = [];
-
+  operationsList = [];
   visible = false;
   dateBetwen: Array<Date> = [];
   numeroCompte: string ;
-  comptConsulter: RecepteCompte = null;
+  comptConsulter: any = null;
 
   constructor(
     private http: HttpClient,
@@ -214,7 +214,7 @@ export class CrudCompteComponent implements OnInit {
     console.log(this.numeroCompte);
     if (this.numeroCompte != null) {
       this.compteService.consulterUnCompte(this.numeroCompte)
-        .subscribe(  (data: Compte) => {
+        .subscribe(  (data: any) => {
           this.comptConsulter = data;
           console.log(this.comptConsulter);
            
@@ -680,10 +680,10 @@ export class CrudCompteComponent implements OnInit {
 
 
   betwen() {
-    this.operationBanqueService.geOp2Date(this.dateBetwen, this.comptConsulter.numCompte)
+    this.operationBanqueService.geOp2Date(this.dateBetwen, this.comptConsulter.id)
       .subscribe((data: Array<Operation>) => {
-        this.dataSet = data;
-        console.log(this.dataSet);
+        this.operationsList = data;
+        console.log(this.operationsList);
       }, (err: HttpErrorResponse) => {
         console.log(err);
       });

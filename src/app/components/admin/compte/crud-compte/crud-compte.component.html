@@ -253,12 +253,11 @@
                     </h6>
                     <div class="botom1">
                         <div class="row">
-                            <div class="col-md-1 col-sm-1">
-                                <button nz-button nzType="primary" (click)="betwen()"><i
-                                nz-icon nzType="search"></i>2 dates
-                        </button>
+                            <div class="col-md-4 col-sm-4">
+                                <button nz-button nzType="primary" (click)="betwen()"><i nz-icon nzType="search"></i>2 dates
+                                </button>
                             </div>
-                            <div class="col-md-5 col-sm-5">
+                            <div class="col-md-8 col-sm-8">
                                 <nz-range-picker [nzDateRender]="tplRender" [(ngModel)]="dateBetwen"></nz-range-picker>
                                 <ng-template #tplRender let-current>
                                     <div class="ant-calendar-date" [class.border]="current.getDate() === 1">
@@ -271,16 +270,16 @@
 
                     </div>
                     <div>
-                        <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet">
+                        <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="operationsList">
                             <thead>
                                 <tr>
-                                    <th nzWidth="20%" nzCustomFilter>
+                                    <th nzWidth="10%" nzCustomFilter>
                                         Type
                                     </th>
                                     <th nzWidth="15%">Compte</th>
-                                    <th nzWidth="20%">Montant</th>
+                                    <th nzWidth="15%">Montant</th>
                                     <th nzWidth="15%">Date</th>
-                                    <th nzWidth="20%">Actions</th>
+                                    <!-- <th nzWidth="20%">Actions</th> -->
                                 </tr>
                             </thead>
                             <tbody>
@@ -313,7 +312,7 @@
                                         </ng-container>
 
                                     </td>
-                                    <td>
+                                    <!--   <td>
                                         <div class="editable-row-operations">
                                             <ng-container>
                                                 <nz-popconfirm [nzTitle]="'Êtes vous sûr
@@ -325,7 +324,7 @@
                                             </ng-container>
 
                                         </div>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </nz-table>
