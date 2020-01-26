@@ -21,7 +21,7 @@ const routes: Routes = [
 
   {
     path: 'admin',
-    loadChildren: './components/admin/admin.module#AdminModule',
+    loadChildren: './components/admin/admin.module#AdminModule', canActivate: [AuthGuard],
     data: {
       breadcrumb: 'Administrateur'
     }

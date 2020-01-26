@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TokenStorage } from '../../utils/token.storage';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './../../service/authentication.service';
+import { AppUser } from './../../model/model.AppUser';
 
 @Component({
   selector: 'app-admin',
@@ -22,11 +23,14 @@ export class AdminComponent implements OnInit {
     sub7: false
   };
   isAdmin: boolean = false;
+  userConnect: AppUser = null;
   constructor(
     private tokenStorage: TokenStorage,
     private router: Router,
     private auth: AuthenticationService,
-  ) { }
+  ) { 
+    this.userConnect = JSON.parse(this.tokenStorage.getCurrentUser());
+  }
 
   ngOnInit() {
     this.isAdmin = this.auth.isAdmin();

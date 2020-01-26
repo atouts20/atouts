@@ -13,9 +13,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./enregistrement.component.css']
 })
 export class EnregistrementComponent implements OnInit {
+  sexeList = [{ name: 'FEMME' }, { name: 'HOMME' }];
+  matrimonialeList = [{ name: 'MARIE(E)' }, { name: 'CELIBATAIRE' }, { name: 'DIVORCE(E)' }, { name: 'VEUF' }, { name: 'VEUVE' }];
 
   isDisabledButton = false;
-  
+
   validateFormUser_Etape1: FormGroup;
   validateFormUser_Etape2: FormGroup;
   validateFormUser_Etape3: FormGroup;
@@ -25,9 +27,9 @@ export class EnregistrementComponent implements OnInit {
 
   //birthday = this.validateFormUser_Etape1.get('dateNaissance');
 
-  imageUrl: string = 'assets/asRach/images/default.jpg';
-  imageUrl1: string = 'assets/asRach/images/default1.jpg';
-  imageUrl2: string = 'assets/asRach/images/default2.jpg';
+  imageUrl = 'assets/images/user.jpg';
+  imageUrl1 = 'assets/images/cni.png';
+  imageUrl2 = 'assets/images/signature.JPG';
   selectedFiles: FileList;
   selectedFiles1: FileList;
   selectedFiles2: FileList;
@@ -87,11 +89,15 @@ export class EnregistrementComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.current = 4;
     this.makeFormUser();
     this.getPays();
     this.getMetier();
+    this.imageUrl = 'assets/images/user.jpg';
+    this.imageUrl1 = 'assets/images/cni.png';
+    this.imageUrl2 = 'assets/images/signature.JPG';
   }
-
+ 
   log(index: number): void {
     console.log(index);
     console.log(this.selectedIndex);
@@ -117,13 +123,13 @@ export class EnregistrementComponent implements OnInit {
 
           break;
         }
-        case 3:
-  
-          {
-            this.login();
-  
-            break;
-          }
+      case 3:
+
+        {
+          this.login();
+
+          break;
+        }
 
       default:
         {
@@ -135,7 +141,7 @@ export class EnregistrementComponent implements OnInit {
     }
   }
 
- 
+
   monAge(birthday) {
     birthday = new Date(birthday);
     return new Number((new Date().getTime() - birthday.getTime() / 31536000000).toFixed(0));
@@ -180,32 +186,34 @@ export class EnregistrementComponent implements OnInit {
       nomEtPrenomConjoint: [this.userSubmit != null ? this.userSubmit.nomEtPrenomConjoint : null, [Validators.required]],
       nbrEnfant: [this.userSubmit != null ? this.userSubmit.nbrEnfant : null, [Validators.required]],
       //profession: [this.userSubmit != null ? this.userSubmit.profession : null, [Validators.required]],
-      categorie: [this.userSubmit != null ? this.userSubmit.categorie : null, [Validators.required]],
-      naturePiece: [this.userSubmit != null ? this.userSubmit.naturePiece : null, [Validators.required]],
+      //categorie: [this.userSubmit != null ? this.userSubmit.categorie : null, [Validators.required]],
+      //naturePiece: [this.userSubmit != null ? this.userSubmit.naturePiece : null, [Validators.required]],
       nci: [this.userSubmit != null ? this.userSubmit.nci : null, [Validators.required]],
       //dateEmission: [this.userSubmit != null ? this.userSubmit.dateEmission : null, [Validators.required]],
       dateExpiration: [this.userSubmit != null ? this.userSubmit.dateExpiration : null, [Validators.required]],
       metier: [this.userSubmit != null ? this.userSubmit.metier : null, [Validators.required]],
       metiers: [this.userSubmit != null ? this.userSubmit.metiers : null, [Validators.required]],
+      phoneNumber: [this.userSubmit != null ? this.userSubmit.phoneNumber : null, [Validators.required]],
+     
+     
     });
 
     this.validateFormUser_Etape3 = this.fb.group({
+      phoneNumber1: [this.userSubmit != null ? this.userSubmit.phoneNumber1 : null],
       personneContacter: [this.userSubmit != null ? this.userSubmit.personneContacter : null, [Validators.required]],
       contactPersonneContacter: [this.userSubmit != null ? this.userSubmit.contactPersonneContacter : null, [Validators.required]],
       relationPersonne: [this.userSubmit != null ? this.userSubmit.relationPersonne : null, [Validators.required]],
       nomPere: [this.userSubmit != null ? this.userSubmit.nomPere : null, [Validators.required]],
-      contactPere: [this.userSubmit != null ? this.userSubmit.contactPere : null, [Validators.required]],
+     // contactPere: [this.userSubmit != null ? this.userSubmit.contactPere : null, [Validators.required]],
       nomMere: [this.userSubmit != null ? this.userSubmit.nomMere : null, [Validators.required]],
-      contactMere: [this.userSubmit != null ? this.userSubmit.contactMere : null, [Validators.required]],
+      //contactMere: [this.userSubmit != null ? this.userSubmit.contactMere : null, [Validators.required]],
     });
 
     this.validateFormUser_Etape4 = this.fb.group({
-      phoneNumber: [this.userSubmit != null ? this.userSubmit.phoneNumber : null, [Validators.required]],
-      phoneNumber1: [this.userSubmit != null ? this.userSubmit.phoneNumber1 : null],
-      phoneNumber2: [this.userSubmit != null ? this.userSubmit.phoneNumber2 : null],
+      //phoneNumber2: [this.userSubmit != null ? this.userSubmit.phoneNumber2 : null],
       email: [this.userSubmit != null ? this.userSubmit.email : null, [Validators.email, Validators.required]],
       username: [this.userSubmit != null ? this.userSubmit.username : null, [Validators.required]],
-      password: [this.userSubmit != null ? this.userSubmit.password : null, [Validators.required, Validators.maxLength(20),
+      password: [this.userSubmit != null ? this.userSubmit.password : null, [Validators.required, Validators.maxLength(16),
       Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[-+!*$@%_])([-+!*$@%_\\w]{8,15})$')]],
       repassword: [this.userSubmit != null ? this.userSubmit.repassword : null, [Validators.required, this.confirmationValidator]],
 
@@ -239,16 +247,18 @@ export class EnregistrementComponent implements OnInit {
           (res: any) => {
             this.unUser = res;
             console.log(res);
-            this.imageUrl = 'assets/asRach/images/default.jpg';
-            this.imageUrl1 = 'assets/asRach/images/default1.jpg';
-            this.imageUrl2 = 'assets/asRach/images/default2.jpg';
+            console.log('Email*******');
+            console.log(this.unUser.email);
+            this.imageUrl = 'assets/images/user.jpg';
+            this.imageUrl1 = 'assets/images/cni.png';
+            this.imageUrl2 = 'assets/images/signature.jpg';
             this.fileToUpload = null;
             this.fileToUpload1 = null;
             this.fileToUpload2 = null;
             this.modalService.success({
               nzTitle: 'Information',
-              nzContent: '<b> Félicitation vous avez Créé votre compte atout avec succès. Un mail de confirmation vous à été envoyez à l\'adresse <strong>'
-                + this.unUser.email + '</strong> pour finalisé votre inscription.</b>',
+              nzContent: '<b> Félicitation ! Vous avez créé votre compte atouts avec succès. Un mail de confirmation vous a été envoyé à l\'adresse <strong>'
+                + this.unUser.email + '</strong> pour finaliser votre inscription.</b>',
               nzOkText: null,
               nzCancelText: 'Ok',
               nzOnCancel: () => this.finish()
@@ -262,12 +272,12 @@ export class EnregistrementComponent implements OnInit {
     }
   }
   finish() {
-    this.current = 0;     
-    this.validateFormUser_Etape1.reset();   
-    this.validateFormUser_Etape2.reset();   
-    this.validateFormUser_Etape3.reset();   
-    this.validateFormUser_Etape4.reset();   
-    this.validateFormUser_Etape5.reset();    
+    this.current = 0;
+    this.validateFormUser_Etape1.reset();
+    this.validateFormUser_Etape2.reset();
+    this.validateFormUser_Etape3.reset();
+    this.validateFormUser_Etape4.reset();
+    this.validateFormUser_Etape5.reset();
   }
   pre(): void {
     this.current -= 1;

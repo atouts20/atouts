@@ -4,37 +4,9 @@
             <a routerLink="/admin" target="_blank">
                 <!-- <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo"> -->
                 <img src="assets/images/banner.jpg" alt="logo">
-                <h1>Afrique Atout</h1>
+                <h1>ATOUTS</h1>
             </a>
         </div>
-        <!--  <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-            <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/welcome">Welcome</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Monitor</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Workplace</a>
-                    </li>
-                </ul>
-            </li>
-            <li nz-submenu nzTitle="Dashboard" nzIcon="dashboard">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/welcome">Welcome</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Monitor</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Workplace</a>
-                    </li>
-                </ul>
-            </li>
-        </ul> -->
         <ul nz-menu nzMode="inline" [nzInlineCollapsed]="isCollapsed">
             <li nz-submenu [(nzOpen)]="openMap.sub1" (nzOpenChange)="openHandler('sub1')" nzTitle="Gestion des
                 membres" nzIcon="user" *ngIf="isAdmin == true">
@@ -105,12 +77,14 @@
                 <ul>
                     <li nz-menu-group nzTitle="Gestions des opérations" *ngIf="isAdmin == true">
                         <ul>
-                            <li nz-menu-item nzSelected [routerLink]="['operation/operations-depot-retrait-virement']" *ngIf="isAdmin == true">Opération de mobilisation</li>
+                            <li nz-menu-item nzSelected [routerLink]="['operation/operations-depot-retrait-virement']" *ngIf="isAdmin == true">Opération de mobilisation
+                            </li>
                             <li nz-menu-item [routerLink]="['operation/operation-en']" *ngIf="isAdmin == true">Autorisation opération
                             </li>
                         </ul>
                     </li>
-                    <li nz-menu-group nzTitle="Gestions des VOD" *ngIf="isAdmin == true">
+                    <li nz-menu-group nzTitle="Gestions des VOD" *ngIf="isAdmin
+                        == true">
                         <ul>
                             <li nz-menu-item nzSelected [routerLink]="['operation/tresor']">Tresor</li>
                             <li nz-menu-item [routerLink]="['operation/ed']">Epargne différé
@@ -171,7 +145,7 @@
                         <a nz-dropdown [nzDropdownMenu]="menu">
 
                             <nz-avatar nzSrc="assets/images/varun.jpg" nzAlt="content" [nzSize]="50" nzIcon="user"></nz-avatar>
-                            <span>AMADOU DIKO</span>
+                            <span>{{userConnect.nom }}</span>
 
                             <i nz-icon nzType="down"></i>
                         </a>
@@ -220,7 +194,6 @@
             <div class="inner-content">
                 <!--  <nz-breadcrumb [nzAutoGenerate]="true" nz-page-header-breadcrumb>
                 </nz-breadcrumb> -->
-
                 <router-outlet>
 
                 </router-outlet>
@@ -228,8 +201,8 @@
         </nz-content>
         <nz-footer style="text-align: center;">
             <strong>Copyright &copy; 2020
-                        <a href="https://atouts.com">atouts</a>.
-                    </strong> All rights
+                <a href="https://atouts.com">atouts</a>.
+            </strong> All rights
         </nz-footer>
     </nz-layout>
 </nz-layout>
