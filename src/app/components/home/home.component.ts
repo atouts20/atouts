@@ -13,17 +13,17 @@ export class HomeComponent implements OnInit {
     {
       active: false,
       name: 'Acceuil',
-      icon: 'mail'
+      icon: 'home'
     },
     {
       active: false,
       name: 'A propos',
-      icon: 'appstore'
+      icon: 'info-circle'
     },
     {
       active: false,
-      name: 'Services',
-      icon: 'setting'
+      name: 'Publications',
+      icon: 'appstore'
     },
     {
       active: false,

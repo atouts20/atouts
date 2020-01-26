@@ -55,7 +55,7 @@ nz-sider {
 
 nz-carousel {
     margin-bottom: 0px;
-    height: 350px;
+    height: 400px;
     margin: 10px;
 }
 
@@ -88,15 +88,23 @@ nz-layout:last-child {
     margin: 0;
 } */
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 992px) {
     .section-1-container {
-        margin-top: 150px;
+        margin-top: 190px;
+    }
+    .section-description h2 {
+        margin-top: 30px;
+        padding-bottom: 10px;
     }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .section-1-container {
-        margin-top: 130px;
+        margin-top: 190px;
+    }
+    .section-description h2 {
+        margin-top: 30px;
+        padding-bottom: 10px;
     }
 }
 
@@ -104,10 +112,18 @@ nz-layout:last-child {
     .section-1-container {
         margin-top: 80px;
     }
+    .section-description h2 {
+        margin-top: 20px;
+        padding-bottom: 10px;
+    }
 }
 
 @media (max-width: 415px) {
     .section-1-container {
         margin-top: 30px;
+    }
+    .section-description h2 {
+        margin-top: 10px;
+        padding-bottom: 10px;
     }
 }
