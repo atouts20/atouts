@@ -3,6 +3,7 @@ import { PasswordForgetService } from './../../service/password-forget.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NzModalService } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-password-forgot',
@@ -12,11 +13,35 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class PasswordForgotComponent implements OnInit {
   email: string;
   validateForm: FormGroup;
+  tabs = [
+    {
+      active: false,
+      name: 'Acceuil',
+      icon: 'home'
+    },
+    {
+      active: false,
+      name: 'A propos',
+      icon: 'info-circle'
+    },
+    {
+      active: false,
+      name: 'Publications',
+      icon: 'appstore'
+    },
+    {
+      active: false,
+      name: 'Connexion',
+      icon: 'user'
+    }
+  ];
+  selectedIndex = 0;
 
   constructor(
     private passwordForgetService: PasswordForgetService,
     private modalService: NzModalService,
-    private fb: FormBuilder 
+    private fb: FormBuilder,
+    private router: Router 
     ) { }
 
   ngOnInit() {
@@ -25,7 +50,9 @@ export class PasswordForgotComponent implements OnInit {
     });
   }
   forget() {
+    console.log(this.email);
     this.passwordForgetService.saveForget(this.email).subscribe(
+      
       data => {
         this.modalService.success({
           nzTitle: 'Information',
@@ -38,4 +65,70 @@ export class PasswordForgotComponent implements OnInit {
       }
     );
   }
+  log(index: number): void {
+    console.log(index);
+    console.log(this.selectedIndex);
+    switch (this.selectedIndex) {
+      case 0:
+
+        {
+          this.blank();
+
+          break;
+        }
+      case 1:
+
+        {
+          this.apropos();
+
+          break;
+        }
+      case 2:
+
+        {
+          this.market();
+
+          break;
+        }
+        case 3:
+  
+          {
+            this.login();
+  
+            break;
+          }
+
+      default:
+        {
+          this.blank();
+
+          break;
+        }
+
+    }
+  }
+
+  apropos() {
+    this.router.navigate(['/apropos']);
+  }
+
+  blank() {
+    this.router.navigate(['/blank']);
+  }
+
+  login() {
+    this.router.navigate(['/connexion']);
+  }
+
+  market() {
+
+    this.router.navigate(['/market-all']);
+  }
+
+
+  connexion() {
+    console.log('La vie est belle in god we trust');
+    this.router.navigate(['/connexion']);
+  }
+
 }

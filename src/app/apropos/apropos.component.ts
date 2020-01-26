@@ -86,7 +86,7 @@ export class AproposComponent implements OnInit {
   }
 
   blank() {
-    this.router.navigate(['/blank']);
+    this.router.navigate(['/home']);
   }
 
   login() {
