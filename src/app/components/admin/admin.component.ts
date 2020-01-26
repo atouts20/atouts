@@ -33,6 +33,7 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userConnect = JSON.parse(this.tokenStorage.getCurrentUser());
     this.isAdmin = this.auth.isAdmin();
   }
 

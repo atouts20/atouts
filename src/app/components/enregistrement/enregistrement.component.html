@@ -30,9 +30,9 @@
                 <div class="steps-content1 col-md-12">
                     <h2><span>ENREGISTREMENT</span></h2>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-12 col-sm-12">
                     <div class="ant-steps ant-steps-horizontal ant-steps-label-horizontal">
-                        <nz-steps [nzCurrent]="current" class="col-md-12">
+                        <nz-steps [nzCurrent]="current" class="col-md-12 col-sm-12">
                             <nz-step nzTitle="Etape 1" class="ant-steps-item "></nz-step>
                             <nz-step nzTitle="Etape 2" class="ant-steps-item "></nz-step>
                             <nz-step nzTitle="Etape 3" class="ant-steps-item "></nz-step>
@@ -144,7 +144,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="residance" formControlName="residance" placeholder="residance" oninput="this.value=
+                                        <input nz-input id="residance" formControlName="residance" placeholder="residence" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape1.get('residance').dirty
                                                 &&
