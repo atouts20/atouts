@@ -88,7 +88,6 @@ export class EnregistrementComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.current = 4;
     this.makeFormUser();
     this.getPays();
     this.getMetier();
