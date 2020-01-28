@@ -79,6 +79,7 @@ export class CrudCompteComponent implements OnInit {
   dateBetwen: Array<Date> = [];
   numeroCompte: string ;
   comptConsulter: any = null;
+  ecran:number = 256;
 
   constructor(
     private http: HttpClient,
@@ -144,6 +145,7 @@ export class CrudCompteComponent implements OnInit {
 
   ngOnInit(): void {
     //this.loadCompteGenerale();  
+    this.resolutionDrawer();
     console.log(this.selectedValueBis);
     this.loadMore();
     console.log(this.edit);
@@ -194,6 +196,27 @@ export class CrudCompteComponent implements OnInit {
        
       } */
   }
+
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   open(): void {
     this.visible = true;

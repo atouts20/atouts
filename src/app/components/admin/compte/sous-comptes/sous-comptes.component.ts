@@ -15,6 +15,7 @@ import { AuthenticationService } from '../../../../service/authentication.servic
   styleUrls: ['./sous-comptes.component.css']
 })
 export class SousComptesComponent implements OnInit {
+  ecran: number = 256;
   visible = false;
   validateFormSousCompte: FormGroup;
   user: AppUser = null;
@@ -52,7 +53,29 @@ export class SousComptesComponent implements OnInit {
     this.getListUtilisateur();
     this.makeFormSousCompte();
     this.getList();
+    this.resolutionDrawer();
   }
+
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

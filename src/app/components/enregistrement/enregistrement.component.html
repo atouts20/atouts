@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="nickname" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="nickname" nzRequired style="text-align: start;">
                                         <span>
                                                 Nom <i nz-icon nz-tooltip nzTitle="Le Nom SVP" type="question-circle" theme="outline"></i>
                                             </span>
@@ -69,7 +69,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="prenoms" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="prenoms" nzRequired style="text-align: start;">
                                         <span>Prénoms
                                                 <i nz-icon nz-tooltip nzTitle="Le Prénom
                                                     SVP" type="question-circle"
@@ -94,7 +94,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="dateNaissance" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="dateNaissance" nzRequired style="text-align: start;">
                                         <span> Date de naissance
                                             <i nz-icon nz-tooltip nzTitle="Votre date de naissance" type="question-circle" theme="outline"></i>
                                         </span>
@@ -113,7 +113,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="lieu" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="lieu" nzRequired style="text-align: start;">
                                         <span>Lieu de naissance
                                                 <i nz-icon nz-tooltip nzTitle="Le Lieu de
                                                     naissance SVP" type="question-circle"
@@ -136,7 +136,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="residance" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="residance" nzRequired style="text-align: start;">
                                         <span>Rue/Quatier/Ville
                                                 <i nz-icon nz-tooltip nzTitle="Votre
                                                     adresse SVP" type="question-circle"
@@ -156,7 +156,7 @@
                             </div>
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="departement" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="departement" nzRequired style="text-align: start;">
                                         <span>Département
                                                 <i nz-icon nz-tooltip nzTitle="Le
                                                     département SVP" type="question-circle"
@@ -182,7 +182,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="nationalite" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="nationalite" nzRequired style="text-align: start;">
                                         <span>Pays d'origine
                                                 <i nz-icon nz-tooltip nzTitle="Votre
                                                     pays d\'origine SVP" type="question-circle"
@@ -208,7 +208,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="sexe" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="sexe" nzRequired style="text-align: start;">
                                         <span>Sexe
                                                 <i nz-icon nz-tooltip nzTitle="Le
                                                 sexe SVP" type="question-circle"
@@ -218,7 +218,7 @@
                                     <nz-form-control class="ant-form-item-control-wrapper">
 
                                         <nz-select nzShowSearch nzAllowClear id="sexe" formControlName="sexe">
-                                            <nz-option *ngFor="let sexe of sexeList" [nzLabel]="sexe.name" [nzValue]="sexe" oninput="this.value=
+                                            <nz-option *ngFor="let sexe of sexeList" [nzLabel]="sexe.name" [nzValue]="sexe.name" oninput="this.value=
                                                     this.value.toUpperCase()">
                                             </nz-option>
                                         </nz-select>
@@ -238,7 +238,7 @@
                         <!--    <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="matrimoniale" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="matrimoniale" nzRequired style="text-align: start;">
                                         <span> Situation matrimoniale
                                                 <i nz-icon nz-tooltip nzTitle="votre Situation
                                                     matrimoniale SVP" type="question-circle"
@@ -264,7 +264,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="matrimoniale" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="matrimoniale" nzRequired style="text-align: start;">
                                         <span> Situation matrimoniale
                                                 <i nz-icon nz-tooltip nzTitle="votre Situation
                                                     matrimoniale SVP" type="question-circle"
@@ -274,7 +274,7 @@
                                     <nz-form-control class="ant-form-item-control-wrapper">
 
                                         <nz-select nzShowSearch nzAllowClear id="matrimoniale" formControlName="matrimoniale">
-                                            <nz-option *ngFor="let matrimoniale of matrimonialeList" [nzLabel]="matrimoniale.name" [nzValue]="matrimoniale" oninput="this.value=
+                                            <nz-option *ngFor="let matrimoniale of matrimonialeList" [nzLabel]="matrimoniale.name" [nzValue]="matrimoniale.name" oninput="this.value=
                                                     this.value.toUpperCase()">
                                             </nz-option>
                                         </nz-select>
@@ -289,7 +289,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="nomEtPrenomConjoint" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="nomEtPrenomConjoint" nzRequired style="text-align: start;">
                                         <span> Nom et prénoms conjoint(e)
                                                 <i nz-icon nz-tooltip nzTitle="Nom et prénoms
                                                     conjoint(e) SVP" type="question-circle"
@@ -309,7 +309,7 @@
                             </div>
                             <!--  <div  class="col-md-6">
                                     <nz-form-item class="ant-row ant-form-item">
-                                        <nz-form-label [nzSpan]="'vertical'" nzFor="profession" nzRequired>
+                                        <nz-form-label [nzSpan]="12" nzFor="profession" nzRequired style="text-align: start;">
                                             <span>Profession
                                                 <i nz-icon nz-tooltip nzTitle="Votre
                                                     profession SVP" type="question-circle"
@@ -333,7 +333,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="categorie" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="categorie" nzRequired style="text-align: start;">
                                         <span>Catégorie
                                                 <i nz-icon nz-tooltip nzTitle="Votre
                                                     catégorie SVP" type="question-circle"
@@ -354,7 +354,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="naturePiece" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="naturePiece" nzRequired style="text-align: start;">
                                         <span>Nature Piece
                                                 <i nz-icon nz-tooltip nzTitle="Nature Piece
                                                     SVP" type="question-circle"
@@ -377,7 +377,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="nbrEnfant" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="nbrEnfant" nzRequired style="text-align: start;">
                                         <span>Nombre d'enfants
                                                 <i nz-icon nz-tooltip nzTitle="Nombre d'enfants
                                                     SVP" type="question-circle"
@@ -397,7 +397,7 @@
                             </div>
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="nci" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="nci" nzRequired style="text-align: start;">
                                         <span>Numero de pièce d'identité
                                                 <i nz-icon nz-tooltip nzTitle="Numero de pièce
                                                     d\'identité SVP" type="question-circle"
@@ -420,7 +420,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="dateExpiration" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="dateExpiration" nzRequired style="text-align: start;">
                                         <span>Date expiration pièce
                                                 <i nz-icon nz-tooltip nzTitle="Date
                                                     expiration pièce SVP"
@@ -441,7 +441,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="metier" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="metier" nzRequired style="text-align: start;">
                                         <span>Activité principale
                                                 <i nz-icon nz-tooltip nzTitle="Votre
                                                 activité principale SVP" type="question-circle"
@@ -468,7 +468,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzFor="metiers" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="metiers" nzRequired style="text-align: start;">
                                         <span>Activités secondaires
                                                 <i nz-icon nz-tooltip nzTitle="Vos activités secondaires SVP" type="question-circle"
                                                     theme="outline"></i>
@@ -492,7 +492,7 @@
                             </div>
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="phoneNumber" nzRequired style="text-align: start;">
                                         <span>Téléphone 1
                                                 <i nz-icon nz-tooltip nzTitle="Votre numéro de téléphone 1 SVP" type="question-circle"
                                                     theme="outline"></i>
@@ -511,7 +511,7 @@
 
                             <!--  <div nz-col nzSm="8" nzMd="8">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber2">
+                                    <nz-form-label [nzSpan]="12" nzFor="phoneNumber2">
                                         <span>Téléphone 2
                                                 <i nz-icon nz-tooltip nzTitle="Le Téléphone
                                                     2 SVP" type="question-circle"
@@ -536,7 +536,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="phoneNumber1">
+                                    <nz-form-label [nzSpan]="12" nzFor="phoneNumber1" style="text-align: start;">
                                         <span>Téléphone 2
                                                 <i nz-icon nz-tooltip nzTitle="Votre numéro de téléphone 2" type="question-circle"
                                                     theme="outline"></i>
@@ -554,7 +554,7 @@
                             </div>
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="personneContacter">
+                                    <nz-form-label [nzSpan]="12" nzFor="personneContacter" nzRequired style="text-align: start;">
                                         <span>Personne à contacter
                                                 <i nz-icon nz-tooltip nzTitle="Personne à contacter SVP" type="question-circle"
                                                     theme="outline"></i>
@@ -577,7 +577,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactPersonneContacter">
+                                    <nz-form-label [nzSpan]="12" nzFor="contactPersonneContacter" nzRequired style="text-align: start;">
                                         <span>Contact personne contacter
                                                 <i nz-icon nz-tooltip nzTitle="Contact personne à contacter SVP"
                                                     type="question-circle" theme="outline"></i>
@@ -596,7 +596,7 @@
                             </div>
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="relationPersonne">
+                                    <nz-form-label [nzSpan]="12" nzFor="relationPersonne" nzRequired style="text-align: start;">
                                         <span> Relation
                                                 <i nz-icon nz-tooltip nzTitle="Relation avec la personne à contacter SVP" type="question-circle"
                                                     theme="outline"></i>
@@ -618,7 +618,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="nomPere">
+                                    <nz-form-label [nzSpan]="12" nzFor="nomPere" nzRequired style="text-align: start;">
                                         <span>Nom père
                                                 <i nz-icon nz-tooltip nzTitle="Nom père SVP"
                                                     type="question-circle" theme="outline"></i>
@@ -638,7 +638,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="nomMere">
+                                    <nz-form-label [nzSpan]="12" nzFor="nomMere" nzRequired style="text-align: start;">
                                         <span>Nom Mère
                                                 <i nz-icon nz-tooltip nzTitle="Nom Mère SVP"
                                                     type="question-circle" theme="outline"></i>
@@ -662,7 +662,7 @@
                         <!--  <div class="row">
                               <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactPere">
+                                    <nz-form-label [nzSpan]="12" nzFor="contactPere">
                                         <span>Contact père
                                                 <i nz-icon nz-tooltip nzTitle="contact Pere
                                                     SVP" type="question-circle"
@@ -684,7 +684,7 @@
                             
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="contactMere">
+                                    <nz-form-label [nzSpan]="12" nzFor="contactMere">
                                         <span> Contact Mère
                                                 <i nz-icon nz-tooltip nzTitle="Contact Mère
                                                     SVP" type="question-circle"
@@ -714,7 +714,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzRequired nzFor="email">E-mail</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzRequired nzFor="email">E-mail</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <input nz-input formControlName="email" id="email" placeholder="Mail Valide SVP" oninput="this.value=
                                                 this.value.toUpperCase()">
@@ -728,7 +728,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="username" nzRequired>
+                                    <nz-form-label [nzSpan]="12" nzFor="username" nzRequired style="text-align: start;">
                                         <span>Identifiant
                                                 <i nz-icon nz-tooltip nzTitle="L'Identifiant
                                                     SVP." type="question-circle"
@@ -752,7 +752,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="password" nzRequired>Mot de passe</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzFor="password" nzRequired style="text-align: start;">Mot de passe</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape4.get('password').dirty && validateFormUser_Etape4.get('password').errors">
@@ -764,7 +764,7 @@
 
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="repassword" nzRequired>Confirmation</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzFor="repassword" nzRequired style="text-align: start;">Confirmation</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <input nz-input type="password" formControlName="repassword" id="repassword">
                                         <nz-form-explain *ngIf="validateFormUser_Etape4.get('repassword').dirty
@@ -786,7 +786,7 @@
                         <div class="row">
                             <div nz-col nzSm="8" nzMd="8">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo d'identité </nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzFor="file" nzRequired style="text-align: start;">Photo d'identité </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <input nz-input type="file" #Image name="file" id="file" accept=".jpg, .jpeg, .png" (change)="onSelectFile($event)">
                                         <p>
@@ -798,7 +798,7 @@
 
                             <div nz-col nzSm="8" nzMd="8">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file1" nzRequired>Photo pièce d'identité</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzFor="file1" nzRequired style="text-align: start;">Photo pièce d'identité</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <input nz-input type="file" #Image name="file1" id="file1" accept=".jpg, .jpeg, .png" (change)="onSelectFile1($event)">
                                         <p>
@@ -810,7 +810,7 @@
 
                             <div nz-col nzSm="8" nzMd="8">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="'vertical'" nzFor="file2" nzRequired>Photo signature</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzFor="file2" nzRequired style="text-align: start;">Photo signature</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
 
                                         <input nz-input type="file" #Image name="file2" id="file2" accept=".jpg,

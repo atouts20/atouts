@@ -14,6 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./demande-bien-user.component.css']
 })
 export class DemandeBienUserComponent implements OnInit {
+  ecran: number = 256;
   selectedIndex = 0;
   //data: any[] = [];
   toto;
@@ -72,7 +73,28 @@ export class DemandeBienUserComponent implements OnInit {
     this.getDemandePub();
     this.getDemandePubAccepter();
     this.getDemandePubRejet();
+    this.resolutionDrawer();
   }
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
 
   rechercherDemandeRejet(){}

@@ -25,6 +25,7 @@ export class MesComptesFavorisComponent implements OnInit {
   compteRechercher: RecepteCompte = null;
   numCompte: string;
   mesComptesFavoriList: Array<CompteFavori> = [];
+  ecran:number = 256;
 
   constructor(
     private fb: FormBuilder,
@@ -41,6 +42,7 @@ export class MesComptesFavorisComponent implements OnInit {
   ngOnInit() {
     // this.initialiseFormulaire(null);
     this.getLisCompteFavoris();
+    this.resolutionDrawer();
   }
 
   open(): void {
@@ -105,5 +107,25 @@ export class MesComptesFavorisComponent implements OnInit {
   createMessage(type: string, msg: string): void {
     this.message.create(type, msg);
   }
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
 }

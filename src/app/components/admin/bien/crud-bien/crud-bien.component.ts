@@ -26,6 +26,7 @@ import { TokenStorage } from './../../../../utils/token.storage';
   styleUrls: ['./crud-bien.component.css']
 })
 export class CrudBienComponent implements OnInit {
+  ecran: number = 256;
   imageUrl: string = 'assets/asRach/images/default.jpg';
   selectedFiles: FileList;
   fileToUpload: File = null;
@@ -166,6 +167,7 @@ export class CrudBienComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resolutionDrawer();
     this.loadServiceActiver();
     this.loadProduitActiver();
     this.dataSet = [];
@@ -242,6 +244,27 @@ export class CrudBienComponent implements OnInit {
 
 
   }
+
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
 
   ngOnInitUpdate(key: string) {

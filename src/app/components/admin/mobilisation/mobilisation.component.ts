@@ -21,6 +21,7 @@ import { RelanceService } from '../../../service/relance.service';
 })
 export class MobilisationComponent implements OnInit {
   visible = false;
+  ecran: number = 256;
   isVisibleReponse = false;
   isVisibleRelance = false;
   isVisibleFormReponse = false;
@@ -80,6 +81,8 @@ export class MobilisationComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.createMessage('danger', 'Echec de chargement !');
       });
+
+      this.resolutionDrawer();
 
 
   }
@@ -355,6 +358,22 @@ export class MobilisationComponent implements OnInit {
       (error: HttpErrorResponse) => {
         this.createMessage('danger', 'Echec de reponse !');
       });
+  }
+
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
   }
 
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { PasswordForgetService } from './../../service/password-forget.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PasswordForgotDto } from './../../model/model.passwordForgotDto';
 
 @Component({
   selector: 'app-password-forgot',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./password-forgot.component.css']
 })
 export class PasswordForgotComponent implements OnInit {
-  email: string;
+
   validateForm: FormGroup;
   tabs = [
     {
@@ -41,8 +42,9 @@ export class PasswordForgotComponent implements OnInit {
     private passwordForgetService: PasswordForgetService,
     private modalService: NzModalService,
     private fb: FormBuilder,
-    private router: Router 
-    ) { }
+    private router: Router,
+    private message: NzMessageService,
+  ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
@@ -50,21 +52,39 @@ export class PasswordForgotComponent implements OnInit {
     });
   }
   forget() {
-    console.log(this.email);
-    this.passwordForgetService.saveForget(this.email).subscribe(
-      
-      data => {
-        this.modalService.success({
-          nzTitle: 'Information',
-          nzContent: '<p>Un lien de récupération de votre mot de passe vous a été envoyé !</p>',
-          nzOnOk: () => console.log('Info OK')   
-        });
+    if (this.validateForm.invalid) {
+      this.modalService.error({
+        nzTitle: 'Erreur',
+        nzContent: '<p> Email invalide.</p>',
+        nzOkText: null,
+        nzCancelText: 'Ok',
+        nzOnCancel: () => console.log('cancel')
+      });
+    } else {
+      const formData = this.validateForm.value;
+      const passwordForgotDto = new PasswordForgotDto(formData.email);
+      this.passwordForgetService.saveForget(passwordForgotDto).subscribe(
 
-      }, (eror: HttpErrorResponse) => {
-        console.log('Echec !')
-      }
-    );
+        data => {
+          this.validateForm = null;
+          console.log(data);
+          this.modalService.success({
+            nzTitle: 'Information',
+            nzContent: '<p>Un lien de récupération de votre mot de passe vous a été envoyé !</p>',
+            nzOnOk: () => console.log('Info OK')
+          });
+
+        }, (eror: HttpErrorResponse) => {
+          this.createMessage('warning', 'Echec de l\'enregistrement de recupération !');
+        }
+      );
+    }
   }
+
+  createMessage(type: string, msg: string): void {
+    this.message.create(type, msg);
+  }
+
   log(index: number): void {
     console.log(index);
     console.log(this.selectedIndex);
@@ -90,13 +110,13 @@ export class PasswordForgotComponent implements OnInit {
 
           break;
         }
-        case 3:
-  
-          {
-            this.login();
-  
-            break;
-          }
+      case 3:
+
+        {
+          this.login();
+
+          break;
+        }
 
       default:
         {

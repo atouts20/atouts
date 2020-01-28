@@ -20,7 +20,7 @@ import { AuthenticationService } from './../../../../service/authentication.serv
   styleUrls: ['./acceptation-demande.component.css']
 })
 export class AcceptationDemandeComponent implements OnInit {
-
+ecran: number = 256;
 
   pageContacts: any;
 
@@ -295,6 +295,7 @@ export class AcceptationDemandeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.resolutionDrawer();
 
     this.cree = false;
 
@@ -354,6 +355,27 @@ export class AcceptationDemandeComponent implements OnInit {
     this.getDemandeProduitRejeter();
 
   }
+
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

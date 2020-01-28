@@ -57,7 +57,8 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveToken(jwt);
             this.storeCurrentUser();
             console.log(this.tokenStorage.getToken());
-            location.href = '/atouts/admin';
+            //location.href = '/atouts/admin';
+            //location.href = '/admin';
           }
         },
         (error: HttpErrorResponse) => {
@@ -82,22 +83,8 @@ export class LoginComponent implements OnInit {
           this.authService.setCurrentUserConnected();
           this.user = JSON.parse(this.tokenStorage.getCurrentUser());
 
-          if (this.user.roles[0].roleName == 'ADMIN') {
-            location.href = '/admin';
-          } else {
 
-            if (this.user.roles[0].roleName == 'ROLE_USER_STRUCTURE_EXTERNE') {
-
-              location.href = '/admin-structure-externe';
-            }
-
-            if (this.user.roles[0].roleName == 'ROLE_USER_PTF') {
-              location.href = '/admin-ptf';
-            }
-
-          }
-
-
+          location.href = '/atouts/admin';
 
           //this.router.navigate(['admin']);
         }

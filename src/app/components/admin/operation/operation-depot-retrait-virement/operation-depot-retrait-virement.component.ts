@@ -16,6 +16,7 @@ import { TokenStorage } from './../../../../utils/token.storage';
   styleUrls: ['./operation-depot-retrait-virement.component.css']
 })
 export class OperationDepotRetraitVirementComponent implements OnInit {
+  ecran: number = 256;
   deadline = Date.now() + 1000 * 60;
   //widthConfig = ['300px', '210px', '230px', '230px', '230px'];
   filter: any;
@@ -62,6 +63,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resolutionDrawer();
     this.initialiseFormulaire(null);
     this.listOperationEn();
     this.loadMore();
@@ -72,6 +74,27 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
     // console.log( this.getRandomLong());
 
   }
+
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   log(value) {
     this.ngOnInit();

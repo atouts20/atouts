@@ -13,7 +13,7 @@ import { TokenStorage } from '../../../../utils/token.storage';
   styleUrls: ['./liquidation-bon.component.css']
 })
 export class LiquidationBonComponent implements OnInit {
-
+ecran: number = 256;
   visible = false;
 
   bon: Bon;
@@ -42,7 +42,28 @@ export class LiquidationBonComponent implements OnInit {
 
     this.makeForm();
     this.loadLiquide();
+    this.resolutionDrawer();
   }
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

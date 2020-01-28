@@ -15,100 +15,14 @@ import { TokenStorage } from '../../../../utils/token.storage';
   styleUrls: ['./echange.component.css']
 })
 export class EchangeComponent implements OnInit {
+  ecran: number = 256;
 
   index1 = 0;
   childrenVisible = false;
 
   motCle: string = '';
 
-  /*  listOfData = [
-     {
-       title: 'Banane',
-       description: 'Bon a mangé banae',
-       image: 'assets/asRach/images/showcase-3.png',
-       avatar: 'assets/asRach/images/showcase-4.png',
-     },
-     {
-       title: 'bombom',
-       description: 'Bon a mangé bombom',
-       image: 'assets/asRach/images/showcase-5.png',
-       avatar: 'assets/asRach/images/showcase-4.png',
-     },
-     {
-       title: 'Pomme',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-6.png',
-       avatar: 'assets/asRach/images/showcase-5.png',
-     },
-     {
-       title: 'Mangue',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-5.png',
-       avatar: 'assets/asRach/images/showcase-6.png',
-     },
-     {
-       title: 'Ignanme',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-3.png',
-       avatar: 'assets/asRach/images/showcase-4.png',
-     },
-     {
-       title: 'Patate',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-4.png',
-       avatar: 'assets/asRach/images/showcase-3.png',
-     },
-     {
-       title: 'Patate',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-4.png',
-       avatar: 'assets/asRach/images/showcase-3.png',
-     },
-     {
-       title: 'Patate',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-4.png',
-       avatar: 'assets/asRach/images/showcase-3.png',
-     },
-     {
-       title: 'Choux',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-2.png',
-       avatar: 'assets/asRach/images/showcase-1.png',
-     },
-     {
-       title: 'Manioc',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-1.png',
-       avatar: 'assets/asRach/images/showcase-2.png',
-     },
-     {
-       title: 'Pastec',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-8.png',
-       avatar: 'assets/asRach/images/showcase-7.png',
-     },
-     {
-       title: 'Pomme',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-6.png',
-       avatar: 'assets/asRach/images/showcase-5.png',
-     },
-     {
-       title: 'Yoyo',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-7.png',
-       avatar: 'assets/asRach/images/showcase-8.png',
-     },
-     {
-       title: 'Pomme',
-       description: 'Bon a mangé Pomme',
-       image: 'assets/asRach/images/showcase-6.png',
-       avatar: 'assets/asRach/images/showcase-5.png',
-     },
- 
-   ]; */
-  listOfData
+   listOfData
   data: any[] = [];
   selectedIndex = 2;
   //echangesList = [...this.listOfData];
@@ -146,6 +60,26 @@ export class EchangeComponent implements OnInit {
     this.currentUser = JSON.parse(this.tokenStorage.getCurrentUser());
     console.log(this.currentUser);
   }
+
+  ngOnInit() {
+    this.resolutionDrawer();
+    this.loadEchangeByID();
+    //console.log(this.authService.loadId());
+    console.log(this.echangesList);
+    /* console.log(this.listOfData);
+    this.loadData(1);
+    console.log(this.listOfData); */
+
+    this.validateForm = this.fb.group({
+      proprietaires: [null, [Validators.required]],
+      nom: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      photo: [null, [Validators.required]],
+      tel: [null, [Validators.required]]
+    });
+
+  }
+
   resetForm() { }
   log(index: number): void {
     console.log(index);
@@ -231,25 +165,26 @@ export class EchangeComponent implements OnInit {
       );
   }
 
-
-
-  ngOnInit() {
-    this.loadEchangeByID();
-    //console.log(this.authService.loadId());
-    console.log(this.echangesList);
-    /* console.log(this.listOfData);
-    this.loadData(1);
-    console.log(this.listOfData); */
-
-    this.validateForm = this.fb.group({
-      proprietaires: [null, [Validators.required]],
-      nom: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      photo: [null, [Validators.required]],
-      tel: [null, [Validators.required]]
-    });
-
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
   }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   // listes des demandes d'échanges (à accepter) par propriétaire
   private loadEchangeAAccepterByID() {

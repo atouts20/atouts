@@ -6,6 +6,7 @@ import { AuthenticationService } from '../../service/authentication.service';
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { AppUser } from '../../model/model.AppUser';
 import { Router } from '@angular/router';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-enregistrement',
@@ -74,7 +75,7 @@ export class EnregistrementComponent implements OnInit {
 
   userSubmit: AppUser = new AppUser();
   current = 0;
-  unUser: AppUser = null;
+  unUser: AppUser = null ;
 
   constructor(
     private fb: FormBuilder,
@@ -182,7 +183,7 @@ export class EnregistrementComponent implements OnInit {
     this.validateFormUser_Etape2 = this.fb.group({
       matrimoniale: [this.userSubmit != null ? this.userSubmit.matrimoniale : null, [Validators.required]],
       nomEtPrenomConjoint: [this.userSubmit != null ? this.userSubmit.nomEtPrenomConjoint : null, [Validators.required]],
-      nbrEnfant: [this.userSubmit != null ? this.userSubmit.nbrEnfant : null, [Validators.required]],
+      nbrEnfant: [this.userSubmit != null ? this.userSubmit.nbrEnfant : 0, [Validators.required]],
       //profession: [this.userSubmit != null ? this.userSubmit.profession : null, [Validators.required]],
       //categorie: [this.userSubmit != null ? this.userSubmit.categorie : null, [Validators.required]],
       //naturePiece: [this.userSubmit != null ? this.userSubmit.naturePiece : null, [Validators.required]],
@@ -242,11 +243,11 @@ export class EnregistrementComponent implements OnInit {
 
       this.authService.postUsersSave(formData)
         .subscribe(
-          (res: any) => {
-            this.unUser = res;
-            console.log(res);
+          (data: HttpResponse<AppUser>) => {
+            this.unUser = data.body;
+            console.log(data);
             console.log('Email*******');
-            console.log(this.unUser.email);
+            console.log(this.unUser);
             this.imageUrl = 'assets/images/user.jpg';
             this.imageUrl1 = 'assets/images/cni.png';
             this.imageUrl2 = 'assets/images/signature.jpg';
@@ -418,7 +419,7 @@ export class EnregistrementComponent implements OnInit {
         break;
       }
       case 2: {
-        if (this.validateFormUser_Etape3.valid) {
+        if (this.validateFormUser_Etape3.valid ) {
           this.userSubmit = Object.assign(this.userSubmit, this.validateFormUser_Etape3.value);
           console.log(this.userSubmit);
           // this.tokenStorage.saveCurrentProjet(this.userSubmit);
@@ -437,7 +438,7 @@ export class EnregistrementComponent implements OnInit {
         break;
       }
       case 3: {
-        if (this.validateFormUser_Etape4.valid) {
+        if (this.validateFormUser_Etape4.valid && this.fileToUpload != null && this.fileToUpload1 != null && this.fileToUpload2 != null) {
           this.userSubmit = Object.assign(this.userSubmit, this.validateFormUser_Etape4.value);
           console.log(this.userSubmit);
           //this.tokenStorage.saveCurrentProjet(this.userSubmit);

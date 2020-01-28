@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./encaisse-bon.component.css']
 })
 export class EncaisseBonComponent implements OnInit {
+  ecran: number = 256;
 
   visible = false;
   numero: string = '';
@@ -72,10 +73,32 @@ export class EncaisseBonComponent implements OnInit {
   ngOnInit() {
     this.makeForm();
     this.loadEncaisse();
+    this.resolutionDrawer();
 
     //this.user = this.authenticationService.loadIdUser();
 
   }
+
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

@@ -15,6 +15,7 @@ import { NzMessageService } from 'ng-zorro-antd';
   styleUrls: ['./crud-bon.component.css']
 })
 export class CrudBonComponent implements OnInit {
+  ecran: number = 256;
 
   // input numric
   value = '';
@@ -45,8 +46,30 @@ export class CrudBonComponent implements OnInit {
     this.user = JSON.parse(this.tokenStorage.getCurrentUser());
     this.makeForm();
     this.loadBon();
+    this.resolutionDrawer();
 
   }
+
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

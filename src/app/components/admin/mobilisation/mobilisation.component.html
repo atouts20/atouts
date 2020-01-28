@@ -7,10 +7,10 @@
 
     <div class="row">
         <div class="col-md-10 col-sm-10">
-            <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="400" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+            <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px', 'width':'100%' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [(nzWidth)]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
                 <form nz-form [formGroup]="validateFormMobilisation" (ngSubmit)="enregistrerMobilisation()">
                     <div class="row">
-                        <div class="col-md-12 col-sm-6 col-xs-6">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Nom du produit
@@ -26,7 +26,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div class="col-md-12 col-sm-6 col-xs-6">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Prix
@@ -45,13 +45,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 col-sm-6 col-xs-6">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Téléphone
                                         <span class="text-danger">*</span>
                                     </h5>
-                                    <input nz-input formControlName="tel" class="form-control" oninput="this.value=
+                                    <input nz-input type="number" formControlName="tel" class="form-control" oninput="this.value=
                                                         this.value.toUpperCase()">
                                     <nz-form-explain *ngIf="validateFormMobilisation.get('tel')?.dirty
                                                         &&
@@ -61,7 +61,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div class="col-md-12 col-sm-6 col-xs-6">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Description</h5>
@@ -91,12 +91,12 @@
                     <div class="footer">
                         <div nz-row>
                             <div nz-col nzSpan="8">
-                                <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary"  ant-btn-primary>
+                                <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" ant-btn-primary>
                                             <i nz-icon type="retweet" theme="outline"></i>
                                             <span>Annuler</span></button>
                             </div>
                             <div nz-col nzSpan="8">
-                                <nz-form-item nz-row >
+                                <nz-form-item nz-row>
                                     <nz-form-control [nzSpan]="14" [nzOffset]="6">
                                         <button nz-button nzType="primary">
                                                     <i nz-icon type="diff"></i>
@@ -178,14 +178,14 @@
                             <td>
                                 <div class="editable-row-operations">
                                     <ng-container>
-                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterMobilisation(data)"  nzShape="circle">
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterMobilisation(data)" nzShape="circle">
                                         <i nz-icon type="info"></i>
                                       </button>
                                     </ng-container>
 
                                     <ng-container>
                                         <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteMobilisation(data)">
-                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                         <i nz-icon type="delete"></i>
                                                     </button>
                                         </nz-popconfirm>
@@ -193,13 +193,13 @@
 
 
                                     <ng-container>
-                                        <button title="Voir le (s) réponse (s) de cette demande" nz-button nzType="primary" (click)="reponse(data.id)"  nzShape="circle">
+                                        <button title="Voir le (s) réponse (s) de cette demande" nz-button nzType="primary" (click)="reponse(data.id)" nzShape="circle">
                                                      <i nz-icon type="form"></i>
                                         </button>
                                     </ng-container>
 
                                     <ng-container>
-                                        <button title="Répondre à cette demande de mobilisation" nz-button nzType="primary" (click)="repondre(data)"  nzShape="circle">
+                                        <button title="Répondre à cette demande de mobilisation" nz-button nzType="primary" (click)="repondre(data)" nzShape="circle">
                                                                  <i nz-icon type="form"></i>
                                         </button>
                                     </ng-container>
@@ -257,14 +257,14 @@
                             <td>
                                 <div class="editable-row-operations">
                                     <ng-container>
-                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterReponse(data)"  nzShape="circle">
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterReponse(data)" nzShape="circle">
                                         <i nz-icon type="info"></i>
                                       </button>
                                     </ng-container>
                                     relancer
                                     <ng-container>
                                         <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteReponse(data)">
-                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                             <i nz-icon type="delete"></i>
                                                         </button>
                                         </nz-popconfirm>
@@ -272,13 +272,13 @@
 
 
                                     <ng-container>
-                                        <button title="Voir le (s) réponse (s) de cette réponse" nz-button nzType="primary" (click)="relance(data.id)"  nzShape="circle">
+                                        <button title="Voir le (s) réponse (s) de cette réponse" nz-button nzType="primary" (click)="relance(data.id)" nzShape="circle">
                                                          <i nz-icon type="form"></i>
                                                     </button>
                                     </ng-container>
 
                                     <ng-container>
-                                        <button title="Relancer la discussion" nz-button nzType="primary" (click)="relancer(data)"  nzShape="circle">
+                                        <button title="Relancer la discussion" nz-button nzType="primary" (click)="relancer(data)" nzShape="circle">
                                                                      <i nz-icon type="form"></i>
                                             </button>
                                     </ng-container>
@@ -338,14 +338,14 @@
                             <td>
                                 <div class="editable-row-operations">
                                     <ng-container>
-                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterRelance(data)"  nzShape="circle">
+                                        <button nz-button title="Inspecter" nzType="info" (click)="inspecterRelance(data)" nzShape="circle">
                                             <i nz-icon type="info"></i>
                                           </button>
                                     </ng-container>
 
                                     <ng-container>
                                         <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="deleteRelance(data)">
-                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                            <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                                 <i nz-icon type="delete"></i>
                                                             </button>
                                         </nz-popconfirm>
@@ -353,7 +353,7 @@
 
 
                                     <ng-container>
-                                        <button title="reponsee" nz-button nzType="primary" (click)="relance(data.id)"  nzShape="circle">
+                                        <button title="reponsee" nz-button nzType="primary" (click)="relance(data.id)" nzShape="circle">
                                                              <i nz-icon type="form"></i>
                                                         </button>
                                     </ng-container>

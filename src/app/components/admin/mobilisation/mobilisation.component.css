@@ -16,6 +16,7 @@ nz-card-tab {
     padding-top: 60px;
     height: 300px;
 }
+
 .footer {
     position: absolute;
     bottom: 0px;
@@ -25,13 +26,11 @@ nz-card-tab {
     text-align: center;
     background: #fff;
 }
-@media screen and(max-width:720px) and(max-width:979px) {
-    
-}
+
+@media screen and(max-width:720px) and(max-width:979px) {}
 
 @media screen and(max-width:320px) {
     nz-drawer {
         width: 320px;
     }
 }
-

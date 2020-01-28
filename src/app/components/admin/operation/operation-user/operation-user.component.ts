@@ -17,7 +17,7 @@ import { CompteFavori } from './../../../../model/model.compte-favori';
   styleUrls: ['./operation-user.component.css']
 })
 export class OperationUserComponent implements OnInit {
-
+  ecran: number = 256;
   filter: any;
   validateForm: FormGroup;
   selectedIndex = 0;
@@ -62,8 +62,29 @@ export class OperationUserComponent implements OnInit {
 
     console.log(this.dataSet);
     // console.log( this.getRandomLong());
+    this.resolutionDrawer();
 
   }
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   getMonCompte(): void {
     this.compteService.getMonComptevaleur(this.user.id).subscribe(
       (data: Compte) => {

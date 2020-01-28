@@ -20,7 +20,8 @@ export class AdminComponent implements OnInit {
     sub4: false,
     sub5: false,
     sub6: false,
-    sub7: false
+    sub7: false,
+    sub8: false
   };
   isAdmin: boolean = false;
   userConnect: AppUser = null;

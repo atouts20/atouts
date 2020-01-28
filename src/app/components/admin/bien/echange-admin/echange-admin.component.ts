@@ -13,7 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./echange-admin.component.css']
 })
 export class EchangeAdminComponent implements OnInit {
-
+ecran: number = 256;
   selectedIndex = 0;
   selectedFiles: FileList;
   imageUrl: String = 'assets/asRach/images/iws_c.png';
@@ -50,6 +50,20 @@ export class EchangeAdminComponent implements OnInit {
   ) {
     this.currentUser = JSON.parse(this.tokenStorage.getCurrentUser());
     console.log(this.currentUser);
+  }
+  ngOnInit() {
+    this.resolutionDrawer();
+    this.loadEchanges();
+    console.log(this.selectedIndex);
+    this.validateForm = this.fb.group({
+      proprietaires: [null, [Validators.required]],
+      nom: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      photo: [null, [Validators.required]],
+      tel: [null, [Validators.required]]
+    });
+
+
   }
 
   log(index: number): void {
@@ -166,19 +180,26 @@ export class EchangeAdminComponent implements OnInit {
     this.open();
   }
 
-  ngOnInit() {
-    this.loadEchanges();
-    console.log(this.selectedIndex);
-    this.validateForm = this.fb.group({
-      proprietaires: [null, [Validators.required]],
-      nom: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      photo: [null, [Validators.required]],
-      tel: [null, [Validators.required]]
-    });
-
-
+   /* ======= Resposive drawer ============= */
+  
+   resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
   }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   private loadEchanges() {
     this.acceptationService.getEchanges()
