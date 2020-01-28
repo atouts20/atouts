@@ -3,6 +3,7 @@ import { PasswordForgetService } from './../../service/password-forget.service';
 import { NzModalService, NzMessageService } from 'ng-zorro-antd';
 import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-password-reset',
@@ -34,18 +35,19 @@ export class PasswordResetComponent implements OnInit {
     }
   ];
   selectedIndex = 0;
-  constructor(private passwordForgetService: PasswordForgetService,
+  constructor(
+    private passwordForgetService: PasswordForgetService,
     private modalService: NzModalService,
     private fb: FormBuilder,
     private router: Router,
     private message: NzMessageService,
-    ) { }
+  ) { }
 
   ngOnInit() {
     this.validateForm = this.fb.group({
       password: [null, [Validators.required, Validators.maxLength(20),
-        Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[-+!*$@%_])([-+!*$@%_\\w]{8,15})$')]],
-        checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[-+!*$@%_])([-+!*$@%_\\w]{8,15})$')]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
 
     });
   }
@@ -64,10 +66,36 @@ export class PasswordResetComponent implements OnInit {
     return {};
   };
 
-  submitForm(){
-    
+  submitForm() {
+    if (this.validateForm.invalid) {
+      this.modalService.error({
+        nzTitle: 'Erreur',
+        nzContent: '<p> Mot de passe invalide.</p>',
+        nzOkText: null,
+        nzCancelText: 'Ok',
+        nzOnCancel: () => console.log('cancel')
+      });
+    } else {
+      const formData = this.validateForm.value;
+      
+      this.passwordForgetService.saveForget(formData).subscribe(
+
+        data => {
+          this.validateForm = null;
+          console.log(data);
+          this.modalService.success({
+            nzTitle: 'Information',
+            nzContent: '<p>Félicitation ! Mot de passe restauré avec succès.</p>',
+            nzOnOk: () => console.log('Info OK')
+          });
+
+        }, (eror: HttpErrorResponse) => {
+          this.createMessage('warning', 'Echec de l\'enregistrement de recupération !');
+        }
+      );
+    }
   }
-  
+
   createMessage(type: string, msg: string): void {
     this.message.create(type, msg);
   }
