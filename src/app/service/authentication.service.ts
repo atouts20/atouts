@@ -24,13 +24,14 @@ export class AuthenticationService {
     private idUser: string;
     public currentUser: BehaviorSubject<AppUser>;
     public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    currentUsers: AppUser = null;
 
     //etat:number;
 
     constructor(public http: HttpClient, private tokenStorage: TokenStorage) {
         this.currentUser = new BehaviorSubject<AppUser>(JSON.parse(this.tokenStorage.getCurrentUser()));
         this.isUserLoggedIn = new BehaviorSubject<boolean>((JSON.parse(this.tokenStorage.getCurrentUser()) != null) ? true : false);
-
+        this.currentUsers = JSON.parse(this.tokenStorage.getCurrentUser());
     }
 
     public setCurrentUserConnected() {
@@ -203,7 +204,7 @@ export class AuthenticationService {
 
     isAdmin() {
         if (this.AuthToken != null) {
-            for (let r of this.roles) {
+            for (let r of this.currentUsers.roles) {
                 if (r.roleName === 'ADMIN') { return true; }
             }
         }
@@ -212,7 +213,7 @@ export class AuthenticationService {
     }
     isUser() {
         if (this.AuthToken != null) {
-            for (let r of this.roles) {
+            for (let r of this.currentUsers.roles) {
                 if (r.roleName === 'USER') { return true; }
             }
         }
