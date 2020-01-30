@@ -8,6 +8,7 @@ import { AuthenticationService } from '../../../../service/authentication.servic
 import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { AppUser } from '../../../../model/model.AppUser';
 import { TokenStorage } from '../../../../utils/token.storage';
+import { WINDOW } from './../../../../utils/window';
 
 @Component({
   selector: 'app-echange',
@@ -16,13 +17,13 @@ import { TokenStorage } from '../../../../utils/token.storage';
 })
 export class EchangeComponent implements OnInit {
   ecran: number = 256;
-
+  largeur;
   index1 = 0;
   childrenVisible = false;
 
   motCle: string = '';
 
-   listOfData
+  listOfData
   data: any[] = [];
   selectedIndex = 2;
   //echangesList = [...this.listOfData];
@@ -46,7 +47,8 @@ export class EchangeComponent implements OnInit {
 
   //currentUser: AppUser;
   currentUser: AppUser = null;
-
+  screenOrientation: any;
+ 
   constructor(
     private router: Router,
     private authService: AuthenticationService,
@@ -62,7 +64,7 @@ export class EchangeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.resolutionDrawer();
+   
     this.loadEchangeByID();
     //console.log(this.authService.loadId());
     console.log(this.echangesList);
@@ -78,9 +80,22 @@ export class EchangeComponent implements OnInit {
       tel: [null, [Validators.required]]
     });
 
+    this.resolutionDrawer();
+
   }
 
+ 
+
+   /*  window.addEventListener("orientationchange", function() {
+      console.log("the orientation of the device is now " + screen.orientation.angle);
+    }); */
+
+
   resetForm() { }
+  /*  orientationEcran(){
+     screen.orientation.addEventListener()
+   } */
+
   log(index: number): void {
     console.log(index);
     console.log(this.selectedIndex);
@@ -140,7 +155,7 @@ export class EchangeComponent implements OnInit {
       id: null,
       nom: this.validateForm.value.nom,
       description: this.validateForm.value.description,
-      photo:null,
+      photo: null,
       proprietaires: this.currentUser,
       tel: this.validateForm.value.tel
     }
@@ -165,25 +180,37 @@ export class EchangeComponent implements OnInit {
       );
   }
 
-  /* ======= Resposive drawer ============= */
-  
-  resolutionDrawer():number {
-    if(screen.width >= 1200){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width >= 920 ){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width <= 4200){
-      this.ecran = 300;
-      return  this.ecran;
-    }
+  initializeApp () {
+    var xx;
+    window.addEventListener ("orientationchange", function () {
    
+    console.log("the orientation of the device is now " + screen.orientation.angle);
+    
+    }, false);
+   
+    }
+
+  /* ======= Resposive drawer ============= */
+
+  resolutionDrawer(): number {
+    
+    if (screen.width >= 1200) {
+     
+      this.ecran = 768;
+      return this.ecran;
+    }
+    if (screen.width >= 920) {
+      this.ecran = 768;
+      return this.ecran;
+    }
+    if (screen.width <= 4200) {
+      this.ecran = 300;
+      return this.ecran;
+    }
+
   }
 
-   /* ======= Fin Resposive drawer ============= */
+  /* ======= Fin Resposive drawer ============= */
 
 
   // listes des demandes d'échanges (à accepter) par propriétaire

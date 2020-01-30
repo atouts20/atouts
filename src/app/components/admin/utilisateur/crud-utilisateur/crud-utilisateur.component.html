@@ -18,7 +18,7 @@
         <br>
 
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)',
-            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
+            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
             NOUVEAU MEMBRE" (nzOnClose)="close()">
 
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="text-justify">
@@ -822,7 +822,7 @@
         <nz-card style="width: 100%;">
             <h4 class="card-title">LISTES DES MEMBRES ACTIFS ATOUTS</h4>
             <h6 class="card-subtitle">
-            LISTES DES MEMBRES<br>
+                LISTES DES MEMBRES<br>
                 <hr>
             </h6>
             <nz-table #editRowTable nzBordered [nzPageSize]=7 [nzShowPagination]=true [nzData]="listUtilisateurs">
@@ -883,7 +883,7 @@
                                     </button>
                                 </ng-container>
 
-                                <ng-container *ngIf="!editCache[data.id].edit" >
+                                <ng-container *ngIf="!editCache[data.id].edit">
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer ?'" (nzOnConfirm)="startDelete (data.id)">
                                         <button nz-popconfirm title="Supprimer" nz-button nzType="danger" nzShape="circle">
                                             <i nz-icon type="delete"></i>
@@ -899,7 +899,7 @@
                                     </nz-popconfirm>
                                 </ng-container> -->
 
-                                
+
 
 
                                 <ng-container *ngIf="editCache[data.id].edit">

@@ -5,20 +5,20 @@
 </button>
 <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto',
     'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible
-    ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+    ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
 
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
 
-        <div nz-row nzGutter="12" class="example-input">
-            <div nz-col nzSpan="12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="cat" nzRequired>Type demande
                     </nz-form-label>
                     <nz-form-control [nzSpan]="'vertical'">
 
                         <nz-select id="cat" formControlName="cat" style="width:
-                            100%;" name="select-type"  [ngModel]="'PRODUIT'" [(ngModel)]="inputValue">
+                            100%;" name="select-type" [ngModel]="'PRODUIT'" [(ngModel)]="inputValue">
                             <nz-option nzValue="PROD" nzLabel="PRODUIT"></nz-option>
                             <nz-option nzValue="SERV" nzLabel="SERVICE"></nz-option>
                         </nz-select>
@@ -29,8 +29,8 @@
         </div>
 
 
-        <div nz-row nzGutter="12" class="example-input">
-            <div nz-col nzSpan="12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
                         <span>
@@ -50,7 +50,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div nz-col nzSpan="12">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="nickname" nzRequired>
                         <span>
@@ -72,8 +72,8 @@
         </div>
 
 
-        <div nz-row nzGutter="12" class="example-input">
-            <div nz-col nzSpan="12">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="prix" nzRequired>
                         <span>
@@ -92,7 +92,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div nz-col nzSpan="12">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="tBCCV" nzRequired>Taux BCCV</nz-form-label>
                     <nz-form-control [nzSpan]="'vertical'">
@@ -101,8 +101,8 @@
                 </nz-form-item>
             </div>
         </div>
-        <div nz-row nzGutter="12" class="example-input" *ngIf="validateForm.get('cat').value == 'PRODUIT'">
-            <div nz-col nzSpan="12">
+        <div class="row" *ngIf="validateForm.get('cat').value == 'PRODUIT'">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <!--  *ngIf="!edit1" *ngIf="isproduit"  ajou && -->
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="stock" nzRequired>
@@ -124,7 +124,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <div nz-col nzSpan="12">
+            <div class="col-md-6 col-sm-12 col-xs-12">
                 <!--  *ngIf="!edit1" *ngIf="isproduit()" -->
                 <nz-form-item>
                     <nz-form-label [nzSpan]="'vertical'" nzFor="stockAlert" nzRequired>
@@ -150,8 +150,8 @@
 
         </div>
 
-        <!-- <div nz-row nzGutter="12" class="example-input"> -->
-        <div nz-col nzSpan="12">
+        <!-- <div class="row" > -->
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <nz-form-item>
                 <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo</nz-form-label>
                 <nz-form-control [nzSpan]="'vertical'">
@@ -170,10 +170,10 @@
 
 
         <div class="footer">
-            <div nz-row nzGutter="12" class="example-input">
+            <div class="row">
                 <div nz-col nzSpan="6">
 
-                    <nz-form-item nz-row style="margin-bottom:8px;">
+                    <nz-form-item class="row" style="margin-bottom:8px;">
                         <nz-form-control [nzSpan]="14" [nzOffset]="6">
                             <button nz-button nzType="primary">
                                         <i nz-icon type="diff"></i>
@@ -184,7 +184,7 @@
                 </div>
                 <div nz-col nzSpan="6">
 
-                    <nz-form-item nz-row style="margin-bottom:8px;">
+                    <nz-form-item class="row" style="margin-bottom:8px;">
                         <nz-form-control [nzSpan]="14" [nzOffset]="6">
                             <button type="button" (click)="resetDemande()" class="ant-btn
                                         ant-btn-primary" style="margin-right:
@@ -199,7 +199,7 @@
                 <div nz-col nzSpan="8">
 
 
-                    <nz-form-item nz-row style="margin-bottom:8px;">
+                    <nz-form-item class="row" style="margin-bottom:8px;">
                         <nz-form-control [nzSpan]="14" [nzOffset]="6">
                             <button type="button" (click)="close()" class="ant-btn ant-btn-primary">
                                         <i nz-icon type="logout"></i>
@@ -236,7 +236,7 @@
             </ng-template>
         </div>
         <br>
-        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{
                     gutter: 16, xs: 24, sm: 12, md: 8,
                     lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
             <ng-template #item let-item>
@@ -279,7 +279,7 @@
             </ng-template>
         </div>
         <br>
-        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{
                     gutter: 16, xs: 24, sm: 12, md: 8,
                     lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
             <ng-template #item let-item>
@@ -323,7 +323,7 @@
                 <button nz-button nzType="primary" nzSize="small" (click)="rechercher()" nzSearch>Search</button>
             </ng-template>
         </div>
-        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+        <nz-list [nzDataSource]="publicationAccepterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{
                     gutter: 16, xs: 24, sm: 12, md: 8,
                     lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
             <ng-template #item let-item>
@@ -370,7 +370,7 @@
             </ng-template>
         </div>
         <br>
-        <nz-list [nzDataSource]="publicationRejeterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+        <nz-list [nzDataSource]="publicationRejeterList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{
                     gutter: 16, xs: 24, sm: 12, md: 8,
                     lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
             <ng-template #item let-item>
@@ -417,7 +417,7 @@
             </ng-template>
         </div>
         <br>
-        <nz-list [nzDataSource]="publicationDemandeList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination"  [nzGrid]="{
+        <nz-list [nzDataSource]="publicationDemandeList" [nzItemLayout]="'vertical'" [nzRenderItem]="item" [nzPagination]="pagination" [nzGrid]="{
                     gutter: 16, xs: 24, sm: 12, md: 8,
                     lg: 8, xl: 6, span: 8 }" nzScroll="{ y: '240px' }">
             <ng-template #item let-item>

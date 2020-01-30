@@ -1,6 +1,7 @@
-:host {
+/* :host {
     text-align: center;
 }
+ */
 
 .scrollable-container {
     height: 120%;
@@ -87,7 +88,7 @@
 nz-header {
     background: #fff;
     color: #fff;
-    padding: 10;
+    padding: 30;
     width: 100%;
     z-index: 2;
     position: fixed;

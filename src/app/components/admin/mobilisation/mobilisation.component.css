@@ -27,10 +27,11 @@ nz-card-tab {
     background: #fff;
 }
 
-@media screen and(max-width:720px) and(max-width:979px) {}
+
+/* @media screen and(max-width:720px) and(max-width:979px) {}
 
 @media screen and(max-width:320px) {
     nz-drawer {
         width: 320px;
     }
-}
+} */

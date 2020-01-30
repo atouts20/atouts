@@ -60,6 +60,7 @@ export class DemandeBienUserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resolutionDrawer();
 
     this.validateForm = this.fb.group({
       nom: [null, [Validators.required]],
@@ -73,7 +74,7 @@ export class DemandeBienUserComponent implements OnInit {
     this.getDemandePub();
     this.getDemandePubAccepter();
     this.getDemandePubRejet();
-    this.resolutionDrawer();
+    
   }
   /* ======= Resposive drawer ============= */
   

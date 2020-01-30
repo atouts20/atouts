@@ -827,20 +827,108 @@
                     </form>
                     <form nz-form [formGroup]="validateFormUser_Etape5" *ngIf="current == 4">
                         <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                                <iframe src="assets/disagne/pdf/CHARTE_ATOUTS.pdf" width="100%" height="1300px"></iframe>
-                            </div>
-                            <div class="col-md-12 col-sm-12">
-                                <nz-form-item nz-row style="margin-bottom:8px;">
-                                    <nz-form-control>
-                                        <label nz-checkbox formControlName="agree">
+                            <div class="col-md-12 align-self-center text-center text-md-left">
+                                <!--  <iframe src="assets/disagne/pdf/CHARTE_ATOUTS.pdf" width="100%" height="1300px"></iframe> -->
+                                <p style="text-align: center;"><strong>CHARTE ATOUTS</strong></p>
+                                <p style="text-align: justify;"><strong>ARTICLE 1</strong></p>
+                                <p style="text-align: justify;">La pr&eacute;sente charte, constitu&eacute;e de vingt-cinq (25) articles, d&eacute;finit les modalit&eacute;s d&rsquo;adh&eacute;sion &agrave; l&rsquo;association Afrique Atouts (ATOUTS) enregistr&eacute;e sous le N&deg;2017/2060/DEP-LIT/SG/SAG-ASSOC
+                                    du 18 ao&ucirc;t 2017.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 2</strong></p>
+                                <p style="text-align: justify;">Le titre de membre est attribu&eacute; &agrave; toute personne poss&eacute;dant un compte en valeur au sein de l&rsquo;association.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 3</strong></p>
+                                <p style="text-align: justify;">Les comptes sont ouverts en ligne et pour une dur&eacute;e ind&eacute;termin&eacute;e &agrave; toute personne &acirc;g&eacute;e d&rsquo;au moins quinze (15) ans.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 4</strong></p>
+                                <p style="text-align: justify;">Un membre ne peut d&eacute;tenir plusieurs comptes d&rsquo;op&eacute;rations.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 5</strong></p>
+                                <p style="text-align: justify;">Tout membre peut v&eacute;rifier ses relev&eacute;s en ligne et aviser le CA des erreurs ou inexactitudes dans un d&eacute;lai de quinze (15) jours maximum. A d&eacute;faut, le CA pourra consid&eacute;rer les donn&eacute;es
+                                    figurant dans les relev&eacute;s comme d&eacute;finitivement approuv&eacute;es et serviront de preuves des op&eacute;rations effectu&eacute;es.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 6</strong></p>
+                                <p style="text-align: justify;">Le membre autorise ATOUTS de mani&egrave;re explicite &agrave; d&eacute;biter son compte des montants y vers&eacute;s erron&eacute;ment ou par suite d&rsquo;un ordre irr&eacute;gulier, faux ou falsifi&eacute; et en g&eacute;n&eacute;ral
+                                    des montants de tout paiement indu vers&eacute; sur le compte, &eacute;ventuellement m&ecirc;me en d&eacute;passement du solde cr&eacute;diteur disponible ou d&rsquo;une ligne d&rsquo;&eacute;change &agrave; terme.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 7</strong></p>
+                                <p style="text-align: justify;">Les r&egrave;gles de fonctionnement des comptes peuvent &ecirc;tre modifi&eacute;es &agrave; tout moment par l&rsquo;association, sous r&eacute;serves du respect des exigences l&eacute;gales notamment l&rsquo;information
+                                    pr&eacute;alable des membres.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 8</strong></p>
+                                <p style="text-align: justify;">La gestion des comptes entraine des frais mensuels (h&eacute;bergement, maintenances, protection, conservation, recherche-d&eacute;veloppement) en nature &agrave; la charge du titulaire et &eacute;valu&eacute;s par le Conseil
+                                    d&rsquo;Administration (CA).</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 9</strong></p>
+                                <p style="text-align: justify;">ATOUTS d&eacute;cline toute responsabilit&eacute; en ce qui concerne les valeurs remises aux conseillers sans aucune approbation du CA ni une souscription formelle. Par ailleurs, toute op&eacute;ration effectu&eacute;e
+                                    sur la plateforme et ayant impact&eacute; le compte du membre donne droit &agrave; une notification sous forme de messages directs ou t&eacute;l&eacute;phoniques ou &eacute;lectroniques ou une quittance manuelle lorsqu&rsquo;il
+                                    s'agit des mobilisations.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 10</strong></p>
+                                <p style="text-align: justify;">Tout membre confirme que les valeurs d&eacute;pos&eacute;es sur son compte ne proviennent pas de sources ou activit&eacute;s ill&eacute;gales. Il accepte la coproduction consommation de valeurs &agrave; travers des unit&eacute;s
+                                    internes et partenaires.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 11</strong></p>
+                                <p style="text-align: justify;">Les valeurs disponibles dans les comptes sont estim&eacute;es en atouts (<span style="text-decoration: line-through;">oo</span>) et ne peuvent en aucun cas &ecirc;tre &eacute;chang&eacute;es contre des devises financi&egrave;res.
+                                    Les atouts peuvent faire objet d&rsquo;&eacute;change diff&eacute;r&eacute; moyennant des arr&eacute;rages.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 12</strong></p>
+                                <p style="text-align: justify;">Seules les valeurs mobilisables sont accept&eacute;es en &eacute;pargne pour le financement des unit&eacute;s de coproduction. Le d&eacute;tenteur doit &ecirc;tre majeur.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 13</strong></p>
+                                <p style="text-align: justify;">Tous les &eacute;changes (achat, troc, solde, relev&eacute;, transfert de compte &agrave; compte...) entre membres sont faits &agrave; distance par le biais d&rsquo;une plateforme disponible 24 heures sur 24 et 7 jours
+                                    sur 7. Les tarifs des biens sont exprim&eacute;s en fonction d&rsquo;un taux BCCV (Biens &agrave; Cr&eacute;dit, au Comptant ou en Nature) indiquant le pourcentage en nature de chaque transaction. Le taux BCCV est de
+                                    15% au moins quelle que soit la nature du bien.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 14</strong></p>
+                                <p style="text-align: justify;">Les articles sont publi&eacute;s sur deux march&eacute;s&nbsp;: Produits/Services et &Eacute;changes. Ils appartiennent &agrave; un ou plusieurs membres biens d&eacute;finis dans une convention &eacute;crite et approuv&eacute;e
+                                    par toutes les parties prenantes Ils sont fournis avec leurs posologies, manuels ou guides d'utilisation et les d&eacute;tails des composants primaires. Les publications sp&eacute;culatives sont interdites.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 15</strong></p>
+                                <p style="text-align: justify;">Les biens achet&eacute;s sur le march&eacute; des produits et services sont livr&eacute;s et garantis par le CA, contrairement &agrave; ceux d&rsquo;&Eacute;change qui ne jouissent d&rsquo;aucune couverture. Dans ce dernier
+                                    cas, le march&eacute; &Eacute;change, la responsabilit&eacute; de Atouts ne peut &ecirc;tre engag&eacute;e.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 16</strong></p>
+                                <p style="text-align: justify;">Les produits et services achet&eacute;s ne peuvent &ecirc;tre retourn&eacute;s mais &eacute;chang&eacute;s sur le march&eacute; d&rsquo;Echanges. Les services sont assujettis de frais d&rsquo;enregistrement et /ou d'&eacute;tude
+                                    et/ ou de prise en charge. Ils sont &agrave; la charge du souscripteur et non remboursables.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 17</strong></p>
+                                <p style="text-align: justify;">La plateforme est ouverte &agrave; tous les membres et accessible par un mat&eacute;riel compatible avec les normes t&eacute;l&eacute;matiques. Le membre y acc&egrave;de gr&acirc;ce aux identifiants qui lui sont communiqu&eacute;s
+                                    d&egrave;s approbation de son adh&eacute;sion par le CA. En cas de vol ou de perte des donn&eacute;es confidentielles, il a la possibilit&eacute; de les r&eacute;initialiser en ligne ou aviser le CA par mail ou autre
+                                    moyen disponible.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 18</strong></p>
+                                <p style="text-align: justify;">Toute ou partie de l'&eacute;pargne du membre peut faire objet de saisi en cas de fraude ou d'acte de mauvaise foi ou de mise en cause du bien-&ecirc;tre d'autrui. Aussi, en cas d&rsquo;&eacute;change &agrave; terme, les
+                                    valeurs en r&eacute;serve constitu&eacute;e ou en cours d'&eacute;pargne sont nanties &agrave; hauteur des engagements du membre pendant la dur&eacute;e de l'&eacute;change.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 19</strong></p>
+                                <p style="text-align: justify;">Les donn&eacute;es informatiques ou &eacute;lectroniques enregistr&eacute;es par ATOUTS font office de preuves des op&eacute;rations ainsi que des ordres, avis ou informations &eacute;chang&eacute;es par voie &eacute;lectronique,
+                                    quel que soit le support sur lequel ces donn&eacute;es sont enregistr&eacute;es. Pour ces op&eacute;rations &eacute;lectroniques, la signature &eacute;lectronique remplace la signature manuscrite du membre.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 20</strong></p>
+                                <p style="text-align: justify;">Le membre et ATOUTS sont responsables de l&rsquo;ex&eacute;cution des engagements qu&rsquo;ils ont souscrits dans le cadre des services offerts sur la plateforme. L&rsquo;association s&rsquo;engage &agrave; mettre en &oelig;uvre
+                                    les moyens utiles pour assurer aux membres l&rsquo;acc&egrave;s aux services dans la limite d&rsquo;une obligation de moyens. Elle a pris toutes les mesures techniques tendant &agrave; assurer la protection de la confidentialit&eacute;
+                                    des informations accessibles et de leur transmission. Elle ne pourra de ce fait voir sa responsabilit&eacute; recherch&eacute;e que s&rsquo;il est &eacute;tabli &agrave; sa charge une faute de sa part.</p>
+                                <p style="text-align: justify;">Le membre s&rsquo;engage notamment au respect des conditions d&rsquo;utilisation des services et particuli&egrave;rement au respect des instructions li&eacute;es &agrave; la s&eacute;curit&eacute; du service. En cons&eacute;quence,
+                                    ATOUTS&nbsp;ne saurait notamment &ecirc;tre tenue pour responsable, et l&rsquo;abonn&eacute;s ne pourra pr&eacute;tendre &agrave; aucune indemnit&eacute;, des cons&eacute;quences quelles qu&rsquo;elles soient r&eacute;sultant
+                                    notamment&nbsp;:
+                                </p>
+                                <ul style="text-align: justify;">
+                                    <li>Du non-respect des proc&eacute;dures d&rsquo;utilisation de la plateforme</li>
+                                    <li>De l&rsquo;usage frauduleux ou abusif r&eacute;sultant notamment de la divulgation du num&eacute;ro de t&eacute;l&eacute;phone du membre, du mot de passe et autre information confidentielle.</li>
+                                    <li>De la communication d&rsquo;informations fausses, inexactes ou incompl&egrave;tes, de la lenteur &eacute;ventuelle du transport des donn&eacute;es ou de la saturation, et de fa&ccedil;on plus g&eacute;n&eacute;rale
+                                        de la qualit&eacute; quelle qu&rsquo;elle soit de ce transport de donn&eacute;es</li>
+                                    <li>Du mauvais fonctionnement ou de l&rsquo;interruption des prestations pour des raisons r&eacute;sultant de pannes, interventions de maintenance, de la force majeure, du cas fortuit ou du fait d&rsquo;un tiers, notamment
+                                        des liaisons informatiques ou du r&eacute;seau de t&eacute;l&eacute;communications, ou de fourniture du courant &eacute;lectrique, ou d&rsquo;inad&eacute;quation du mat&eacute;riel informatique et des logiciels
+                                        utilis&eacute;s ou du mat&eacute;riel t&eacute;l&eacute;phonique.</li>
+                                </ul>
+                                <p style="text-align: justify;">&nbsp;Au cas o&ugrave; la responsabilit&eacute; de l&rsquo;association serait &eacute;tablie, seul le pr&eacute;judice personnel, pr&eacute;visible, mat&eacute;riel et direct du membre donnera lieu &agrave; r&eacute;paration&nbsp;en
+                                    nature. Aucune r&eacute;paration p&eacute;cuniaire ne peut &ecirc;tre engag&eacute;e par l&rsquo;association quelle que soit la nature des dommages.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 21</strong></p>
+                                <p style="text-align: justify;">La cr&eacute;ation continue et rationnelle de valeur ajout&eacute;e est l&rsquo;unit&eacute; d&rsquo;identification de tout membre. Elle est d'au moins cinq mille (5&nbsp;000) atouts par jour. Il s'engage &agrave; coproduire
+                                    avec les autres membres de l&rsquo;association et accro&icirc;tre ses r&eacute;serves de valeurs.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 22</strong></p>
+                                <p style="text-align: justify;">Les op&eacute;rations de virement et d'&eacute;mission de bon de paiement sont assujetties de commissions en atouts qui sont respectivement de 1,5% et 1% du montant. Le montant d'un bon est sup&eacute;rieur ou &eacute;gal
+                                    &agrave; 500 atouts. Le bon est aussi caract&eacute;ris&eacute; par une date d&rsquo;expiration &agrave; laquelle sa valeur devient nulle.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 23</strong></p>
+                                <p style="text-align: justify;">ATOUTS peut r&eacute;silier le contrat de tout membre en cas de d&eacute;c&egrave;s ou fautes lourdes (activit&eacute;s illicites ou ill&eacute;gales, fraudes) moyennant un pr&eacute;avis de deux (2) mois.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 24</strong></p>
+                                <p style="text-align: justify;">Pour l&rsquo;interpr&eacute;tation et l&rsquo;ex&eacute;cution des pr&eacute;sentes, les tribunaux nationaux seront comp&eacute;tents.</p>
+                                <p style="text-align: justify;"><strong>ARTICLE 25</strong></p>
+                                <p style="text-align: justify;">L&rsquo;acc&egrave;s au compte par le membre, d&egrave;s la premi&egrave;re connexion ou l&rsquo;apposition de la mention &laquo;&nbsp;lu et approuv&eacute;&nbsp;&raquo;&nbsp;et une signature manuelle sur une copie imprim&eacute;e
+                                    des articles ci-dessus cit&eacute;s, entraine l&rsquo;acceptation de la pr&eacute;sente charte avec effet imm&eacute;diat.</p>
+                                <div class="col-md-12 col-sm-12">
+                                    <nz-form-item nz-row style="margin-bottom:8px; text-align: center;">
+                                        <nz-form-control>
+                                            <label nz-checkbox formControlName="agree">
                                             <span>Charte lue et acceptée</span>
                                         </label>
-                                    </nz-form-control>
-                                </nz-form-item>
-                            </div>
+                                        </nz-form-control>
+                                    </nz-form-item>
+                                </div>
 
-                            <!--  <div class="scrollable-container">
+                                <!--  <div class="scrollable-container">
                                
                                  <div class="pdf-viewer-area mg-b-15">
                                     <div class="container-fluid">
@@ -860,6 +948,7 @@
                                
                             </div> -->
 
+                            </div>
                         </div>
                     </form>
 

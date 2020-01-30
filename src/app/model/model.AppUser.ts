@@ -36,6 +36,7 @@ export class AppUser {
   //profession: string;
   roles: Array<Role>;
   repassword: string;
+  createdAt: Date;
 
 
   /* 

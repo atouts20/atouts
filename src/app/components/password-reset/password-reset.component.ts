@@ -77,8 +77,7 @@ export class PasswordResetComponent implements OnInit {
       });
     } else {
       const formData = this.validateForm.value;
-      
-      this.passwordForgetService.saveForget(formData).subscribe(
+      this.passwordForgetService.saveReset(formData).subscribe(
 
         data => {
           this.validateForm = null;

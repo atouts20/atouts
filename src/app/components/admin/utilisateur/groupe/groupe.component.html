@@ -12,7 +12,7 @@
 
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
                 'auto',
-                'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN NOUVEAU GROUPE" (nzOnClose)="close()">
+                'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN NOUVEAU GROUPE" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
                 <div nz-row nzGutter="12" class="example-input">
@@ -27,7 +27,7 @@
                             </nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
                                 <input nz-input id="id" disabled style="width:  200px;" formControlName="id" placeholder="Numero Groupe">
-                               
+
                             </nz-form-control>
                         </nz-form-item>
                     </div>
@@ -106,7 +106,7 @@
 
                             <nz-form-label [nzSpan]="'vertical'" nzFor="partvl" nzRequired>Part Valeur</nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
-<nz-input-number style="width: 150px;" formControlName="partvl" [nzMin]="0" [nzStep]="0.1" [nzMax]="1" [(ngModel)]="partvl" placeholder="---part valeur---"></nz-input-number>
+                                <nz-input-number style="width: 150px;" formControlName="partvl" [nzMin]="0" [nzStep]="0.1" [nzMax]="1" [(ngModel)]="partvl" placeholder="---part valeur---"></nz-input-number>
                                 <!-- <input nz-input id="partvl" style="width:
                                         150px;" formControlName="partvl" [(ngModel)]="partvl" placeholder="---part valeur---"> -->
                             </nz-form-control>
@@ -217,7 +217,7 @@
                         <td>
                             <div class="editable-row-operations">
                                 <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
-                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                                             <i nz-icon type="edit"></i>
                                         </button>
                                 </ng-container>
@@ -228,7 +228,7 @@
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
-                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="delete"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -236,13 +236,13 @@
 
 
                                 <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
-                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                                             <i nz-icon type="form"></i>
                                         </button>
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             l\'annulation?'" (nzOnConfirm)="cancelEdit(data.pkGrouper.appUser_id)">
-                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="close"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -330,7 +330,7 @@
                         <td>
                             <div class="editable-row-operations">
                                 <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
-                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                                             <i nz-icon type="edit"></i>
                                         </button>
                                 </ng-container>
@@ -341,7 +341,7 @@
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
-                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="delete"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -349,13 +349,13 @@
 
 
                                 <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
-                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                                             <i nz-icon type="form"></i>
                                         </button>
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             l\'annulation?'" (nzOnConfirm)="cancelEdit(data.pkGrouper.appUser_id)">
-                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="close"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -477,9 +477,9 @@
 
 
         <nz-card style="width: 100%;">
-             <h4 class="card-title">LISTES DES GROUPES ACTIFS ATOUTS</h4>
+            <h4 class="card-title">LISTES DES GROUPES ACTIFS ATOUTS</h4>
             <h6 class="card-subtitle">
-            LISTES DES GROUPES<br>
+                LISTES DES GROUPES<br>
                 <hr>
             </h6>
             <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="dataSet1">
@@ -530,7 +530,7 @@
                                 <ng-container *ngIf="!editCache1[data.id].edit">
                                     <nz-popconfirm [nzTitle]="'Edition
                                             avancée?'" (nzOnConfirm)="avance(data.id)" (nzOnCancel)="startEdit1(data.id)">
-                                        <button nz-button title="Editer" nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button nz-button title="Editer" nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="edit"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -540,7 +540,7 @@
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             supprimer?'" (nzOnConfirm)="delete1(data.id)">
-                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="delete"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -548,13 +548,13 @@
 
 
                                 <ng-container *ngIf="editCache1[data.id].edit">
-                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit1(data.id)"  nzShape="circle">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit1(data.id)" nzShape="circle">
                                             <i nz-icon type="form"></i>
                                         </button>
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             l\'annulation?'" (nzOnConfirm)="cancelEdit1(data.id)">
-                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="close"></i>
                                             </button>
                                     </nz-popconfirm>

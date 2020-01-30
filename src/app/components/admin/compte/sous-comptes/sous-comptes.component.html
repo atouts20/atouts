@@ -11,7 +11,7 @@
     <div class="col-md-12 col-sm-12">
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
             'auto',
-            'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="FORMULAIRE DE CREATION DES SOUS
+            'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="FORMULAIRE DE CREATION DES SOUS
             COMPTES" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateFormSousCompte" (ngSubmit)="enregistreSousCompte()">
                 <div class="row">

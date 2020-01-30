@@ -16,6 +16,7 @@ import { TokenStorage } from '../../../../utils/token.storage';
   styleUrls: ['./groupe.component.css']
 })
 export class GroupeComponent implements OnInit {
+  ecran: number = 256;
   visible = false;
   validateForm: FormGroup;
 
@@ -90,6 +91,7 @@ export class GroupeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resolutionDrawer();
     this.dataSet = [];
     this.updateEditCache();
 
@@ -125,6 +127,27 @@ export class GroupeComponent implements OnInit {
 
 
   }
+
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
   open(): void {
     this.visible = true;
   }

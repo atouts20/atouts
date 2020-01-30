@@ -6,7 +6,7 @@
             Ajouter
         </button>
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
-            'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="VIREMENT PONCTUEL" (nzOnClose)="close()">
+            'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="VIREMENT PONCTUEL" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
                 <div class="row"><a [routerLink]="['compte-favori']">ajouter new compte bénéficière</a></div>
                 <div class="row">

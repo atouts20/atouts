@@ -15,7 +15,7 @@ import { TokenStorage } from '../../../../utils/token.storage';
   styleUrls: ['./crud-utilisateur-final.component.css']
 })
 export class CrudUtilisateurFinalComponent implements OnInit {
-
+ecran: number = 256;
   roleList: Array<Role> = [];
   sortName = null;
   sortValue = null;
@@ -81,10 +81,6 @@ export class CrudUtilisateurFinalComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListloggedUsers();
-    console.log(this.currentUser);
-    console.log("dfjkwxbbbbbbbgsbjk");
-    console.log(this.authService.setCurrentUserConnected());
-    console.log(this.authService.setIsConnectedUser());
     this.getList();
     this.makeFormeUtilisateur();
     this.loadUser();
@@ -92,8 +88,30 @@ export class CrudUtilisateurFinalComponent implements OnInit {
     this.getListloggedUsers();
     this.getPays();
     this.getMetier();
+    this.resolutionDrawer();
 
   }
+
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   getPays() {
     this.authService.getPays().subscribe(

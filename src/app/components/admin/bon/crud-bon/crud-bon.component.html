@@ -10,7 +10,7 @@
 
 
 
-<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="CREATION DU BON DE VALEUR" (nzOnClose)="close()">
+<nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="CREATION DU BON DE VALEUR" (nzOnClose)="close()">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
         <div nz-row nzGutter="12" class="example-input">
             <div nz-col nzMd="12" nzSm="12" nzXs="12">

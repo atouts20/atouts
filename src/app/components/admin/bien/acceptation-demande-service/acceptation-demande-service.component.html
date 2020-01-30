@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto',
-      'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="720" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+      'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
 
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
@@ -14,7 +14,7 @@
                             <nz-form-control [nzSpan]="'vertical'">
 
                                 <nz-select id="cat" formControlName="cat" style="width:
-                  100%;" name="select-type"  [ngModel]="'SERV'" [(ngModel)]="inputValue">
+                  100%;" name="select-type" [ngModel]="'SERV'" [(ngModel)]="inputValue">
                                     <!--  <nz-option nzValue="PROD" nzLabel="PRODUIT"></nz-option> -->
                                     <nz-option nzValue="SERV" nzLabel="SERVICE"></nz-option>
                                 </nz-select>
@@ -418,7 +418,7 @@
                         <td>
                             <div class="editable-row-operations">
                                 <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
-                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                         <i nz-icon type="edit"></i>
                       </button>
                                 </ng-container>
@@ -426,7 +426,7 @@
 
                                 <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
-                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                           <i nz-icon type="delete"></i>
                         </button>
                                     </nz-popconfirm>
@@ -434,12 +434,12 @@
 
 
                                 <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
-                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)"  nzShape="circle">
+                                    <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.pkGrouper.appUser_id)" nzShape="circle">
                         <i nz-icon type="form"></i>
                       </button>
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr de
                         l\'annulation?'" (nzOnConfirm)="cancelEdit(data.pkGrouper.appUser_id)">
-                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                        <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                           <i nz-icon type="close"></i>
                         </button>
                                     </nz-popconfirm>
@@ -557,13 +557,13 @@
             <div *ngIf="index1==0">
 
                 <nz-tabset nzSize="large" [(nzSelectedIndex)]="index2">
-                   <!--  <nz-tab nzTitle="Liste services"></nz-tab> -->
+                    <!--  <nz-tab nzTitle="Liste services"></nz-tab> -->
                     <nz-tab nzTitle="Liste services acceptées"></nz-tab>
                     <nz-tab nzTitle="Liste services rejetées"></nz-tab>
                     <nz-tab nzTitle="Liste demandes service"></nz-tab>
                 </nz-tabset>
 
-               
+
 
                 <div *ngIf="index2==0">
                     <nz-table #editRowTable nzBordered [nzPageSize]=6 [nzShowPagination]=true [nzData]="serviceAccepterList">
@@ -610,17 +610,17 @@
                                     <div class="editable-row-operations">
 
                                         <ng-container>
-                                            <button title="Inspecter/Créer" nz-button nzType="primary" (click)="avance4(data.id)"  nzShape="circle">
+                                            <button title="Inspecter/Créer" nz-button nzType="primary" (click)="avance4(data.id)" nzShape="circle">
                             <i nz-icon type="form"></i>
                           </button>
                                         </ng-container>
                                         <ng-container>
                                             <nz-popconfirm [nzTitle]="'Voulez-vous confirmer la
                             création cet bien?'" (nzOnConfirm)="creer(data.id)">
-                                                <button title="Confirmer création" nz-button nzType="primary" nz-popconfirm  nzShape="circle" *ngIf="cree">
+                                                <button title="Confirmer création" nz-button nzType="primary" nz-popconfirm nzShape="circle" *ngIf="cree">
                               <i nz-icon type="check"></i>
                             </button>
-                                                <button title="Confirmer création" nz-button nzType="primary" nz-popconfirm  nzShape="circle" disabled *ngIf="!cree">
+                                                <button title="Confirmer création" nz-button nzType="primary" nz-popconfirm nzShape="circle" disabled *ngIf="!cree">
                               <i nz-icon type="check"></i>
                             </button>
                                             </nz-popconfirm>
@@ -677,7 +677,7 @@
                                     <div class="editable-row-operations">
 
                                         <ng-container>
-                                            <button title="Inspecter/Créer" nz-button nzType="primary" (click)="avance4(data.id)"  nzShape="circle">
+                                            <button title="Inspecter/Créer" nz-button nzType="primary" (click)="avance4(data.id)" nzShape="circle">
                             <i nz-icon type="form"></i>
                           </button>
                                         </ng-container>
@@ -742,14 +742,14 @@
                                     <div class="editable-row-operations">
 
                                         <ng-container>
-                                            <button title="Inspecter" nz-button nzType="primary" (click)="avance3(data.id)"  nzShape="circle">
+                                            <button title="Inspecter" nz-button nzType="primary" (click)="avance3(data.id)" nzShape="circle">
                             <i nz-icon type="form"></i>
                           </button>
                                         </ng-container>
                                         <ng-container>
                                             <nz-popconfirm [nzTitle]="'Voulez-vous accepter cette
                             publication?'" (nzOnConfirm)="accepter(data.id)">
-                                                <button title="Accepter" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                                <button title="Accepter" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                               <i nz-icon type="check"></i>
                             </button>
                                             </nz-popconfirm>
@@ -758,7 +758,7 @@
                                         <ng-container>
                                             <nz-popconfirm [nzTitle]="'Voulez-vous rejeter cette
                             publication?'" (nzOnConfirm)="rejeterService(data.id)">
-                                                <button title="Rejet" nz-button nzType="danger" nz-popconfirm  nzShape="circle">
+                                                <button title="Rejet" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                               <i nz-icon type="check"></i>
                             </button>
                                             </nz-popconfirm>

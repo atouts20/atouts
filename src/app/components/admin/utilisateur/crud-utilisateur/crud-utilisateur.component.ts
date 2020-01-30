@@ -58,6 +58,7 @@ export class CrudUtilisateurComponent implements OnInit {
   visible = false;
   validateForm: FormGroup;
   roleForm: FormGroup;
+  ecran: number = 256;
 
   constructor(
     private http: HttpClient,
@@ -84,8 +85,29 @@ export class CrudUtilisateurComponent implements OnInit {
     this.loadUser();
     this.authService.newUserStream.subscribe(data => this.loadUser());
     this.getListloggedUsers();
+    this.resolutionDrawer();
 
   }
+  /* ======= Resposive drawer ============= */
+  
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
+  }
+
+   /* ======= Fin Resposive drawer ============= */
+
 
   makeFormeUtilisateur(): void {
     this.validateForm = this.fb.group({

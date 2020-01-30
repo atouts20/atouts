@@ -18,7 +18,7 @@
         <br>
 
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)',
-            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="720" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
+            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
             NOUVEAU MEMBRE" (nzOnClose)="close()">
 
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitFormFinal()" class="text-justify">
@@ -752,7 +752,7 @@
 
                 </div>
 
-                
+
 
                 <div class="footer">
 
@@ -788,7 +788,7 @@
         <nz-card style="width: 100%;">
             <h4 class="card-title">LISTES DES MEMBRES NON ACTIFS ATOUTS</h4>
             <h6 class="card-subtitle">
-            LISTES DES MEMBRES A ACTIVES<br>
+                LISTES DES MEMBRES A ACTIVES<br>
                 <hr>
             </h6>
             <nz-table #editRowTable nzBordered [nzPageSize]=7 [nzShowPagination]=true [nzData]="listUtilisateurs">
@@ -843,8 +843,8 @@
                         </td>
                         <td>
                             <div class="editable-row-operations">
-                                <ng-container *ngIf="!editCache[data.id].edit" >                                    
-                                        <button title="Finalisation" (click)="avance(data.id)" nz-button nzType="primary" nzShape="circle">
+                                <ng-container *ngIf="!editCache[data.id].edit">
+                                    <button title="Finalisation" (click)="avance(data.id)" nz-button nzType="primary" nzShape="circle">
                                             <i nz-icon type="check"></i>
                                         </button>
                                 </ng-container>

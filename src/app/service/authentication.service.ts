@@ -5,6 +5,7 @@ import { User } from '../model/model.user';
 import { environment } from '../../environments/environment';
 import { AppUser } from '../model/model.AppUser';
 import { TokenStorage } from '../utils/token.storage';
+import { Role } from './../model/Role';
 
 
 @Injectable()
@@ -12,7 +13,7 @@ export class AuthenticationService {
     private host: string = environment.backend;
     private jwtToken = null;
     private AuthToken = null;
-    private roles: Array<any>;
+    private roles: Array<Role>;
     private newAppUser = new Subject<string>();
 
     newUserStream = this.newAppUser.asObservable();
@@ -203,7 +204,7 @@ export class AuthenticationService {
     isAdmin() {
         if (this.AuthToken != null) {
             for (let r of this.roles) {
-                if (r.authority === 'ADMIN') { return true; }
+                if (r.roleName === 'ADMIN') { return true; }
             }
         }
 
@@ -212,7 +213,7 @@ export class AuthenticationService {
     isUser() {
         if (this.AuthToken != null) {
             for (let r of this.roles) {
-                if (r.authority === 'USER') { return true; }
+                if (r.roleName === 'USER') { return true; }
             }
         }
 

@@ -66,6 +66,7 @@ export class MobilisationComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.resolutionDrawer();
     this.user = JSON.parse(this.tokenStorage.getCurrentUser());
     console.log(JSON.parse(this.tokenStorage.getCurrentUser()));
     this.makeFormMobilisation(null);
@@ -82,10 +83,7 @@ export class MobilisationComponent implements OnInit {
         this.createMessage('danger', 'Echec de chargement !');
       });
 
-      this.resolutionDrawer();
-
-
-  }
+       }
   log(index: number): void {
     console.log(index);
     console.log(this.selectedIndex);
