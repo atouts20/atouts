@@ -32,6 +32,7 @@ export class AuthenticationService {
         this.currentUser = new BehaviorSubject<AppUser>(JSON.parse(this.tokenStorage.getCurrentUser()));
         this.isUserLoggedIn = new BehaviorSubject<boolean>((JSON.parse(this.tokenStorage.getCurrentUser()) != null) ? true : false);
         this.currentUsers = JSON.parse(this.tokenStorage.getCurrentUser());
+        console.log(this.currentUsers.roles[0].roleName);
     }
 
     public setCurrentUserConnected() {
@@ -204,18 +205,20 @@ export class AuthenticationService {
 
     isAdmin() {
         if (this.AuthToken != null) {
-            for (let r of this.currentUsers.roles) {
-                if (r.roleName === 'ADMIN') { return true; }
-            }
+            if (this.currentUsers.roles[0].roleName === 'ADMIN') { 
+                console.log(this.currentUsers.roles[0].roleName);
+                return true; }
         }
 
         return false;
     }
     isUser() {
         if (this.AuthToken != null) {
-            for (let r of this.currentUsers.roles) {
-                if (r.roleName === 'USER') { return true; }
-            }
+           
+                if (this.currentUsers.roles[0].roleName === 'USER') { 
+                    console.log(this.currentUsers.roles[0].roleName);
+                    return true; }
+           
         }
 
         return false;
