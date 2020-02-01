@@ -97,15 +97,14 @@
                             </li>
                         </ul>
                     </li>
-                    <li nz-menu-group nzTitle="Gestions des VOD" *ngIf="isAdmin
-                        == true">
+                    <li nz-menu-group nzTitle="Gestions des VOD" *ngIf="isAdmin == true">
                         <ul>
                             <li nz-menu-item nzSelected [routerLink]="['operation/tresor']">Tresor</li>
                             <li nz-menu-item [routerLink]="['operation/ed']">Epargne différé
                             </li>
                         </ul>
                     </li>
-                    <li nz-menu-group nzTitle="Gestions de mes opérations">
+                    <li nz-menu-group nzTitle="Mes opérations" *ngIf="isUser == true">
                         <ul>
                             <li nz-menu-item>Mes dépot</li>
                             <li nz-menu-item [routerLink]="['operation/operation-virement-user']">Mes opérations
@@ -116,7 +115,7 @@
                     </li>
                 </ul>
             </li>
-            <li nz-submenu [(nzOpen)]="openMap.sub5" (nzOpenChange)="openHandler('sub5')" nzTitle="Gestions des Mobilisations" nzIcon="more">
+            <li nz-submenu [(nzOpen)]="openMap.sub5" (nzOpenChange)="openHandler('sub5')" nzTitle="Mobilisations" nzIcon="more">
                 <ul>
                     <li nz-menu-item [routerLink]="['mobilisation']">Gestions des Mobilisation
                     </li>
@@ -124,7 +123,7 @@
                     <!--  <li nz-menu-item>Option 11</li> -->
                 </ul>
             </li>
-            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Gestion des Bons" nzIcon="money-collect">
+            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Bons" nzIcon="money-collect">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a [routerLink]="['bon/crud-bon']">Liste des bons</a>
