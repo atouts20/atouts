@@ -1,7 +1,7 @@
 <nz-layout class="app-layout">
     <nz-sider class="menu-sidebar" nzCollapsible nzWidth="256px" nzTheme="light" nzBreakpoint="md" [(nzCollapsed)]="isCollapsed">
         <div class="sidebar-logo">
-            <a routerLink="/admin" target="_blank">
+            <a routerLink="/admin">
                 <!-- <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo"> -->
                 <img src="assets/images/banner.jpg" alt="logo">
                 <h1>ATOUTS</h1>
@@ -67,13 +67,21 @@
                 </ul>
             </li>
             <li nz-submenu [(nzOpen)]="openMap.sub7" (nzOpenChange)="openHandler('sub7')" nzTitle="Gestions des
-                Commandes-Payements" nzIcon="shopping-cart">
+                Commandes-Payements" nzIcon="shopping-cart" *ngIf="isAdmin == true">
                 <ul>
                     <li nz-menu-item [routerLink]="['commande-payment/admin-commande']" *ngIf="isAdmin == true">Commande-Admin</li>
-                    <li nz-menu-item [routerLink]="['commande-payment/user-commande']">Commande-User</li>
+
                     <li nz-menu-item [routerLink]="['commande-payment/admin-commande-service']" *ngIf="isAdmin == true">admin-commande-service</li>
-                    <li nz-menu-item [routerLink]="['commande-payment/user-commande-service']">user-commande-service</li>
+
                     <li nz-menu-item [routerLink]="['commande-payment/admin-payment']" *ngIf="isAdmin == true">Payment-Admin</li>
+
+                </ul>
+            </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub7" (nzOpenChange)="openHandler('sub7')" nzTitle="Commandes-Payements" nzIcon="shopping-cart">
+                <ul>
+
+                    <li nz-menu-item [routerLink]="['commande-payment/user-commande']">Commande-User</li>
+                    <li nz-menu-item [routerLink]="['commande-payment/user-commande-service']">user-commande-service</li>
                     <li nz-menu-item [routerLink]="['commande-payment/user-payment']">Payment-User</li>
                 </ul>
             </li>

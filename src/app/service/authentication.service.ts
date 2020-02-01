@@ -32,7 +32,7 @@ export class AuthenticationService {
         this.currentUser = new BehaviorSubject<AppUser>(JSON.parse(this.tokenStorage.getCurrentUser()));
         this.isUserLoggedIn = new BehaviorSubject<boolean>((JSON.parse(this.tokenStorage.getCurrentUser()) != null) ? true : false);
         this.currentUsers = JSON.parse(this.tokenStorage.getCurrentUser());
-        console.log(this.currentUsers.roles[0].roleName);
+      
     }
 
     public setCurrentUserConnected() {
@@ -203,7 +203,7 @@ export class AuthenticationService {
 
 
 
-    isAdmin() {
+    /* isAdmin() {
         if (this.AuthToken != null) {
             if (this.currentUsers.roles[0].roleName === 'ADMIN') { 
                 console.log(this.currentUsers.roles[0].roleName);
@@ -222,7 +222,7 @@ export class AuthenticationService {
         }
 
         return false;
-    }
+    } */
 
     grtUtilisateur(): Observable<object> {
         if (this.jwtToken == null) this.loadToken();

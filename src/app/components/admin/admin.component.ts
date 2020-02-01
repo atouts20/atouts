@@ -24,18 +24,45 @@ export class AdminComponent implements OnInit {
     sub8: false
   };
   isAdmin: boolean = false;
+  isUser: boolean = false;
   userConnect: AppUser = null;
   constructor(
     private tokenStorage: TokenStorage,
     private router: Router,
     private auth: AuthenticationService,
-  ) { 
+  ) {
     this.userConnect = JSON.parse(this.tokenStorage.getCurrentUser());
   }
 
   ngOnInit() {
     this.userConnect = JSON.parse(this.tokenStorage.getCurrentUser());
-    this.isAdmin = this.auth.isUser();
+    console.log('this.isAdmin = this.UserIsAdmin')
+    this.isAdmin = this.UserIsAdmin();
+    console.log('this.isUser = this.UserIsUser')
+
+    this.isUser = this.userIsUser();
+  }
+
+  UserIsAdmin() {
+    if (this.tokenStorage.getToken() !== null != null) {
+      if (this.userConnect.roles[0].roleName === 'ADMIN') {
+        console.log(this.userConnect.roles[0].roleName);
+        return true;
+      }
+    }
+
+    return false;
+  }
+  userIsUser() {
+    if (this.tokenStorage.getToken() !== null != null) {
+
+      if (this.userConnect.roles[0].roleName === 'USER') {
+        console.log(this.userConnect.roles[0].roleName);
+        return true;
+      }
+
+    }
+    return false;
   }
 
   openHandler(value: string): void {

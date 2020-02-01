@@ -9,18 +9,13 @@
                 <img src="assets/images/banner.jpg">
             </div>
 
-
             <nz-tabset nzSize="small" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
                 <nz-tab *ngFor="let tab of tabs" [nzTitle]="titleTemplate">
                     <ng-template #titleTemplate> <i nz-icon [nzType]="tab.icon"></i>{{ tab.name }} </ng-template>
                 </nz-tab>
             </nz-tabset>
         </div>
-
     </nz-header>
-
-
-
 
     <nz-content>
         <div class="section-1-container section-container">
