@@ -9,6 +9,7 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { AppUser } from '../../../../model/model.AppUser';
 import { TokenStorage } from '../../../../utils/token.storage';
 import { WINDOW } from './../../../../utils/window';
+import { AcceptationService } from './../../../../service/acceptation.service';
 
 @Component({
   selector: 'app-echange',
@@ -52,6 +53,7 @@ export class EchangeComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthenticationService,
+    private acceptationService: AcceptationService,
     public httpC: HttpClient,
     private fb: FormBuilder,
     private message: NzMessageService,
@@ -168,18 +170,42 @@ export class EchangeComponent implements OnInit {
     this.echanegService.postEchange(formData)
       .subscribe(
         data => {
-          console.log(data);
-          this.validateForm.reset();
-          this.ngOnInit();
+          if(data == null){
+            this.modalService.warning({
+              nzTitle: 'Information',
+              nzContent: '<b> Vous avez atteint le seuil de publication. Veuillez supprimer les échanges déjà effectués.</b>',
+              nzOkText: null,
+              nzCancelText: 'Ok',
+              nzOnCancel: () => this.finish()
 
-          this.imageUrl = 'assets/asRach/images/iws_c.png';
+            });
+          } else if(data != null) {
+            this.modalService.success({
+              nzTitle: 'Information',
+              nzContent: '<b> Demande de mise en échange effectuée avec succès.</b>',
+              nzOkText: null,
+              nzCancelText: 'Ok',
+              nzOnCancel: () => this.finish()
+
+            });
+          }
+                  
 
         }, (error: HttpErrorResponse) => {
           console.log(error);
+          this.createMessage('error', 'Echec de l\'enregistrement !');
         }
       );
   }
+  finish(){
+    this.validateForm.reset();
+    this.ngOnInit();
 
+    this.imageUrl = 'assets/asRach/images/iws_c.png';
+  }
+  createMessage(type: string, msg: string): void {
+    this.message.create(type, msg);
+  }
   initializeApp () {
     var xx;
     window.addEventListener ("orientationchange", function () {
@@ -230,8 +256,10 @@ export class EchangeComponent implements OnInit {
   private loadEchangeAActiverByID() {
     this.echanegService.getEchangeAActiver(this.currentUser.id, this.pagesNo, this.pageSize)
       .subscribe((data: any) => {
+        console.log(' ************************ echange à activé');
 
         this.echangesAccepterList = data.content;
+        console.log(this.echangesAccepterList);
         this.pages = data.totalElements;
         this.pageSize = data.size;
 
@@ -298,5 +326,35 @@ export class EchangeComponent implements OnInit {
   }
 
   chercherEchange() { }
+
+  startDelete1(id: number) {
+    this.acceptationService.deleteEchange(id).subscribe((response) => {
+      this.loadEchangeByID();
+      this.message.info('Effectuer avec succès');
+    });
+    console.log(id);
+  }
+  startDelete2(id: number) {
+    this.acceptationService.deleteEchange(id).subscribe((response) => {
+      this.loadEchangeAActiverByID();
+      this.message.info('Effectuer avec succès');
+    });
+    console.log(id);
+  }
+  startDelete3(id: number) {
+    this.acceptationService.deleteEchange(id).subscribe((response) => {
+      this.loadEchangeAAccepterByID();
+      this.message.info('Effectuer avec succès');
+    });
+    console.log(id);
+  }
+  cancel(): void {
+    this.message.info('click annulé');
+  }
+
+
+  /* confirm(): void {
+    this.message.info('Effectuer avec succès');
+  } */
 
 }

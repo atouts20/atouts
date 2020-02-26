@@ -317,7 +317,7 @@
                             </ng-container>
 
                             <ng-container *ngIf="!editCache2[data.id].edit">
-                                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'activer?'" (nzOnConfirm)="startActiver(data.id)">
+                                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'activer?'" (nzOnConfirm)="startActiver(data)">
                                     <button title="Activer" nz-button nzType="success" nz-popconfirm nzShape="circle">
                     <i nz-icon type="check"></i>
                   </button>
@@ -432,7 +432,7 @@
                 </button>
               </ng-container> -->
                             <ng-container *ngIf="!editCache3[data.id].edit">
-                                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'accepter?'" (nzOnConfirm)="startAccepter(data.id)">
+                                <nz-popconfirm [nzTitle]="'Êtes vous sûr d\'accepter?'" (nzOnConfirm)="startAccepter(data)">
                                     <button title="Accepter" nz-button nzType="success" nz-popconfirm nzShape="circle">
                     <i nz-icon type="check"></i>
                   </button>

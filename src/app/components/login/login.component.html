@@ -29,11 +29,10 @@
                         </nz-form-item>
                         <nz-form-item>
                             <nz-form-control>
-                                <label nz-checkbox formControlName="remember"> <span>Se souvenir</span>
-                </label>
-                                <a class="login-form-forgot" class="login-form-forgot" routerLink="/forgot-password">Mot de passe oublier</a>
-                                <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Or
-                                <a routerLink="/register">S'enrégistrer!</a>
+                                <label nz-checkbox formControlName="remember"> <span>Se souvenir</span></label>
+                                <a class="login-form-forgot" routerLink="/forgot-password">Mot de passe oublier</a>
+                                <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Ou
+                                <a routerLink="/register">S'enrégistrer!</a> <a class="login-form-forgot" routerLink="/home">Acceuil</a>
                             </nz-form-control>
                         </nz-form-item>
                     </form>

@@ -5,9 +5,9 @@
     <nz-header class="white-bg header-border fixed ant-layout-header">
 
         <div class="container">
-            <div class="logo" style="text-align: left; margin-right: 5px;">
+            <!--  <div class="logo" style="text-align: left; margin-right: 5px;">
                 <img src="assets/images/banner.jpg">
-            </div>
+            </div> -->
 
 
             <nz-tabset nzSize="small" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
@@ -78,7 +78,7 @@
                                     </nz-form-label>
 
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="prenom" formControlName="prenom" placeholder="prénoms" oninput="this.value=
+                                        <input nz-input id="prenom" formControlName="prenom" placeholder="Prénoms" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape1.get('prenom').dirty
                                                 &&
@@ -100,8 +100,8 @@
                                         </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="dateNaissance" type="date" formControlName="dateNaissance">
-                                        <!-- <nz-date-picker style="width:200px;" formControlName="dateNaissance"></nz-date-picker> (blur)="monAge(dateNaissance) >= 15" -->
+                                        <input nz-input id="dateNaissance" type="date" formControlName="dateNaissance" placeholder="Date naissance">
+                                        <!-- <nz-date-picker style="width:200px;" formControlName="dateNaissance "></nz-date-picker> (blur)="monAge(dateNaissance)= 15"> -->
                                         <nz-form-explain *ngIf="validateFormUser_Etape1.get('dateNaissance').dirty
                                                 &&
                                                 validateFormUser_Etape1.get('dateNaissance').errors">
@@ -144,7 +144,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="residance" formControlName="residance" placeholder="residence" oninput="this.value=
+                                        <input nz-input id="residance" formControlName="residance" placeholder="Résidence" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape1.get('residance').dirty
                                                 &&
@@ -164,7 +164,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="departement" formControlName="departement" placeholder="département" oninput="this.value=
+                                        <input nz-input id="departement" formControlName="departement" placeholder="Département" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape1.get('departement').dirty
                                                 &&
@@ -192,7 +192,7 @@
                                     <nz-form-control class="ant-form-item-control-wrapper">
                                         <!--  <input nz-input id="nationalite" formControlName="nationalite" placeholder="nationalité" oninput="this.value=
                                                             this.value.toUpperCase()"> -->
-                                        <nz-select nzShowSearch nzAllowClear id="nationalite" formControlName="nationalite">
+                                        <nz-select nzShowSearch nzAllowClear id="nationalite" formControlName="nationalite" placeholder="Pays d'origine">
                                             <nz-option *ngFor="let pays of paysList" [nzLabel]="pays.capital" [nzValue]="pays" oninput="this.value=
                                                     this.value.toUpperCase()">
                                             </nz-option>
@@ -217,7 +217,7 @@
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
 
-                                        <nz-select nzShowSearch nzAllowClear id="sexe" formControlName="sexe">
+                                        <nz-select nzShowSearch nzAllowClear id="sexe" formControlName="sexe" placeholder="Sexe">
                                             <nz-option *ngFor="let sexe of sexeList" [nzLabel]="sexe.name" [nzValue]="sexe.name" oninput="this.value=
                                                     this.value.toUpperCase()">
                                             </nz-option>
@@ -273,7 +273,7 @@
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
 
-                                        <nz-select nzShowSearch nzAllowClear id="matrimoniale" formControlName="matrimoniale">
+                                        <nz-select nzShowSearch nzAllowClear id="matrimoniale" formControlName="matrimoniale" placeholder="Situation matrimoniale">
                                             <nz-option *ngFor="let matrimoniale of matrimonialeList" [nzLabel]="matrimoniale.name" [nzValue]="matrimoniale.name" oninput="this.value=
                                                     this.value.toUpperCase()">
                                             </nz-option>
@@ -297,7 +297,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="nomEtPrenomConjoint" formControlName="nomEtPrenomConjoint" placeholder="Nom Et Prenom Conjoint" oninput="this.value=
+                                        <input nz-input id="nomEtPrenomConjoint" formControlName="nomEtPrenomConjoint" placeholder="Nom et Prénoms conjoint(e)" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape2.get('nomEtPrenomConjoint').dirty
                                                 &&
@@ -385,7 +385,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="nbrEnfant" type="number" min="0" formControlName="nbrEnfant" placeholder="nombre enfant" oninput="this.value=
+                                        <input nz-input id="nbrEnfant" type="number" min="0" formControlName="nbrEnfant" placeholder="Nombre d'enfant" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape2.get('nbrEnfant').dirty
                                                 &&
@@ -405,7 +405,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="nci" minlength="4" formControlName="nci" placeholder="nci" oninput="this.value=
+                                        <input nz-input id="nci" minlength="4" formControlName="Numero pièce d'identité" placeholder="nci" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape2.get('nci').dirty
                                                 &&
@@ -499,7 +499,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input formControlName="phoneNumber" id="'phoneNumber'" placeholder="SVP numero de téléphone 1" nz-input>
+                                        <input formControlName="phoneNumber" id="'phoneNumber'" placeholder="Numero de téléphone" nz-input>
                                         <nz-form-explain *ngIf="validateFormUser_Etape2.get('phoneNumber').dirty
                                                 &&
                                                 validateFormUser_Etape2.get('phoneNumber').errors">
@@ -538,7 +538,7 @@
                                 <nz-form-item class="ant-row ant-form-item">
                                     <nz-form-label [nzSpan]="12" nzFor="phoneNumber1" style="text-align: start;">
                                         <span>Téléphone 2
-                                                <i nz-icon nz-tooltip nzTitle="Votre numéro de téléphone 2" type="question-circle"
+                                                <i nz-icon nz-tooltip nzTitle="Numéro de téléphone" type="question-circle"
                                                     theme="outline"></i>
                                             </span>
                                     </nz-form-label>
@@ -584,7 +584,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="contactPersonneContacter" formControlName="contactPersonneContacter" placeholder="contact Personne Contacter" oninput="this.value=
+                                        <input nz-input id="contactPersonneContacter" formControlName="contactPersonneContacter" placeholder="Contact personne à contacter" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape3.get('contactPersonneContacter').dirty
                                                 &&
@@ -603,7 +603,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="relationPersonne" formControlName="relationPersonne" placeholder="Relation avec la personne à contacter SVP" oninput="this.value=
+                                        <input nz-input id="relationPersonne" formControlName="relationPersonne" placeholder="Relation avec la personne à contacter" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape3.get('relationPersonne').dirty
                                                 &&
@@ -625,8 +625,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="nomPere" formControlName="nomPere" placeholder="nom
-                                                père" oninput="this.value=this.value.toUpperCase()">
+                                        <input nz-input id="nomPere" formControlName="nomPere" placeholder="Nom père" oninput="this.value=this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape3.get('nomPere').dirty
                                                 &&
                                                 validateFormUser_Etape3.get('nomPere').errors">
@@ -645,8 +644,7 @@
                                             </span>
                                     </nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input id="nomMere" formControlName="nomMere" placeholder="Nom
-                                                Mère" oninput="this.value=this.value.toUpperCase()">
+                                        <input nz-input id="nomMere" formControlName="nomMere" placeholder="Nom Mère" oninput="this.value=this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape3.get('nomMere').dirty
                                                 &&
                                                 validateFormUser_Etape3.get('nomMere').errors">
@@ -714,9 +712,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <nz-form-item class="ant-row ant-form-item">
-                                    <nz-form-label [nzSpan]="12" nzRequired nzFor="email">E-mail</nz-form-label>
+                                    <nz-form-label [nzSpan]="12" nzRequired nzFor="email" style="text-align: start;">E-mail</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input formControlName="email" id="email" placeholder="Mail Valide SVP" oninput="this.value=
+                                        <input nz-input formControlName="email" id="email" placeholder="E-mail" oninput="this.value=
                                                 this.value.toUpperCase()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape4.get('email').dirty
                                                 &&
@@ -727,7 +725,7 @@
                             </div>
 
                             <div class="col-md-6">
-                                <nz-form-item class="ant-row ant-form-item">
+                                <!--  <nz-form-item class="ant-row ant-form-item">
                                     <nz-form-label [nzSpan]="12" nzFor="username" nzRequired style="text-align: start;">
                                         <span>Identifiant
                                                 <i nz-icon nz-tooltip nzTitle="L'Identifiant
@@ -743,6 +741,26 @@
                                             Votre Identifiant SVP
                                         </nz-form-explain>
                                     </nz-form-control>
+                                </nz-form-item> -->
+                                <nz-form-item class="ant-row ant-form-item">
+                                    <nz-form-label [nzSpan]="12" nzFor="username" nzRequired style="text-align: start;">
+                                        <span>Identifiant
+                                                <i nz-icon nz-tooltip nzTitle="L'Identifiant
+                                                    SVP." type="question-circle"
+                                                    theme="outline"></i>
+                                            </span>
+                                    </nz-form-label>
+                                    <nz-form-control class="ant-form-item-control-wrapper" nzHasFeedback nzValidatingTip="Validating..." [nzErrorTip]="userErrorTpl">
+                                        <input nz-input formControlName="username" placeholder="Nom d'utilisateur" />
+                                        <ng-template #userErrorTpl let-control>
+                                            <ng-container *ngIf="control.hasError('required')">
+                                                Veuillez saisir votre nom d'utilisateur!
+                                            </ng-container>
+                                            <ng-container *ngIf="control.hasError('duplicated')">
+                                                Le nom d'utilisateur est redondant!
+                                            </ng-container>
+                                        </ng-template>
+                                    </nz-form-control>
                                 </nz-form-item>
                             </div>
 
@@ -754,7 +772,7 @@
                                 <nz-form-item class="ant-row ant-form-item">
                                     <nz-form-label [nzSpan]="12" nzFor="password" nzRequired style="text-align: start;">Mot de passe</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input type="password" id="password" formControlName="password" (ngModelChange)="updateConfirmValidator()">
+                                        <input nz-input type="password" id="password" formControlName="password" placeholder="Mot de passe" (ngModelChange)="updateConfirmValidator()">
                                         <nz-form-explain *ngIf="validateFormUser_Etape4.get('password').dirty && validateFormUser_Etape4.get('password').errors">
                                             Le mot de passe doit contenir huit (08) caractères au minimum, au moins une lettre majuscule, une lettre minuscule, un (01) chiffre et un des caractères spéciaux $@%*+-/_!\:
                                         </nz-form-explain>
@@ -766,7 +784,7 @@
                                 <nz-form-item class="ant-row ant-form-item">
                                     <nz-form-label [nzSpan]="12" nzFor="repassword" nzRequired style="text-align: start;">Confirmation</nz-form-label>
                                     <nz-form-control class="ant-form-item-control-wrapper">
-                                        <input nz-input type="password" formControlName="repassword" id="repassword">
+                                        <input nz-input type="password" formControlName="repassword" placeholder="Confirme mot de passe" id="repassword">
                                         <nz-form-explain *ngIf="validateFormUser_Etape4.get('repassword').dirty
                                                 &&
                                                 validateFormUser_Etape4.get('repassword').errors">

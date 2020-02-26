@@ -19,7 +19,7 @@ export class CompteService {
   constructor(public httpClient: HttpClient, private authService: AuthenticationService) { }
 
   newUserCom() {
-    this.newCompte.next("ok");
+    this.newCompte.next('ok');
   }
 
 
@@ -28,6 +28,9 @@ export class CompteService {
   }
   getComptesValeurs(): Observable<object> {
     return this.httpClient.get(this.host + '/listes-valeurs');
+  }
+  getoutComptesValeurs(): Observable<object> {
+    return this.httpClient.get(this.host + '/listes-tout-valeurs');
   }
   getComptesMonnaies(): Observable<object> {
     return this.httpClient.get(this.host + '/listes-monnaies');

@@ -24,7 +24,28 @@ export class MarketAllComponent implements OnInit {
   selectedIndex = 2;
   echangesList: Array<Echange> = [];
   //listOfDisplayData1 = [];fatal: unable to access 'https://github.com/adimouch21/projetbasco.git/': Could not resolve host: github.com
-
+  tabs = [
+    {
+      active: false,
+      name: 'Echanges',
+      //icon: 'home'
+    },
+    {
+      active: false,
+      name: 'Services',
+      //icon: 'info-circle'
+    },
+    {
+      active: false,
+      name: 'Produits',
+      //icon: 'appstore'
+    },
+    {
+      active: false,
+      name: 'Accueil',
+      //icon: 'home'
+    }
+  ];
   listOfDisplayData2 = [];
   pages: number = 0;
   pagesEchange: number = 0; 
@@ -33,6 +54,7 @@ export class MarketAllComponent implements OnInit {
   pagesNo: number = 0;
   pageSize: number = 8;
   motCle: string = '';
+  
 
   currentProduit: number = 0;
 
@@ -73,7 +95,7 @@ export class MarketAllComponent implements OnInit {
       case 0:
 
         {
-          this.loadEchange();
+          //this.loadEchange();
 
           break;
         }
@@ -87,7 +109,7 @@ export class MarketAllComponent implements OnInit {
       case 2:
 
         {
-          this.loadProduitsActiver();
+          //this.loadProduitsActiver();
 
           break;
         }
@@ -101,7 +123,7 @@ export class MarketAllComponent implements OnInit {
 
       default:
         {
-          this.loadEchange();
+          //this.loadEchange();
 
           break;
         }
@@ -146,6 +168,7 @@ export class MarketAllComponent implements OnInit {
       .subscribe((data: any) => {
         console.log(data);
         this.echangesList = data.content;
+       
         console.log(this.echangesList);
         console.log(this.echangesList);
         this.pagesEchange = data.totalElements;
@@ -353,7 +376,7 @@ export class MarketAllComponent implements OnInit {
   }
   /* Debut méthode format monnetaire */
   formatNumber(num: number): string {
-    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1 ');
   }
   /* Fin méthode format monnetaire */
 

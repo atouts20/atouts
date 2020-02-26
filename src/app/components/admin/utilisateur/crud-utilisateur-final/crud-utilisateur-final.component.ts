@@ -15,7 +15,7 @@ import { TokenStorage } from '../../../../utils/token.storage';
   styleUrls: ['./crud-utilisateur-final.component.css']
 })
 export class CrudUtilisateurFinalComponent implements OnInit {
-ecran: number = 256;
+  ecran: number = 256;
   roleList: Array<Role> = [];
   sortName = null;
   sortValue = null;
@@ -80,7 +80,12 @@ ecran: number = 256;
 
 
   ngOnInit(): void {
+    this.resolutionDrawer();
     this.getListloggedUsers();
+    console.log(this.currentUser);
+    console.log("dfjkwxbbbbbbbgsbjk");
+    console.log(this.authService.setCurrentUserConnected());
+    console.log(this.authService.setIsConnectedUser());
     this.getList();
     this.makeFormeUtilisateur();
     this.loadUser();
@@ -88,30 +93,8 @@ ecran: number = 256;
     this.getListloggedUsers();
     this.getPays();
     this.getMetier();
-    this.resolutionDrawer();
 
   }
-
-  /* ======= Resposive drawer ============= */
-  
-  resolutionDrawer():number {
-    if(screen.width >= 1200){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width >= 920 ){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width <= 4200){
-      this.ecran = 300;
-      return  this.ecran;
-    }
-   
-  }
-
-   /* ======= Fin Resposive drawer ============= */
-
 
   getPays() {
     this.authService.getPays().subscribe(
@@ -691,7 +674,7 @@ ecran: number = 256;
       console.log(formData);
 
 
-      this.authService.postUsersSaveFinal(formData,this.iduser)
+      this.authService.postUsersSaveFinal(formData, this.iduser)
         .subscribe(
           (res: any) => {
             this.unUser = res;
@@ -733,6 +716,20 @@ ecran: number = 256;
     this.listUtilisateurs = this.listUtilisateurs.filter(i => i.id !== this.iduser);
     }
 
-
+    resolutionDrawer():number {
+      if(screen.width >= 1200){
+        this.ecran = 768;
+        return  this.ecran;
+      }
+      if(screen.width >= 920 ){
+        this.ecran = 768;
+        return  this.ecran;
+      }
+      if(screen.width <= 4200){
+        this.ecran = 300;
+        return  this.ecran;
+      }
+     
+    }
 
 }

@@ -1,4 +1,4 @@
-<div></div>
+<br />
 <div nz-row nzGutter="12" class="example-input">
     <div nz-col nzSpan="12">
         <button nz-button nzType="primary" (click)="open()">
@@ -15,14 +15,14 @@
             COMPTES" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateFormSousCompte" (ngSubmit)="enregistreSousCompte()">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <h5> Type de compte<span class="text-danger">*</span></h5>
                         <nz-select formControlName="type" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select
                             type" nzAllowClear>
                             <nz-option *ngFor="let o of typeList" [nzValue]="o" [nzLabel]="o"></nz-option>
                         </nz-select>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <nz-form-item>
                             <nz-form-control nzErrorTip="Please write something
                                 here!">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <h5> Propriétaire du sous compte<span class="text-danger">*</span></h5>
                         <nz-select formControlName="appUserSousCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select
                             Propriétaire" nzAllowClear>
@@ -46,7 +46,7 @@
                             </nz-option>
                         </nz-select>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-6">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
                         <nz-form-item>
                             <nz-form-control nzErrorTip="Please write something
                                 here!">
@@ -81,7 +81,7 @@
                 </div>
                 <div class="footer">
 
-                    <div nz-row>
+                    <div nz-row nzType="flex" nzJustify="space-between">
                         <div nz-col nzSpan="8">
                             <button type="button" (click)="resetForm($event)" class="ant-btn
                                 ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>

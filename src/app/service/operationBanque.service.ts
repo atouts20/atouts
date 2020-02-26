@@ -57,6 +57,10 @@ export class OperationBanqueService {
     console.log(operation);
     return this.httpClient.post(this.host + '/save-operation', operation);
   }
+  saveUser(operation: Operation): Observable<object> {
+   
+    return this.httpClient.post(this.host + '/save-operation-vire-user', operation);
+  }
 
   saveEn(operation: Operation): Observable<object> {
     console.log(operation);

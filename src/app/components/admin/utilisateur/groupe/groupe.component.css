@@ -1,0 +1,17 @@
+.footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    border-top: 1px solid rgb(232, 232, 232);
+    background: #fff;
+}
+
+.scrollable-container {
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.background {
+    padding-top: 60px;
+    height: 300px;
+}

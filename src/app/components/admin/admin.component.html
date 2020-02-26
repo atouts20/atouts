@@ -12,17 +12,21 @@
                 membres" nzIcon="user" *ngIf="isAdmin == true">
                 <ul *ngIf="isAdmin == true">
                     <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
-                        <a [routerLink]="['utilisateur/crud-utilisateur']">Liste des membres</a>
+                        <a [routerLink]="['utilisateur/crud-membre']">Gestion 
+                            des membres</a>
                     </li>
                     <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
-                        <a [routerLink]="['utilisateur/crud-utilisateur-final']">Liste des membres à finaliser</a>
+                        <a [routerLink]="['utilisateur/crud-utilisateur']">Gestion
+                            des administratifs</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
+                        <a [routerLink]="['utilisateur/crud-utilisateur-final']">Liste
+                            des membres à finaliser</a>
                     </li>
                     <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
                         <a [routerLink]="['utilisateur/crud-goupe']">Groupe</a>
                     </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Workplace</a>
-                    </li>
+
                 </ul>
             </li>
             <li nz-submenu [(nzOpen)]="openMap.sub2" (nzOpenChange)="openHandler('sub2')" nzTitle="Gestion des
@@ -33,7 +37,7 @@
                             comptes</a>
                     </li>
                     <li nz-menu-item nzMatchRouter *ngIf="isAdmin == true">
-                        <a [routerLink]="['compte/crud-sous-comptes']">Liste des
+                        <a [routerLink]="['compte/crud-sous-comptes']">Liste des sous
                             comptes</a>
                     </li>
 
@@ -57,7 +61,7 @@
 
                 </ul>
             </li>
-            <li nz-submenu [(nzOpen)]="openMap.sub3" (nzOpenChange)="openHandler('sub3')" nzTitle="Biens" nzIcon="gold">
+            <li nz-submenu [(nzOpen)]="openMap.sub3" (nzOpenChange)="openHandler('sub3')" nzTitle="Biens" nzIcon="gold" *ngIf="isUser == true">
                 <ul>
                     <li nz-menu-item [routerLink]="['bien/demande-bien-user']">Mes ventes
                     </li>
@@ -86,7 +90,7 @@
                 </ul>
             </li>
             <li nz-submenu [(nzOpen)]="openMap.sub4" (nzOpenChange)="openHandler('sub4')" nzTitle="Gestions des
-                Opérations" nzIcon="property-safety">
+                Opérations" nzIcon="property-safety" *ngIf="isAdmin == true">
 
                 <ul>
                     <li nz-menu-group nzTitle="Gestions des opérations" *ngIf="isAdmin == true">
@@ -104,6 +108,12 @@
                             </li>
                         </ul>
                     </li>
+
+                </ul>
+            </li>
+
+            <li nz-submenu [(nzOpen)]="openMap.sub4" (nzOpenChange)="openHandler('sub4')" nzTitle="Opérations" nzIcon="property-safety" *ngIf="isUser == true">
+                <ul>
                     <li nz-menu-group nzTitle="Mes opérations" *ngIf="isUser == true">
                         <ul>
                             <li nz-menu-item>Mes dépot</li>
@@ -115,15 +125,26 @@
                     </li>
                 </ul>
             </li>
+
+
+
+
+
+
+
+
+
+
+
             <li nz-submenu [(nzOpen)]="openMap.sub5" (nzOpenChange)="openHandler('sub5')" nzTitle="Mobilisations" nzIcon="more">
                 <ul>
                     <li nz-menu-item [routerLink]="['mobilisation']">Gestions des Mobilisation
                     </li>
-                    <li nz-menu-item>Option 10</li>
+                    <!--  <li nz-menu-item>Option 10</li> -->
                     <!--  <li nz-menu-item>Option 11</li> -->
                 </ul>
             </li>
-            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Bons" nzIcon="money-collect">
+            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Gestion des bons" nzIcon="money-collect" *ngIf="isAdmin == true">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
                         <a [routerLink]="['bon/crud-bon']">Liste des bons</a>
@@ -135,7 +156,18 @@
 
                 </ul>
             </li>
+            <li nz-submenu [(nzOpen)]="openMap.sub6" (nzOpenChange)="openHandler('sub6')" nzTitle="Bons" nzIcon="money-collect" *ngIf="isUser == true">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a [routerLink]="['bon/crud-bon']">Liste des bons</a>
+                    </li>
+                    <!--  <li nz-menu-item [routerLink]="['bon/encaisse-bon']">Liste des encaisses
+                    </li>
+                    <li nz-menu-item [routerLink]="['bon/liquidation-bon']">Liste des liquidations
+                    </li> -->
 
+                </ul>
+            </li>
             <li nz-submenu [(nzOpen)]="openMap.sub8" (nzOpenChange)="openHandler('sub8')" nzTitle="Méssagerie" nzIcon="message">
                 <ul>
                     <li nz-menu-item nzMatchRouter>
@@ -166,7 +198,7 @@
                     <div class="imageUser">
                         <a nz-dropdown [nzDropdownMenu]="menu">
 
-                            <nz-avatar nzSrc="assets/images/varun.jpg" nzAlt="content" [nzSize]="50" nzIcon="user"></nz-avatar>
+                            <nz-avatar nzSrc="https://api.atouts.org/files/{{userConnect.photo}}" nzAlt="content" [nzSize]="50" nzIcon="user"></nz-avatar>
                             <span>{{userConnect.nom }}</span>
 
                             <i nz-icon nzType="down"></i>

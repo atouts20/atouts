@@ -751,7 +751,7 @@ ecran: number = 256;
         console.log(this.produitAccepterList);
       }, err => {
         console.log(err);
-      })
+      });
 
   }
 

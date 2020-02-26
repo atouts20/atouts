@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormBuilder, FormGroup, ValidationErrors } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Role } from '../../model/Role';
 import { AuthenticationService } from '../../service/authentication.service';
@@ -7,6 +7,7 @@ import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { AppUser } from '../../model/model.AppUser';
 import { Router } from '@angular/router';
 import { HttpResponse } from '@angular/common/http';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-enregistrement',
@@ -41,6 +42,7 @@ export class EnregistrementComponent implements OnInit {
   listOfOption = Array<Role>();
   paysList: Array<any> = [];
   metierList: Array<any> = [];
+  usernameList: Array<string> = [];
 
   tabs = [
     {
@@ -75,7 +77,7 @@ export class EnregistrementComponent implements OnInit {
 
   userSubmit: AppUser = new AppUser();
   current = 0;
-  unUser: AppUser = null ;
+  unUser: AppUser = null;
 
   constructor(
     private fb: FormBuilder,
@@ -89,14 +91,17 @@ export class EnregistrementComponent implements OnInit {
 
 
   ngOnInit(): void {
+    
     this.makeFormUser();
     this.getPays();
     this.getMetier();
+    this.getUserNames();
     this.imageUrl = 'assets/images/user.jpg';
     this.imageUrl1 = 'assets/images/cni.png';
     this.imageUrl2 = 'assets/images/signature.JPG';
+
   }
- 
+
   log(index: number): void {
     console.log(index);
     console.log(this.selectedIndex);
@@ -168,6 +173,21 @@ export class EnregistrementComponent implements OnInit {
 
   }
 
+  updateConfirmValidator(): void {
+    /** wait for refresh value */
+    //Promise.resolve().then(() => this.validateFormUser_Etape4.controls.checkPassword.updateValueAndValidity());
+    setTimeout(() => this.validateFormUser_Etape4.controls.checkPassword.updateValueAndValidity());
+  }
+
+  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
+    if (!control.value) {
+      return { required: true };
+    } else if (control.value !== this.validateFormUser_Etape4.controls.password.value) {
+      return { confirm: true, error: true };
+    }
+
+  };
+
   makeFormUser(): void {
     this.validateFormUser_Etape1 = this.fb.group({
       nom: [this.userSubmit != null ? this.userSubmit.nom : null, [Validators.required]],
@@ -183,7 +203,7 @@ export class EnregistrementComponent implements OnInit {
     this.validateFormUser_Etape2 = this.fb.group({
       matrimoniale: [this.userSubmit != null ? this.userSubmit.matrimoniale : null, [Validators.required]],
       nomEtPrenomConjoint: [this.userSubmit != null ? this.userSubmit.nomEtPrenomConjoint : null, [Validators.required]],
-      nbrEnfant: [this.userSubmit != null ? this.userSubmit.nbrEnfant : 0, [Validators.required]],
+      nbrEnfant: [this.userSubmit != null ? this.userSubmit.nbrEnfant : 0],
       //profession: [this.userSubmit != null ? this.userSubmit.profession : null, [Validators.required]],
       //categorie: [this.userSubmit != null ? this.userSubmit.categorie : null, [Validators.required]],
       //naturePiece: [this.userSubmit != null ? this.userSubmit.naturePiece : null, [Validators.required]],
@@ -191,10 +211,10 @@ export class EnregistrementComponent implements OnInit {
       //dateEmission: [this.userSubmit != null ? this.userSubmit.dateEmission : null, [Validators.required]],
       dateExpiration: [this.userSubmit != null ? this.userSubmit.dateExpiration : null, [Validators.required]],
       metier: [this.userSubmit != null ? this.userSubmit.metier : null, [Validators.required]],
-      metiers: [this.userSubmit != null ? this.userSubmit.metiers : null, [Validators.required]],
+      metiers: [this.userSubmit != null ? this.userSubmit.metiers : null],
       phoneNumber: [this.userSubmit != null ? this.userSubmit.phoneNumber : null, [Validators.required]],
-     
-     
+
+
     });
 
     this.validateFormUser_Etape3 = this.fb.group({
@@ -203,7 +223,7 @@ export class EnregistrementComponent implements OnInit {
       contactPersonneContacter: [this.userSubmit != null ? this.userSubmit.contactPersonneContacter : null, [Validators.required]],
       relationPersonne: [this.userSubmit != null ? this.userSubmit.relationPersonne : null, [Validators.required]],
       nomPere: [this.userSubmit != null ? this.userSubmit.nomPere : null, [Validators.required]],
-     // contactPere: [this.userSubmit != null ? this.userSubmit.contactPere : null, [Validators.required]],
+      // contactPere: [this.userSubmit != null ? this.userSubmit.contactPere : null, [Validators.required]],
       nomMere: [this.userSubmit != null ? this.userSubmit.nomMere : null, [Validators.required]],
       //contactMere: [this.userSubmit != null ? this.userSubmit.contactMere : null, [Validators.required]],
     });
@@ -211,10 +231,10 @@ export class EnregistrementComponent implements OnInit {
     this.validateFormUser_Etape4 = this.fb.group({
       //phoneNumber2: [this.userSubmit != null ? this.userSubmit.phoneNumber2 : null],
       email: [this.userSubmit != null ? this.userSubmit.email : null, [Validators.email, Validators.required]],
-      username: [this.userSubmit != null ? this.userSubmit.username : null, [Validators.required]],
+      username: [this.userSubmit != null ? this.userSubmit.username : null, [Validators.required], [this.userNameAsyncValidator]],
       password: [this.userSubmit != null ? this.userSubmit.password : null, [Validators.required, Validators.maxLength(16),
       Validators.minLength(8), Validators.pattern('^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[-+!*$@%_])([-+!*$@%_\\w]{8,15})$')]],
-      repassword: [this.userSubmit != null ? this.userSubmit.repassword : null, [Validators.required, this.confirmationValidator]],
+      repassword: [this.userSubmit != null ? this.userSubmit.repassword : null, [ Validators.required, this.confirmationValidator]],
 
     });
     this.validateFormUser_Etape5 = this.fb.group({
@@ -288,19 +308,8 @@ export class EnregistrementComponent implements OnInit {
   }
 
 
-  updateConfirmValidator(): void {
-    /** wait for refresh value */
-    Promise.resolve().then(() => this.validateFormUser_Etape4.controls.checkPassword.updateValueAndValidity());
-  }
-
-  confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
-    if (!control.value) {
-      return { required: true };
-    } else if (control.value !== this.validateFormUser_Etape4.controls.password.value) {
-      return { confirm: true, error: true };
-    }
-
-  };
+ 
+  
 
   getCaptcha(e: MouseEvent): void {
     e.preventDefault();
@@ -419,7 +428,7 @@ export class EnregistrementComponent implements OnInit {
         break;
       }
       case 2: {
-        if (this.validateFormUser_Etape3.valid ) {
+        if (this.validateFormUser_Etape3.valid) {
           this.userSubmit = Object.assign(this.userSubmit, this.validateFormUser_Etape3.value);
           console.log(this.userSubmit);
           // this.tokenStorage.saveCurrentProjet(this.userSubmit);
@@ -509,4 +518,52 @@ export class EnregistrementComponent implements OnInit {
     console.log('La vie est belle in god we trust');
     this.router.navigate(['/connexion']);
   }
+  getUserNames(){
+    this.authService.getUsernames().subscribe(
+      (data: Array<string>) => {
+        this.usernameList = data;
+        console.log( this.usernameList);
+      },
+      (error: HttpErrorResponse) => {
+        console.log('Echec !');
+      });
+  }
+
+
+  userNameAsyncValidator = (control: FormControl) =>
+  new Observable((observer: Observer<ValidationErrors | null>) => {
+    setTimeout(() => {
+      const found =  this.usernameList.find(element => element === control.value);
+      if (control.value === found) {
+        // you have to return `{error: true}` to mark it as an error event
+        observer.next({ error: true, duplicated: true });
+      } else {
+        observer.next(null);
+      }
+      observer.complete();
+    }, 1000);
+  });
+
+
+
+
+
+ /*  userNameAsyncValidator = (control: FormControl) =>
+    new Observable((observer: Observer<ValidationErrors | null>) => {
+      setTimeout(() => {
+        this.usernameList.forEach(element => {
+          console.log(element)
+          console.log('*************')
+          console.log(control.value)
+          if (control.value === element) {
+            // you have to return `{error: true}` to mark it as an error event
+            observer.next({ error: true, duplicated: true });
+          } else {
+            observer.next(null);
+          }
+          observer.complete();
+        }, 1000);
+      });
+
+    }); */
 }

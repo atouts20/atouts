@@ -61,7 +61,7 @@ registerLocaleData(fr);
     ReadMoreComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'Projet1' }),
     AppRoutingModule,
     IconsProviderModule,
     NgZorroAntdModule,

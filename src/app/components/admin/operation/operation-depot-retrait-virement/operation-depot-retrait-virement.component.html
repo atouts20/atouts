@@ -7,7 +7,7 @@
             </button>
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow: 'auto',
                 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible
-                ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
+                ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="MOBILISATIONS/VIRMENTS" (nzOnClose)="close()">
 
 
 
@@ -30,9 +30,6 @@
                         </nz-radio-group>
                     </nz-form-control>
                 </nz-form-item>
-
-
-
                 <div nz-row nzGutter="12" class="example-input" *ngIf="!edit">
                     <div nz-col nzSpan="12">
                         <nz-form-item>
@@ -44,10 +41,10 @@
                                     </span>
                             </nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
-                                <nz-select id="type" formControlName="type" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select a compte" [(ngModel)]="selectedValue" (ngModelChange)="log(selectedValue)">
-                                    <nz-option nzLabel="COMPTES MONNAIES" nzValue="CPMN"></nz-option>
+                                <nz-select id="type" formControlName="type" style="width: 100%;" nzShowSearch nzAllowClear nzPlaceHolder="Select a compte" [(ngModel)]="selectedValue">
+                                    <!-- <nz-option nzLabel="COMPTES MONNAIES" nzValue="CPMN"></nz-option> -->
                                     <nz-option nzLabel="COMPTES VALEURS" nzValue="CPVL"></nz-option>
-                                    <nz-option nzLabel="COMPTES" nzValue="CPTS"></nz-option>
+                                    <!--  <nz-option nzLabel="COMPTES" nzValue="CPTS"></nz-option> -->
                                 </nz-select>
 
                             </nz-form-control>
@@ -60,8 +57,8 @@
                             </span>
                     </nz-form-label>
                     <div nz-col nzSpan="12" *ngIf="!edit">
-                        <nz-select id="numCompte" formControlName="numCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select numcompte" nzAllowClear (nzBlur)="getUnCompt()">
-                            <nz-option *ngFor="let o of optionList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte"></nz-option>
+                        <nz-select id="numCompte" formControlName="numCompte" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUser" nzPlaceHolder="Select numcompte" nzAllowClear (nzBlur)="getUnCompt()">
+                            <nz-option *ngFor="let o of optionList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte+' '+o.appUserCompte.nom+' '+o.appUserCompte.prenom"></nz-option>
                             <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
                                 <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
                             </nz-option>
@@ -95,9 +92,9 @@
                             </span>
                     </nz-form-label>
                     <div nz-col nzSpan="12" *ngIf="!edit">
-                        <nz-select *ngIf="radioValue =='VIRE'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select
+                        <nz-select *ngIf="radioValue =='VIRE'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" nzPlaceHolder="Select
                                 numcompte destinataire" nzAllowClear>
-                            <nz-option *ngFor="let o of optionList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte"></nz-option>
+                            <nz-option *ngFor="let o of listComptValeurs" [nzValue]="o.numCompte" [nzLabel]="o.numCompte+' '+o.appUserCompte.nom+' '+o.appUserCompte.prenom"></nz-option>
                             <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
                                 <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
                             </nz-option>
@@ -111,9 +108,9 @@
                             </span>
                     </nz-form-label>
                     <div nz-col nzSpan="12" *ngIf="!edit">
-                        <nz-select *ngIf="radioValue =='RETR'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select
+                        <nz-select *ngIf="radioValue =='RETR'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" nzPlaceHolder="Select
                                 numcompte destinataire" nzAllowClear>
-                            <nz-option *ngFor="let o of compteSystemeList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte"></nz-option>
+                            <nz-option *ngFor="let o of compteSystemeList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte+' '+o.appUserCompte.nom+' '+o.appUserCompte.prenom"></nz-option>
                             <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
                                 <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
                             </nz-option>
@@ -128,9 +125,9 @@
                             </span>
                     </nz-form-label>
                     <div nz-col nzSpan="12" *ngIf="!edit">
-                        <nz-select *ngIf="radioValue =='DEPO'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" (nzScrollToBottom)="loadMore()" nzPlaceHolder="Select
+                        <nz-select *ngIf="radioValue =='DEPO'" id="numCompte2" formControlName="numCompte2" style="width: 100%;" nzShowSearch nzAllowClear [(ngModel)]="selectedUserBiss" nzPlaceHolder="Select
                                 numcompte destinataire" nzAllowClear>
-                            <nz-option *ngFor="let o of compteSystemeList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte"></nz-option>
+                            <nz-option *ngFor="let o of compteSystemeList" [nzValue]="o.numCompte" [nzLabel]="o.numCompte+' '+o.codePays"></nz-option>
                             <nz-option *ngIf="isLoading" nzDisabled nzCustomContent>
                                 <i nz-icon type="loading" class="loading-icon"></i> Loading Data...
                             </nz-option>
@@ -138,12 +135,12 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="!edit">
+                <div nz-row nzGutter="24" class="example-input" *ngIf="!edit">
                     <div nz-col nzSpan="24">
 
                         <nz-form-item>
-                            <nz-form-label [nzSpan]="7" nzRequired>Narrative</nz-form-label>
-                            <nz-form-control [nzSpan]="12" nzErrorTip="SVP la narrative de l'opération!">
+                            <nz-form-label [nzSpan]="24" nzRequired>Narrative</nz-form-label>
+                            <nz-form-control [nzSpan]="24" nzErrorTip="SVP la narrative de l'opération!">
                                 <textarea formControlName="narrative" nz-input rows="2" placeholder="Narrative de l'operation" oninput="this.value = this.value.toUpperCase()"></textarea>
                             </nz-form-control>
                         </nz-form-item>

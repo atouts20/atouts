@@ -5,7 +5,6 @@ import { User } from '../model/model.user';
 import { environment } from '../../environments/environment';
 import { AppUser } from '../model/model.AppUser';
 import { TokenStorage } from '../utils/token.storage';
-import { Role } from './../model/Role';
 
 
 @Injectable()
@@ -13,7 +12,7 @@ export class AuthenticationService {
     private host: string = environment.backend;
     private jwtToken = null;
     private AuthToken = null;
-    private roles: Array<Role>;
+    private roles: Array<any>;
     private newAppUser = new Subject<string>();
 
     newUserStream = this.newAppUser.asObservable();
@@ -24,15 +23,13 @@ export class AuthenticationService {
     private idUser: string;
     public currentUser: BehaviorSubject<AppUser>;
     public isUserLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-    currentUsers: AppUser = null;
 
     //etat:number;
 
     constructor(public http: HttpClient, private tokenStorage: TokenStorage) {
         this.currentUser = new BehaviorSubject<AppUser>(JSON.parse(this.tokenStorage.getCurrentUser()));
         this.isUserLoggedIn = new BehaviorSubject<boolean>((JSON.parse(this.tokenStorage.getCurrentUser()) != null) ? true : false);
-        this.currentUsers = JSON.parse(this.tokenStorage.getCurrentUser());
-      
+
     }
 
     public setCurrentUserConnected() {
@@ -146,20 +143,90 @@ export class AuthenticationService {
         return this.http.post(this.host + '/register', dataForm);
     }
 
+    postAppUserAdmin(dataForm: FormData): Observable<Object> {
+        return this.http.post(this.host + '/register-admin', dataForm);
+    }
+
+    postAppUserMembre(dataForm: FormData): Observable<Object> {
+        return this.http.post(this.host + '/register-membre', dataForm);
+    }
+
+    bloquerAppUser(id: number, raison: string): Observable<Object> {
+        return this.http.post(this.host + '/bloquer-utilisateur/' + id, raison);
+    }
+
+    debloquerAppUser(id: number): Observable<Object> {
+        return this.http.delete(this.host + '/debloquer-utilisateur/' + id);
+    }
+
+    getBloquagesByUtilisateurId(id: any): Observable<object> {
+        return this.http.get(this.host + '/list-bloquages-by-Utilisateur/' + id);
+    }
 
 
     retrieveCurrentUser(username: string) {
         return this.http.get(this.host + '/me/' + username);
     }
 
+
+    /* putUtilisateur(id:any,utilisateur: any) {
+      if (this.jwtToken == null) this.loadToken();
+      return this.http.patch('http://localhost:8080/userE/'+id, utilisateur,
+        {headers: new HttpHeaders({'Authorization': this.jwtToken})});
+    } */
+
+    //sans modif photo
+    putUtilisateur(id: any, utilisateur: any) {
+        return this.http.patch(this.host + '/utilisateur-edit/' + id, utilisateur);
+    }
+
+
+    /* putUtilisateurF(id:number,formData:any){          
+     return this.http.patch('http://localhost:8080/userImg/'+id,formData,
+        {headers: new HttpHeaders({'Authorization': this.jwtToken})});
+     } */
+
+    //avec modif photo
+    putUtilisateurF(id: number, formData: any) {
+        return this.http.patch(this.host + '/utilisateur-edit-img/' + id, formData);
+    }
+
+
+
+
     //,  
     getUtilisateur(): Observable<object> {
         return this.http.get(this.host + '/listUtilisateurs');
     }
 
+    listUtilisateur(): Observable<object> {
+        return this.http.get(this.host + '/list-utilisateurs');
+    }
+
+
+    getUtilisateurBloques(): Observable<object> {
+        return this.http.get(this.host + '/listUtilisateurs-bloques');
+    }
+
+
+    getMembres(): Observable<object> {
+        return this.http.get(this.host + '/listMembres');
+    }
+    
+    
+    getMembreBloques(): Observable<object> {
+        return this.http.get(this.host + '/listMembres-bloques');
+    }
+
+
+    
+
     getUtilisateurNonActives(): Observable<object> {
         return this.http.get(this.host + '/listUtilisateurs-non-actives');
     }
+
+
+
 
     getRole(): Observable<object> {
 
@@ -173,6 +240,9 @@ export class AuthenticationService {
     getMetier(): Observable<object> {
 
         return this.http.get(this.host + '/metier');
+    }
+    getUsernames() {
+        return this.http.get(this.host + '/user-names');
     }
 
     getLoggedUsers(): Observable<object> {
@@ -203,26 +273,24 @@ export class AuthenticationService {
 
 
 
-    /* isAdmin() {
+    isAdmin() {
         if (this.AuthToken != null) {
-            if (this.currentUsers.roles[0].roleName === 'ADMIN') { 
-                console.log(this.currentUsers.roles[0].roleName);
-                return true; }
+            for (let r of this.roles) {
+                if (r.authority === 'ADMIN') { return true; }
+            }
         }
 
         return false;
     }
     isUser() {
         if (this.AuthToken != null) {
-           
-                if (this.currentUsers.roles[0].roleName === 'USER') { 
-                    console.log(this.currentUsers.roles[0].roleName);
-                    return true; }
-           
+            for (let r of this.roles) {
+                if (r.authority === 'USER') { return true; }
+            }
         }
 
         return false;
-    } */
+    }
 
     grtUtilisateur(): Observable<object> {
         if (this.jwtToken == null) this.loadToken();

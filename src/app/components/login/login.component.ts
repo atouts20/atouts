@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
           this.user = JSON.parse(this.tokenStorage.getCurrentUser());
 
 
-          location.href = '/atouts/admin';
+          location.href = '/admin';
 
           //this.router.navigate(['admin']);
         }

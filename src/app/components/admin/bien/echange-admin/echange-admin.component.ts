@@ -6,6 +6,7 @@ import { TokenStorage } from './../../../../utils/token.storage';
 import { AppUser } from './../../../../model/model.AppUser';
 import { EchangeService } from './../../../../service/echange.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-echange-admin',
@@ -13,7 +14,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./echange-admin.component.css']
 })
 export class EchangeAdminComponent implements OnInit {
-ecran: number = 256;
+  ecran: number = 256;
   selectedIndex = 0;
   selectedFiles: FileList;
   imageUrl: String = 'assets/asRach/images/iws_c.png';
@@ -47,6 +48,8 @@ ecran: number = 256;
     private fb: FormBuilder,
     private tokenStorage: TokenStorage,
     private echanegService: EchangeService,
+    private message: NzMessageService,
+    private modalService: NzModalService,
   ) {
     this.currentUser = JSON.parse(this.tokenStorage.getCurrentUser());
     console.log(this.currentUser);
@@ -114,7 +117,7 @@ ecran: number = 256;
     this.visible = false;
   }
 
-  resetForm(e:MouseEvent){
+  resetForm(e: MouseEvent) {
     e.preventDefault();
     this.validateForm.reset();
   }
@@ -130,7 +133,7 @@ ecran: number = 256;
       id: this.id,
       nom: this.validateForm.value.nom,
       description: this.validateForm.value.description,
-      photo:null,
+      photo: null,
       proprietaires: this.currentUser,
       tel: this.validateForm.value.tel
     }
@@ -155,50 +158,50 @@ ecran: number = 256;
       );
   }
 
-  saveEdit1(id){}
-  saveEdit2(id){}
-  saveEdit3(id){}
+  saveEdit1(id) { }
+  saveEdit2(id) { }
+  saveEdit3(id) { }
 
   avance1(key: number) {
     this.editCache1[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache1[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache1[key].data.photo;
     this.ngOnInitUpdate1(key);
     this.open();
   }
 
   avance2(key: number) {
     this.editCache2[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache2[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache2[key].data.photo;
     this.ngOnInitUpdate2(key);
     this.open();
   }
 
   avance3(key: number) {
     this.editCache3[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache3[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache3[key].data.photo;
     this.ngOnInitUpdate3(key);
     this.open();
   }
 
-   /* ======= Resposive drawer ============= */
-  
-   resolutionDrawer():number {
-    if(screen.width >= 1200){
+  /* ======= Resposive drawer ============= */
+
+  resolutionDrawer(): number {
+    if (screen.width >= 1200) {
       this.ecran = 768;
-      return  this.ecran;
+      return this.ecran;
     }
-    if(screen.width >= 920 ){
+    if (screen.width >= 920) {
       this.ecran = 768;
-      return  this.ecran;
+      return this.ecran;
     }
-    if(screen.width <= 4200){
+    if (screen.width <= 4200) {
       this.ecran = 300;
-      return  this.ecran;
+      return this.ecran;
     }
-   
+
   }
 
-   /* ======= Fin Resposive drawer ============= */
+  /* ======= Fin Resposive drawer ============= */
 
 
   private loadEchanges() {
@@ -365,33 +368,97 @@ ecran: number = 256;
   // tableau 3
   startInspecte1(key: number) {
     this.editCache1[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache1[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache1[key].data.photo;
     this.ngOnInitUpdate1(key);
     this.open();
   }
 
   startInspecte2(key: number) {
     this.editCache2[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache2[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache2[key].data.photo;
     this.ngOnInitUpdate2(key);
     this.open();
   }
   startInspecte3(key: number) {
     this.id = key;
     this.editCache3[key].edit = false;
-    this.imageUrl = 'http://localhost:8080/files/' + this.editCache3[key].data.photo;
+    this.imageUrl = 'https://api.atouts.org/files/' + this.editCache3[key].data.photo;
     this.ngOnInitUpdate3(key);
     this.open();
   }
 
   //------------------ accepatation ------------------
-  startAccepter(id: number) {
+  startAccepter(data) {
 
-    this.acceptationService.patchEchangesAccepter(id).subscribe(response => this.loadEchangesAaccepter());
-    console.log(id);
+    this.acceptationService.patchEchangesAccepter(data).subscribe(
+      (response) => {
+        if (data == null) {
+          this.modalService.warning({
+            nzTitle: 'Information',
+            nzContent: '<b>Seuil de publication atteint pour ce membre !</b>',
+            nzOkText: null,
+            nzCancelText: 'Ok',
+            nzOnCancel: () => this.finish()
+
+          });
+        } else if (data != null) {
+          this.modalService.success({
+            nzTitle: 'Information',
+            nzContent: '<b> Demande de mise en échange acceptée avec succès.</b>',
+            nzOkText: null,
+            nzCancelText: 'Ok',
+            nzOnCancel: () => this.finish()
+
+          });
+        }
+      }, (error: HttpErrorResponse) => {
+          console.log(error);
+          this.createMessage('error', 'Echec de l\'enregistrement !');
+        }
+      );
+
   }
-  startActiver(id: number) {
-    this.acceptationService.patchEchangesActiver(id).subscribe(res => this.loadEchangesAactiver());
+
+  finish() {
+    this.validateForm.reset();
+    this.ngOnInit();
+    this.imageUrl = 'assets/asRach/images/iws_c.png';
+    this.loadEchangesAaccepter();
+  }
+
+  startActiver(data) {
+    this.acceptationService.patchEchangesActiver(data).subscribe((data) => {
+      if (data == null) {
+        this.modalService.warning({
+          nzTitle: 'Information',
+          nzContent: '<b>Seuil de publication atteint pour ce membre !</b>',
+          nzOkText: null,
+          nzCancelText: 'Ok',
+          nzOnCancel: () => this.finishActiver()
+
+        });
+      } else if (data != null) {
+        this.modalService.success({
+          nzTitle: 'Information',
+          nzContent: '<b> Demande de mise en échange activée avec succès.</b>',
+          nzOkText: null,
+          nzCancelText: 'Ok',
+          nzOnCancel: () => this.finishActiver()
+
+        });
+      }
+    }, (error: HttpErrorResponse) => {
+        console.log(error);
+        this.createMessage('error', 'Echec de l\'enregistrement !');
+      }
+    );
+  }
+
+  finishActiver(){
+    this.validateForm.reset();
+    this.ngOnInit();
+    this.imageUrl = 'assets/asRach/images/iws_c.png';
+    this.loadEchangesAactiver();
   }
   startDelete1(id: number) {
     this.acceptationService.deleteEchange(id).subscribe(response => this.loadEchangesAaccepter());
@@ -458,6 +525,9 @@ ecran: number = 256;
       this.imageUrl = event.target.result;
     };
     reader.readAsDataURL(this.fileToUpload);
+  }
+  createMessage(type: string, msg: string): void {
+    this.message.create(type, msg);
   }
 
 }

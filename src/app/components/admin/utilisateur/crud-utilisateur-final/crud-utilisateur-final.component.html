@@ -18,7 +18,7 @@
         <br>
 
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)',
-            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
+            overflow:'auto','padding-bottom':'53px' }" [nzClosable]="false" [(nzWidth)]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN
             NOUVEAU MEMBRE" (nzOnClose)="close()">
 
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitFormFinal()" class="text-justify">
@@ -138,7 +138,7 @@
                     <div nz-col nzSm="12" nzMd="12">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="12" nzFor="residance" nzRequired>
-                                <span>Résidance
+                                <span>Rue/Quatier/Ville
                                         <i nz-icon nz-tooltip nzTitle="Votre
                                             résidance SVP" type="question-circle"
                                             theme="outline"></i>
@@ -162,7 +162,7 @@
                     <div nz-col nzSm="12" nzMd="12">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="12" nzFor="nationalite" nzRequired>
-                                <span>Nationalité
+                                <span>Pays d'origine
                                         <i nz-icon nz-tooltip nzTitle="Votre
                                             nationalite SVP" type="question-circle"
                                             theme="outline"></i>
@@ -399,7 +399,7 @@
                     <div nz-col nzSm="12" nzMd="12">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="12" nzFor="metier" nzRequired>
-                                <span>Profession
+                                <span>Activité principale
                                         <i nz-icon nz-tooltip nzTitle="Votre
                                             metier SVP" type="question-circle"
                                             theme="outline"></i>
@@ -425,7 +425,7 @@
                     <div nz-col nzSm="12" nzMd="12">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="12" nzFor="metiers" nzRequired>
-                                <span>Autres Métiés
+                                <span>Activités secondaires
                                         <i nz-icon nz-tooltip nzTitle="Votre
                                             nationalite SVP" type="question-circle"
                                             theme="outline"></i>
@@ -506,7 +506,7 @@
                     <div nz-col nzSm="12" nzMd="12">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="relationPersonne">
-                                <span> Relation Personne
+                                <span> Relation
                                         <i nz-icon nz-tooltip nzTitle="Relation
                                             Personne SVP" type="question-circle"
                                             theme="outline"></i>
@@ -788,7 +788,7 @@
         <nz-card style="width: 100%;">
             <h4 class="card-title">LISTES DES MEMBRES NON ACTIFS ATOUTS</h4>
             <h6 class="card-subtitle">
-                LISTES DES MEMBRES A ACTIVES<br>
+                LISTES DES MEMBRES A ACTIVER<br>
                 <hr>
             </h6>
             <nz-table #editRowTable nzBordered [nzPageSize]=7 [nzShowPagination]=true [nzData]="listUtilisateurs">

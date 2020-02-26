@@ -79,7 +79,7 @@ export class CrudCompteComponent implements OnInit {
   dateBetwen: Array<Date> = [];
   numeroCompte: string ;
   comptConsulter: any = null;
-  ecran:number = 256;
+  ecran: number = 256;
 
   constructor(
     private http: HttpClient,
@@ -611,7 +611,7 @@ export class CrudCompteComponent implements OnInit {
   }
   loadMore(): void {
     this.isLoading = true;
-    this.authenService.getUtilisateur().subscribe((data: Array<AppUser>) => {
+    this.authenService.listUtilisateur().subscribe((data: Array<AppUser>) => {
       console.log(data);
       this.optionList = data;
       console.log(this.optionList);

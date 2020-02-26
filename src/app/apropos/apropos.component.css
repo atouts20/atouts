@@ -2,7 +2,8 @@
     text-align: center;
 }
 
-.scrollable-container {
+
+/* .scrollable-container {
     height: 120%;
     overflow-y: scroll;
 }
@@ -69,7 +70,7 @@
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
-}
+} */
 
 
 /* nz-steps {
@@ -87,7 +88,7 @@
 nz-header {
     background: #fff;
     color: #fff;
-    padding: 30;
+    padding: 0;
     width: 100%;
     z-index: 2;
     position: fixed;
@@ -105,16 +106,37 @@ h3 {
     .col-md-12 {
         width: 100%;
     }
-    .pff {
-        width: 100%;
-    }
 }
 
 @media screen and(max-width:320px) {
     .col-md-12 {
         width: 100%;
     }
-    .pff {
-        width: 50%;
+}
+
+@media (min-width: 992px) {
+    .col-md-1,
+    .col-md-10,
+    .col-md-11,
+    .col-md-12,
+    .col-md-2,
+    .col-md-3,
+    .col-md-4,
+    .col-md-5,
+    .col-md-6,
+    .col-md-7,
+    .col-md-8,
+    .col-md-9 {
+        float: left;
     }
+}
+
+.steps-content {
+    font-family: "Monospaced Number", "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin-top: 16px;
+    min-height: 200px;
+    padding: 20px;
+    border: 1px solid #ebedf0;
+    border-radius: 5px;
+    background: #fff;
 }

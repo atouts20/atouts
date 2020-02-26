@@ -143,7 +143,7 @@
     <nz-card-tab>
         <nz-tabset nzSize="large" [(nzSelectedIndex)]="selectedIndex" (nzSelectChange)="log(selectedIndex)">
             <nz-tab nzTitle="Mes échanges"></nz-tab>
-            <nz-tab nzTitle="Mes échanges accepter"></nz-tab>
+            <nz-tab nzTitle="Mes échanges acceptés"></nz-tab>
             <nz-tab nzTitle="Mes demandes d'échanges"></nz-tab>
         </nz-tabset>
     </nz-card-tab>
@@ -168,13 +168,13 @@
                     </nz-card-meta>
                 </nz-card>
                 <ng-template #avatarTemplate>
-                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                    <nz-avatar nzSrc="https://api.atouts.org/files/{{item.photo}}"></nz-avatar>
                 </ng-template>
                 <ng-template #coverTemplate>
-                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                    <img height="200" alt="example" src="https://api.atouts.org/files/{{item.photo}}" />
                 </ng-template>
                 <ng-template #actionMonney>
-                    <i nz-icon type="money-collect"></i>
+                    <a nz-popconfirm nzPopconfirmTitle="Êtes-vous sûr de supprimer?" nzPopconfirmPlacement="bottom" (nzOnConfirm)="startDelete1(item.id)" (nzOnCancel)="cancel()"><i nz-icon type="delete"  style="color: red;"></i></a>
                 </ng-template>
                 <ng-template #actionEdit>
                     <i nz-icon type="edit"></i>
@@ -213,13 +213,13 @@
                     </nz-card-meta>
                 </nz-card>
                 <ng-template #avatarTemplate>
-                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                    <nz-avatar nzSrc="https://api.atouts.org/files/{{item.photo}}"></nz-avatar>
                 </ng-template>
                 <ng-template #coverTemplate>
-                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                    <img height="200" alt="example" src="https://api.atouts.org/files/{{item.photo}}" />
                 </ng-template>
                 <ng-template #actionMonney>
-                    <i nz-icon type="money-collect"></i>
+                    <a nz-popconfirm nzPopconfirmTitle="Êtes-vous sûr de supprimer?" nzPopconfirmPlacement="bottom" (nzOnConfirm)="startDelete2(item.id)" (nzOnCancel)="cancel()"> <i nz-icon type="delete" style="color: red;"></i></a>
                 </ng-template>
                 <ng-template #actionEdit>
                     <i nz-icon type="edit"></i>
@@ -258,13 +258,13 @@
                     </nz-card-meta>
                 </nz-card>
                 <ng-template #avatarTemplate>
-                    <nz-avatar nzSrc="http://localhost:8080/files/{{item.photo}}"></nz-avatar>
+                    <nz-avatar nzSrc="https://api.atouts.org/files/{{item.photo}}"></nz-avatar>
                 </ng-template>
                 <ng-template #coverTemplate>
-                    <img height="200" alt="example" src="http://localhost:8080/files/{{item.photo}}" />
+                    <img height="200" alt="example" src="https://api.atouts.org/files/{{item.photo}}" />
                 </ng-template>
                 <ng-template #actionMonney>
-                    <i nz-icon type="money-collect"></i>
+                    <a nz-popconfirm nzPopconfirmTitle="Êtes-vous sûr de supprimer?" nzPopconfirmPlacement="bottom" (nzOnConfirm)="startDelete3(item.id)" (nzOnCancel)="cancel()"> <i nz-icon type="delete" style="color: red;"></i></a>
                 </ng-template>
                 <ng-template #actionEdit>
                     <i nz-icon type="edit"></i>
@@ -281,10 +281,5 @@
 
 
     </div>
-
-
-
-
-
 
 </nz-card>

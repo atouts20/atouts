@@ -10,7 +10,7 @@
             <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:'auto','padding-bottom':'53px', 'width':'100%' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [(nzWidth)]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
                 <form nz-form [formGroup]="validateFormMobilisation" (ngSubmit)="enregistrerMobilisation()">
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Nom du produit
@@ -26,7 +26,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Prix
@@ -45,7 +45,7 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Téléphone
@@ -61,7 +61,7 @@
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
                             <nz-form-item>
                                 <nz-form-control>
                                     <h5> Description</h5>
@@ -89,7 +89,7 @@
 
 
                     <div class="footer">
-                        <div nz-row>
+                        <div nz-row nzType="flex" nzJustify="space-between">
                             <div nz-col nzSpan="8">
                                 <button type="button" (click)="resetForm($event)" class="ant-btn ant-btn-primary" ant-btn-primary>
                                             <i nz-icon type="retweet" theme="outline"></i>
@@ -97,7 +97,7 @@
                             </div>
                             <div nz-col nzSpan="8">
                                 <nz-form-item nz-row>
-                                    <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                                    <nz-form-control [nzSpan]="8">
                                         <button nz-button nzType="primary">
                                                     <i nz-icon type="diff"></i>
                                                     <span>Ajouter</span></button>
@@ -374,7 +374,7 @@
 <!--détail reponse-->
 <nz-modal [(nzVisible)]="isVisibleReponse" nzTitle="Detail reponse" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()" [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="768">
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
 
             <div *ngIf="uneReponse != null">
                 <span> Montant : </span>
@@ -382,7 +382,7 @@
             </div>
 
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div *ngIf="uneReponse != null">
                 <span> Observation : </span>
                 <strong> {{ uneReponse.observation  }} </strong>
@@ -396,7 +396,7 @@
 <!--détail relance-->
 <nz-modal [(nzVisible)]="isVisibleRelance" nzTitle="Detail relance" [(nzCancelText)]="btnFermerText" (nzOnCancel)="handleCancel()" [nzClosable]="false" [nzOkDisabled]="false" [nzOkText]="null" [nzWidth]="500">
     <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
 
             <div *ngIf="uneRelance != null">
                 <span> Montant : </span>
@@ -404,7 +404,7 @@
             </div>
 
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <div *ngIf="uneRelance != null">
                 <span> Observation : </span>
                 <strong> {{ uneRelance.observation  }} </strong>
@@ -418,7 +418,7 @@
 <!-- Formulaire reponse-->
 <nz-modal [(nzVisible)]="isVisibleFormReponse" nzTitle="Formulaire de reponse" [nzClosable]="false" [nzWidth]="500">
     <form nz-form [formGroup]="validateFormReponse">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <nz-form-item>
                 <nz-form-control>
                     <h5> Prix <span class="text-danger">*</span></h5>
@@ -431,7 +431,7 @@
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <nz-form-item>
                 <nz-form-control>
                     <h5> Message<span class="text-danger">*</span></h5>
@@ -464,7 +464,7 @@
 <!-- Formulaire reponse-->
 <nz-modal [(nzVisible)]="isVisibleFormRelance" nzTitle="Formulaire de relance" [nzClosable]="false" [nzWidth]="500">
     <form nz-form [formGroup]="validateFormRelance">
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <nz-form-item>
                 <nz-form-control>
                     <h5> Prix <span class="text-danger">*</span></h5>
@@ -477,7 +477,7 @@
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-6 col-sm-12 col-xs-12">
             <nz-form-item>
                 <nz-form-control>
                     <h5> Message<span class="text-danger">*</span></h5>

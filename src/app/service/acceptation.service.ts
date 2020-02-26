@@ -27,15 +27,15 @@ export class AcceptationService {
     return this.httpClient.get(this.host + '/listEchanges');
   }
 
-  patchEchangesAccepter(id: number): Observable<object> {
+  patchEchangesAccepter(data: Echange): Observable<object> {
 
-    return this.httpClient.delete(this.host + '/accepteEchange/' + id);
+    return this.httpClient.post(this.host + '/accepteEchange/', data);
 
   }
 
-  patchEchangesActiver(id: number): Observable<object> {
+  patchEchangesActiver(data: Echange): Observable<object> {
 
-    return this.httpClient.delete(this.host + '/activeEchange/' + id);
+    return this.httpClient.post(this.host + '/activeEchange/', data);
 
   }
 

@@ -9,7 +9,7 @@ import { ProduitsService } from '../../../service/produits.service';
 import { PanierService } from '../../../service/panier.service';
 import { EchangeService } from '../../../service/echange.service';
 import { AppUser } from '../../../model/model.AppUser';
-import { filter } from '../../../../../node_modules/@types/minimatch';
+
 
 @Component({
   selector: 'app-detail-echange',
@@ -19,9 +19,10 @@ import { filter } from '../../../../../node_modules/@types/minimatch';
 export class DetailEchangeComponent implements OnInit {
 
   paramKey: number;
-  echange: Echange = new Echange("","","",null);
+  echange: Echange ;//= new Echange("","","","",null);
 
   prorietaire : AppUser = new AppUser();
+  telephone: string;
 
   constructor(private router: Router,
     private activeRoute: ActivatedRoute,
@@ -37,8 +38,11 @@ export class DetailEchangeComponent implements OnInit {
       (data: Echange) => {
         this.echange = data;
         this.prorietaire = data.proprietaires;
+        this.telephone = data.tel;
         console.log(this.echange);
       });
+
+     
 
       //let d = this.panierService.returnQtPn(this.produit)
       //this.echange.proprietaires.nom
@@ -61,19 +65,21 @@ export class DetailEchangeComponent implements OnInit {
   } */
 
 
-  gotoWatsapp(){
+  gotoWhatsapp(){
+    let url = this.router.createUrlTree(["/https://wa.me/this.telephone?text=I'm%20interested%20in%20your%20car%20for%20sale"]);
+    window.open(url.toString(), '_blank')
+   
     //this.router.navigateByUrl("https://wa.me/15551234567?text=I'm%20interested%20in%20your%20car%20for%20sale");
   
-
+/* 
       const req = new HttpRequest('GET', "https://wa.me/22997543734?text=I'm%20interested%20in%20your%20car%20for%20sale");
-    this.http.request(req).subscribe((data: any) => {          
+   */ /*  this.http.request(req).subscribe((data: any) => {          
           console.log(data.body);         
         },
         err => {
           console.log(err); 
         });  
-
-  
+ */  
   }
 
   /* gotoCall(){

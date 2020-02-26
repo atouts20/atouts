@@ -4,6 +4,7 @@ import { UtilisateurComponent } from './utilisateur.component';
 import { CrudUtilisateurComponent } from './crud-utilisateur/crud-utilisateur.component';
 import { GroupeComponent } from './groupe/groupe.component';
 import { CrudUtilisateurFinalComponent } from './crud-utilisateur-final/crud-utilisateur-final.component';
+import { CrudMembreComponent } from './crud-membre/crud-membre.component';
 
 
 const routes: Routes = [
@@ -22,7 +23,14 @@ const routes: Routes = [
         path: 'crud-utilisateur-final',
         component: CrudUtilisateurFinalComponent,
         data: {
-          breadcrumb: 'Crud-utilisateur'
+          breadcrumb: 'Crud-utilisateur-final'
+        }
+      },
+      {
+        path: 'crud-membre',
+        component: CrudMembreComponent,
+        data: {
+          breadcrumb: 'Crud-membre'
         }
       },
       {

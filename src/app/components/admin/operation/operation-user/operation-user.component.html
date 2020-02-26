@@ -8,12 +8,12 @@
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
             'auto', 'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="VIREMENT PONCTUEL" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-                <div class="row"><a [routerLink]="['compte-favori']">ajouter new compte bénéficière</a></div>
+                <div class="row"><a [routerLink]="['compte-favori']">ajouter compte bénéficiaire</a></div>
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <nz-form-item>
                             <nz-form-control>
-                                <h5>Bénéficière <span class="text-danger">*</span></h5>
+                                <h5>Bénéficiaire <span class="text-danger">*</span></h5>
                                 <nz-select nzShowSearch nzAllowClear formControlName="numCompte2">
                                     <nz-option *ngFor="let compte of
                                         mesComptesFavoriList" [nzLabel]="compte.nom+' '+compte.prenom" [nzValue]="compte.numCompte">
@@ -84,7 +84,7 @@
 
 
         <nz-card style="width: 100%;">
-            <h4 class="card-title">LISTES DE MES OPERATIONS EFFECTUEE</h4>
+            <h4 class="card-title">LISTES DE MES OPERATIONS EFFECTUEES</h4>
             <h6 class="card-subtitle">
                 LISTES DE MES OPERATIONS<br>
                 <hr>

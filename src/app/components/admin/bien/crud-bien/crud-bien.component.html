@@ -11,7 +11,7 @@
                 'padding-bottom':'53px' }" [nzClosable]="false" [nzOffsetX]="childrenVisible ? 180 : 0" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="Create" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit">
+                <div nz-row *ngIf="edit">
                     <!-- *ngIf="isgroupe"  (ngModelChange)="logupG($event)"-->
                     <div nz-col nzSpan="6">
                         <nz-form-item>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit1">
+                <div nz-row *ngIf="edit1">
                     <!-- *ngIf="isgroupe"  (ngModelChange)="logupG($event)"-->
                     <div nz-col nzSpan="6">
                         <nz-form-item>
@@ -39,10 +39,10 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="!edit
+                <div nz-row *ngIf="!edit
                         &&
                         !edit1">
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="cat" nzRequired>cat</nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
@@ -58,8 +58,8 @@
 
 
 
-                <div nz-row nzGutter="12" class="example-input">
-                    <div nz-col nzSpan="12">
+                <div nz-row>
+                    <div nz-col nzSpan="24">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="nom" nzRequired>
@@ -80,7 +80,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="nickname" nzRequired>
                                 <span>
@@ -105,8 +105,8 @@
                 </div>
 
 
-                <div nz-row nzGutter="12" class="example-input">
-                    <div nz-col nzSpan="12">
+                <div nz-row>
+                    <div nz-col nzSpan="24">
 
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="prix" nzRequired>
@@ -129,7 +129,7 @@
 
 
                     </div>
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="tBCCV" nzRequired>
                                 <span>
@@ -154,10 +154,10 @@
 
 
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="ajou
+                <div nz-row *ngIf="ajou
                         &&
                         isproduit()">
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <!--  *ngIf="!edit1" *ngIf="isproduit"  ajou && -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="stock" nzRequired>
@@ -179,7 +179,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <!--  *ngIf="!edit1" *ngIf="isproduit()" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="stockAlert" nzRequired>
@@ -204,14 +204,14 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="!isproduit()
+                <div nz-row *ngIf="!isproduit()
                         && ajou">
 
                 </div>
 
 
-                <div nz-row nzGutter="12" class="example-input">
-                    <div nz-col nzSpan="12">
+                <div nz-row>
+                    <div nz-col nzSpan="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="file" nzRequired>Photo</nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
@@ -226,9 +226,9 @@
                         </nz-form-item>
                     </div>
                 </div>
-                <div nz-row nzGutter="12" class="example-input" *ngIf="ajou">
+                <div nz-row *ngIf="ajou">
                     <!-- *ngIf="!edit" *ngIf="!isuser()" -->
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="proprietaire" nzRequired>Groupe Proprietaire
                             </nz-form-label>
@@ -241,7 +241,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
 
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="groupe" nzRequired>Nouveau groupe
@@ -256,7 +256,7 @@
                 <!--  *ngIf="!edit"   -->
 
                 <br>
-                <div nz-row nzGutter="12" class="example-input" *ngIf="!switchValue && ajou">
+                <div nz-row *ngIf="!switchValue && ajou">
                     <div nz-col nzSpan="6" *ngIf="!edit">
                         <nz-form-item nz-row style="margin-bottom:8px;">
                             <nz-form-control [nzSpan]="14" [nzOffset]="6">
@@ -291,7 +291,7 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit
+                <div nz-row *ngIf="edit
                                 && !biengrp">
                     <div nz-col nzSpan="6">
                         <nz-form-item nz-row style="margin-bottom:8px;">
@@ -313,7 +313,7 @@
                         </nz-form-item>
                     </div>
                 </div>
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit1
+                <div nz-row *ngIf="edit1
                                 && !biengrp">
                     <div nz-col nzSpan="6">
                         <nz-form-item nz-row style="margin-bottom:8px;">
@@ -336,8 +336,8 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="switchValue">
-                    <div nz-col nzSpan="12">
+                <div nz-row *ngIf="switchValue">
+                    <div nz-col nzSpan="24">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
@@ -357,7 +357,7 @@
                         </nz-form-item>
                     </div>
 
-                    <div nz-col nzSpan="12" *ngIf="!edit">
+                    <div nz-col nzSpan="24" *ngIf="!edit">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="nomGroupe" nzRequired>
                                 <span>
@@ -378,9 +378,9 @@
                         </nz-form-item>
                     </div>
                 </div>
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit">
+                <div nz-row *ngIf="edit">
                     <!-- *ngIf="isgroupe" -->
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
@@ -428,9 +428,9 @@
                         </nz-form-item>
                     </div>
                 </div>
-                <div nz-row nzGutter="12" class="example-input" *ngIf="edit1">
+                <div nz-row *ngIf="edit1">
                     <!-- *ngIf="isgroupe" -->
-                    <div nz-col nzSpan="12">
+                    <div nz-col nzSpan="24">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
@@ -483,7 +483,7 @@
 
 
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="switchValue">
+                <div nz-row *ngIf="switchValue">
                     <!--  *ngIf="!edit"   -->
 
                     <div nz-col nzSpan="6">
@@ -548,7 +548,7 @@
 
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input" *ngIf="switupValue">
+                <div nz-row *ngIf="switupValue">
                     <!--  *ngIf="!edit"   -->
 
                     <div nz-col nzSpan="6">
@@ -745,13 +745,13 @@
             </nz-table>
             <div nz-row *ngIf="edit">
                 <!--  *ngIf="isgroupe" -->
-                <div nz-col nzSpan="12" nzOffset="6">
+                <div nz-col nzSpan="24" nzOffset="6">
                     Détails groupe propriétaire
                 </div>
             </div>
             <div nz-row *ngIf="edit1">
                 <!--  *ngIf="isgroupe" -->
-                <div nz-col nzSpan="12" nzOffset="6">
+                <div nz-col nzSpan="24" nzOffset="6">
                     Détails groupe propriétaire
                 </div>
             </div>
@@ -1245,7 +1245,7 @@
 
 
 
-            <div nz-row nzGutter="12" class="example-input">
+            <div nz-row>
                 <div nz-col nzSpan="6" *ngIf="switchValue">
 
                     <button type="button" (click)="valider()" class="ant-btn

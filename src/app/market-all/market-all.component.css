@@ -38,12 +38,18 @@ p {
     margin-right: 8px;
 }
 
-
 :host {
     text-align: center;
 }
 
 nz-card-tab {
+    padding: 0;
+    width: 100%;
+    z-index: 2;
+    position: fixed;
+}
+
+nz-header {
     background: #fff;
     color: #fff;
     padding: 0;
@@ -51,13 +57,26 @@ nz-card-tab {
     z-index: 2;
     position: fixed;
 }
-.scrollable-container {
-        height: 100px;
-        overflow-y: scroll;
-      }
 
-      .background {
-        padding-top: 60px;
-        height: 300px;
-       
-      }
+nz-footer {
+    line-height: 1.5;
+}
+
+nz-content {
+    color: #fff;
+    min-height: 5px;
+    line-height: 5px;
+}
+
+nz-layout {
+    margin-bottom: 48px;
+}
+
+nz-layout:last-child {
+    margin: 0;
+}
+
+.inner-content {
+    padding: 30px;
+    background: #fff;
+}

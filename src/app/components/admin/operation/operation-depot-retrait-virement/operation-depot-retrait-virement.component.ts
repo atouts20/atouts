@@ -25,13 +25,14 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
   visible = false;
   isLoading = false;
   optionList: Array<Compte> = [];
+  listComptValeurs: Array<Compte> = [];
   optionListBis;
   selectedValueBis;
   selectedUserBiss;
   searchValue;
   childrenVisible = false;
   selectedUser;
-  selectedValue = 'CPTS';
+  selectedValue = 'CPVL';
   radioValue = 'DEPO';
   compteOperant: Compte;
   compteList: Array<Compte> = [];
@@ -66,11 +67,14 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
     this.resolutionDrawer();
     this.initialiseFormulaire(null);
     this.listOperationEn();
-    this.loadMore();
+    //this.loadMore();
+
     this.loadOperation();
-    this.loadCompte();
+    //this.loadCompte();
+    this.loadCompteValeur();
     this.loadCompteSysteme();
     console.log(this.dataSet);
+    this.loadToutCompteValeur();
     // console.log( this.getRandomLong());
 
   }
@@ -142,7 +146,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
           this.modalService.info({
             nzTitle: 'Information',
             nzContent: '<b> L\'opération de montant. <strong>' + data.montantOp +
-              '</strong> a été enregistré avec succès.</b>',
+              '</strong> a été enregistrée avec succès.</b>',
             nzOkText: null,
             nzCancelText: 'Ok',
             nzOnCancel: () => this.validateForm.reset()
@@ -175,7 +179,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
 
 
 
-  /* Methode de chargement des Depots valeurs Uniquements  */
+  /* Methode de chargement des Depots valeurs Uniquements  */ 
   loadCompteValeur() {
     this.compteService.getComptesValeurs()
       .subscribe((data: Array<any>) => {
@@ -191,8 +195,20 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
         console.log(err);
       });
   }
+   /* Methode de chargement des Depots valeurs Uniquements  */ 
+   loadToutCompteValeur() {
+    this.compteService.getoutComptesValeurs()
+      .subscribe((data: Array<any>) => {
+        this.listComptValeurs = data;
+        this.isLoading = false;
+        this.updateEditCache();
+
+      }, err => {
+        console.log(err);
+      });
+  }
   /* Methode de chargement des Comptes Monnaie Uniquements  */
-  loadCompteMonnaie() {
+ /*  loadCompteMonnaie() {
     this.compteService.getComptesMonnaies()
       .subscribe((data: Array<any>) => {
         console.log(data);
@@ -205,7 +221,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
         console.log(err);
       });
 
-  }
+  } */
   postOperationtValeurs(foutou: any) {
     this.operationBanqueService.postOperationCompteValeur(foutou)
       .subscribe(
@@ -276,6 +292,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
     this.editCache[key].edit = false;
 
   }
+  /* 
   loadMore(): void {
     this.isLoading = true;
     switch (this.selectedValue) {
@@ -291,12 +308,12 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
         this.loadCompteMonnaie();
         break;
       }
-      /* default:
-        this.loadCompte(); */
+       default:
+        this.loadCompte(); 
     }
-  }
+  } */
   /* Méthode de chargement des 2 comptes */
-  private loadCompte() {
+ /*  private loadCompte() {
     this.compteService.getComptes()
       .subscribe((data: Array<Compte>) => {
         console.log(data);
@@ -307,7 +324,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
       }, err => {
         console.log('Echec de chargements des Comptes !!!');
       });
-  }
+  } */
   inspecterMobilisation(data) {
 
   }
@@ -366,7 +383,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
     console.log(data);
     if (data.type === 'RETR_EN') {
       this.uneOperation = new Operation(
-        data.id,
+        null,
         data.compte.numCompte,
         data.numCompteSysteme,
         data.montantOp,
@@ -380,7 +397,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
     }
     if (data.type === 'DEPO_EN') {
       this.uneOperation = new Operation(
-        data.id,
+        null,
         data.compte.numCompte,
         data.numCompteSysteme,
         data.montantOp,
@@ -400,7 +417,7 @@ export class OperationDepotRetraitVirementComponent implements OnInit {
           this.modalService.info({
             nzTitle: 'Information',
             nzContent: '<p> L\'opération de montant. <strong>' + data.montantOp +
-              '</strong> a été enregistré avec succès.</p>',
+              '</strong> a été enregistrée avec succès.</p>',
             nzOkText: null,
             nzCancelText: 'Ok',
             nzOnCancel: () => this.validation(this.uneOperation)

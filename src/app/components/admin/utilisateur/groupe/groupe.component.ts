@@ -111,7 +111,7 @@ export class GroupeComponent implements OnInit {
     });
 
 
-    this.authService.getUtilisateur()
+    this.authService.getMembres()
       .subscribe((data: Array<AppUser>) => {
         this.optionsC = data;
         console.log(this.optionsC);
@@ -127,27 +127,6 @@ export class GroupeComponent implements OnInit {
 
 
   }
-
-  /* ======= Resposive drawer ============= */
-  
-  resolutionDrawer():number {
-    if(screen.width >= 1200){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width >= 920 ){
-      this.ecran = 768;
-      return  this.ecran;
-    }
-    if(screen.width <= 4200){
-      this.ecran = 300;
-      return  this.ecran;
-    }
-   
-  }
-
-   /* ======= Fin Resposive drawer ============= */
-
   open(): void {
     this.visible = true;
   }
@@ -328,6 +307,7 @@ export class GroupeComponent implements OnInit {
               //this.somme=0;
               this.depass = false;
               this.nocent = false;
+              this.close();
 
             },
             err => {
@@ -366,6 +346,7 @@ export class GroupeComponent implements OnInit {
 
               /*  if(!this.edit){ */
               this.resegroupe();
+              this.close();
               /*  }else{
                  this.loadGroupe();
                 this.dataSet = [];
@@ -468,6 +449,7 @@ export class GroupeComponent implements OnInit {
   }
 
   ajout() {
+    this.resegroupe();
     this.nouv = true;
     this.edit = false;
     this.sommemn = 0;
@@ -491,10 +473,6 @@ export class GroupeComponent implements OnInit {
     /*  this.dataSet.forEach(item => { 
        this.somme = this.somme + item.part*1;
      }) */
-
-
-
-
 
     this.open();
   }
@@ -715,5 +693,21 @@ export class GroupeComponent implements OnInit {
     };
     const data = this.dat.filter(item => filterFunc(item));
     this.dataSet1 = data.sort((a, b) => (this.sortValue === 'ascend') ? (a[this.sortName] > b[this.sortName] ? 1 : -1) : (b[this.sortName] > a[this.sortName] ? 1 : -1));
+  }
+
+  resolutionDrawer():number {
+    if(screen.width >= 1200){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width >= 920 ){
+      this.ecran = 768;
+      return  this.ecran;
+    }
+    if(screen.width <= 4200){
+      this.ecran = 300;
+      return  this.ecran;
+    }
+   
   }
 }

@@ -9,6 +9,7 @@ import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { IconsProviderModule } from '../../../icons-provider.module';
 import { GroupeComponent } from './groupe/groupe.component';
 import { CrudUtilisateurFinalComponent } from './crud-utilisateur-final/crud-utilisateur-final.component';
+import { CrudMembreComponent } from './crud-membre/crud-membre.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CrudUtilisateurFinalComponent } from './crud-utilisateur-final/crud-uti
     UtilisateurComponent,
     CrudUtilisateurComponent,
     GroupeComponent,
-    CrudUtilisateurFinalComponent
+    CrudUtilisateurFinalComponent,
+    CrudMembreComponent
   ],
   imports: [
     CommonModule,

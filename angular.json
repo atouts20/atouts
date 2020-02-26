@@ -13,7 +13,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
-                        "outputPath": "dist/Projet1",
+                        "outputPath": "dist/browser",
                         "index": "src/index.html",
                         "main": "src/main.ts",
                         "polyfills": "src/polyfills.ts",
@@ -65,13 +65,18 @@
                     }
                 },
                 "serve": {
-                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "builder": "@angular-devkit/build-angular:server",
                     "options": {
-                        "browserTarget": "Projet1:build"
+                        "browserTarget": "Projet1:build",
+                        "outputPath": "dist/server",
+                        "main": "src/main.server.ts",
+                        "tsConfig": "tsconfig.server.json"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "Projet1:build:production"
+                            "browserTarget": "Projet1:build:production",
+                            "replace": "src/environments/environment.ts",
+                            "with": "src/environments/environment.prod.ts"
                         }
                     }
                 },
@@ -120,6 +125,27 @@
                     "configurations": {
                         "production": {
                             "devServerTarget": "Projet1:serve:production"
+                        }
+                    }
+                },
+                "server": {
+                    "builder": "@angular-devkit/build-angular:server",
+                    "options": {
+                        "outputPath": "dist/server",
+                        "main": "src/main.server.ts",
+                        "tsConfig": "tsconfig.server.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [{
+                                "replace": "src/environments/environment.ts",
+                                "with": "src/environments/environment.prod.ts"
+                            }],
+                            "sourceMap": false,
+                            "optimization": {
+                                "scripts": false,
+                                "styles": true
+                            }
                         }
                     }
                 }

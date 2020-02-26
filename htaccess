@@ -1,0 +1,52 @@
+<IfModule mod_rewrite.c>
+
+ RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_METHOD} !OPTIONS
+RewriteRule ^(.*)$ index.html [L]
+
+### INTERDIRE L'AFFICHAGE DE CERTAINS FORMATS DE FICHIER EXÉCUTÉS PAR LE SERVEUR 
+### MAIS INTERDIT D'AFFICHAGE PAR LE NAVIGATEUR WEB
+RewriteRule "(\.(aspx?|backup|bak|bash|bat|bin|bkp|c|cfg|class|cmd|com|conf|config|cvs|cxz|dat|db|dist|dll|dos|env|exe|fla|git|h|hg|inc|ini|jsp|key|lnk|log|mdb|module|mso|old|pass|pdb|pl|pol|printer|psd|pwd|py|rar|resources|sh|spd|sql|svn|sw[op]|sys|theme|tpl|webinfo)|~)$" - [NC,F]
+
+### INTERDIRE L'ACCÈS À CERTAINS DOSSIERS PAR LE NAVIGATEUR WEB 
+### MAIS AUTORISÉS ET EXÉCUTÉS PAR LE SERVEUR
+### À ADAPTER SI CELA POSE PROBLÈME
+RewriteRule "(\.svn|\.git|\.hg|\.bzr|\.env|\.cvs|\.ssh|install?|users?|modules|node|core|config(ure|uration)?|options?|settings?|functions?|setup|[-_a-z0-9.]*cms[-_a-z0-9.]*|[-_a-z0-9.]*php[-_a-z0-9.]*|null|^root|^logs?)/.*" - [NC,F]
+
+### INTERDIRE L'AFFICHAGE DE CERTAINS FICHIERS COMME readme, changelog, default, xmlrpc. 
+### CES FICHIERS DONNENT DES INFORMATIONS PRÉCIEUSES SUR LA CONFIGURATION INSTALLÉE (NOM DU SERVEUR ET NUMÉRO DE VERSION). 
+### À ADAPTER SI CELA POSE PROBLÈME
+RewriteRule "(readme|changelog|license|default|home|xmlrpc|local|errors?|debug|hacke?r?d?|php|shell|ssh|roots?|cmd|null|test|data)\.(p?s?x?htm?l?|txt|md|log|aspx?|cfml?|cgi|pl|php[3-9]{0,1}|jsp?|sql|xml)$" - [NC,F]
+
+### PROTECTION DES ACCÈS SFTP DE SYNCHRONISATION NON SÉCURISÉS ET NON AUTORISÉS DEPUIS UN NAVIGATEUR WEB
+RewriteRule "\.?(s?ftp|remote|deployment|ws_ftp|winscp|filezilla|webservers)-?(config|sync)?\.(json|settings?|ini|xml)$" - [NC,F]
+RewriteRule "(\.ssh/)?(id_[rdec1259]+sa)$" - [NC,F]
+
+### FILTRE CONTRE CERTAINS ROBOTS DES PIRATES
+RewriteEngine On
+## EXCEPTION: TOUS LES ROBOTS MÊMES ANONYMES OU BANNIS PEUVENT ACCÉDER À CES FICHIERS
+RewriteCond %{REQUEST_URI} !^robots.txt
+RewriteCond %{REQUEST_URI} !^sitemap.xml
+## ANONYMES
+RewriteCond %{HTTP_USER_AGENT} ^-?$ [OR]
+## BIBLIOTHÈQUES / CLASSES HTTP DONT ON NE VEUT PAS. ATTENTION, CELA PEUT BLOQUER CERTAINES FONCTIONS DE VOTRE CMS. NE PAS TOUT EFFACER, MAIS CHERCHEZ LE NOM DE LA CLASSE HTTP CONCERNÉE (DEMANDEZ AUX DÉVELOPPEURS DE VOTRE CMS). CETTE LISTE BLOQUE 80% DES ROBOTS SPAMMEURS. IL FAUT LA CONSERVER.
+RewriteCond %{HTTP_USER_AGENT} ^curl|^Fetch\ API\ Request|GT::WWW|^HTTP::Lite|httplib|^Java|^LeechFTP|lwp-trivial|^LWP|libWeb|libwww|^PEAR|PECL::HTTP|PHPCrawl|PycURL|^ReGet|Rsync|Snoopy|URI::Fetch|urllib|WebDAV|^Wget|^AnyConnect|Nmap\ Scripting [NC]
+## CEUX QUI INVENTENT DES NOMS AU HASARD, RETIREZ LES 2 DIÈSES EN DÉBUT DE LIGNE POUR L'ACTIVER
+## RewriteCond %{HTTP_USER_AGENT} ^[bcdfghjklmnpqrstvwxz\ ]{10,}|^[0-9a-z]{15,}|^[0-9A-Za-z]{19,}|^[A-Za-z]{3,}\ [a-z]{4,}\ [a-z]{4,} [OR]
+RewriteRule (.*) [F]
+
+### ON ÉVITE LE VOL D'IMAGES, VIDÉO, SON, FEUILLE DE STYLE, PDF ET ZIP
+### LES VISITEURS DOIVENT PASSER PAR LE SITE. 
+RewriteEngine on 
+RewriteCond %{HTTP_REFERER} !^$ 
+RewriteCond %{HTTP_REFERER} !^https?://[-a-z0-9.]*atouts\.org$ [NC] 
+RewriteCond %{HTTP_REFERER} !^https?://[-a-z0-9.]*atouts\.org/.*$ [NC] 
+## CES DOMAINES PEUVENT AFFICHER LES ÉLÉMENTS DU SITE
+RewriteCond %{HTTP_REFERER} !^https?://.*(translate|paypal|google|bing|yahoo|yandex|baidu|facebook|qwant|duck|ixquick|pinterest|twitter).*$ [NC]
+## LES CONNEXIONS À TRAVERS LES APP DES MOBILES PEUVENT AFFICHER LES ÉLÉMENTS DU SITE
+RewriteCond %{HTTP_REFERER} !^mobile?://.*$ [NC]
+RewriteRule .*\.(gif|jpe?g?|jp2|png|svgz?|css|pdf|zip|gz|js|mp3|m4a|mp4|mov|divx|avi|wma?v?|wmp|swf|flv|docx?|xlsx?|pptx?|vbs|rtf|asf?x?|odt|ods|odp|odg|odb|eot|ttf|woff|woff2)$ [NC,F]
+	
+</IfModule>

@@ -1,49 +1,9 @@
-<div class="container" style="margin-top: 2%; background-color: #ededed">
+<div class="container" style="margin-top: 01px; background-color: #ededed">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 style="text-align: center">Panier-Atouts</h3>
         </div>
         <div class="panel-body">
-            <!-- <table class="table table-striped border" style="width: 100%!important;">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Nom</th>
-                                <th>Quantité</th>
-                                <th>Prix</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let pi of panier.items let i=index">
-                                <td> {{ i+1 }}</td>
-                                <td> {{ pi.nom }}</td>
-                                <td> {{ pi.quantite }}</td>
-                                <td> {{ pi.prix }}</td>
-                                <td>
-                                    <div class="editable-row-operations">
-            
-                                        <ng-container>
-                                            <nz-popconfirm [nzTitle]="'Êtes vous sûr de supprimer?'" (nzOnConfirm)="onRemoveProductFromCaddy(pi)" [nzOkText]="'Oui'"
-                                                [nzCancelText]="'Non'">
-            
-                                                <button type="button" nz-popconfirm class="btn btn-danger btn-circle  btn-sm">
-                                                    <i class="ti-close"></i>
-                                                </button>
-            
-                                            </nz-popconfirm>
-                                        </ng-container>
-            
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="3">Total</td>
-                                <td>{{ panierService.getTotal() }}</td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>                      -->
             <div class="table-responsive">
                 <nz-table #editRowTable nzBordered [nzShowPagination]=false [nzPageSize]=7 [nzData]="panier.items">
                     <thead>
@@ -54,8 +14,8 @@
                                 <nz-dropdown nzTrigger="click" nzPlacement="bottomRight" [nzClickHide]="false" nzTableFilter #dropdown>
                                     <i nz-icon nzType="search" class="ant-table-filter-icon" [class.ant-table-filter-open]="dropdown.nzVisible" nz-dropdown></i>
                                     <div class="search-box">
-                                        <input type="text" nz-input placeholder="Search name" [(ngModel)]="searchValue">
-                                        <button nz-button nzType="primary" (click)="search()" class="search-button">Search</button>
+                                        <input type="text" nz-input placeholder="Texte de recherche" [(ngModel)]="searchValue">
+                                        <button nz-button nzType="primary" (click)="search()" class="search-button">Recherche</button>
                                         <button nz-button (click)="reset()">Reset</button>
                                     </div>
                                 </nz-dropdown>
@@ -107,14 +67,14 @@
                             <td>
                                 <div class="editable-row-operations">
                                     <ng-container *ngIf="!editCache[data.id].edit">
-                                        <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.id)"  nzShape="circle">
+                                        <button nz-button title="Editer" nzType="primary" (click)="startEdit(data.id)" nzShape="circle">
                                             <i nz-icon type="edit"></i>
                                         </button>
                                     </ng-container>
 
                                     <ng-container *ngIf="!editCache[data.id].edit">
                                         <nz-popconfirm [nzTitle]="'Sure to delete?'" (nzOnConfirm)="startDelete (data.id)">
-                                            <button nz-popconfirm title="Enlever" nz-button nzType="danger"  nzShape="circle">
+                                            <button nz-popconfirm title="Enlever" nz-button nzType="danger" nzShape="circle">
                                                 <i nz-icon type="close"></i>
                                             </button>
                                         </nz-popconfirm>
@@ -122,11 +82,11 @@
 
 
                                     <ng-container *ngIf="editCache[data.id].edit">
-                                        <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.id)"  nzShape="circle">
+                                        <button title="Modifier" nz-button nzType="primary" (click)="saveEdit(data.id)" nzShape="circle">
                                             <i nz-icon type="form"></i>
                                         </button>
                                         <nz-popconfirm [nzTitle]="'Êtes vous sûr de l\'annulation?'" (nzOnConfirm)="cancelEdit(data.id)">
-                                            <button title="Annuler" nz-button nzType="primary" nz-popconfirm  nzShape="circle">
+                                            <button title="Annuler" nz-button nzType="primary" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="close"></i>
                                             </button>
                                         </nz-popconfirm>
@@ -151,12 +111,12 @@
 
                 </nz-table>
                 <!-- <button nz-button nzType="primary" nzSize="default"  (click)="onNewCommande()" >Commander</button> -->
-                
+
                 <br>
                 <p style="text-align: center; margin:2px;">
-                        <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0"  (click)="onNewCommande()" >Commander</button>
-                        <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0"  (click)="onViderPanier()" >Vider panier</button>
-                        <button nz-button nzType="primary" nzSize="default" (click)="onReturnMarket()" ><i nz-icon>Retour marché</i></button>
+                    <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0" (click)="onNewCommande()">Commander</button>
+                    <button nz-button nzType="primary" style="margin-right:10px;" nzSize="default" [disabled]="panier.items.length == 0" (click)="onViderPanier()">Vider panier</button>
+                    <button nz-button nzType="primary" nzSize="default" (click)="onReturnMarket()"><i nz-icon>Retour marché</i></button>
                     <!-- <i nz-icon type="shopping"></i>
                         <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onNewCommande()">Commander</button>
                     <button class="btn btn-success" [disabled]="panier.items.length == 0" (click)="onViderPanier()">Vider panier</button>
@@ -173,4 +133,114 @@
             </div>
         </div>
     </div>
+</div>
+
+<div>
+    <!--  <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button> -->
+    <nz-modal [(nzVisible)]="isVisible" nzTitle="Connexion" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <div class="limiter">
+            <div class="card">
+                <div class="card-body">
+                    <div class="container-login100">
+                        <div class="wrap-login100 p-t-85 p-b-20">
+
+                            <form nz-form [formGroup]="validateForm" class="login100-form" (ngSubmit)="submitForm()">
+                                <span class="login100-form-title p-b-70">
+                                    Bienvenu(e) à Atouts
+                    </span>
+                                <span class="login100-form-avatar">
+                      <img src="assets/images/banner.jpg" alt="AVATAR">
+                    </span>
+                                <nz-form-item>
+                                    <nz-form-control nzErrorTip="Please input your
+                        username!">
+                                        <nz-input-group nzPrefixIcon="user">
+                                            <input type="text" nz-input formControlName="username" placeholder="username" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <nz-form-control nzErrorTip="Please input your
+                        Password!">
+                                        <nz-input-group nzPrefixIcon="lock">
+                                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                                        </nz-input-group>
+                                    </nz-form-control>
+                                </nz-form-item>
+                                <nz-form-item>
+                                    <nz-form-control>
+                                        <label nz-checkbox formControlName="remember"> <span>Se souvenir</span></label>
+                                        <a class="login-form-forgot" routerLink="/forgot-password">Mot de passe oublier</a>
+                                        <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Ou
+                                        <a routerLink="/register">S'enrégistrer!</a> <a class="login-form-forgot" routerLink="/home">Acceuil</a>
+                                    </nz-form-control>
+                                </nz-form-item>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+        <!-- 
+        
+        <div nz-row style="margin-top: 2%;">
+        
+            <div class="card">
+                <div class="card-body">
+                    <div class="alert alert-danger" *ngIf="mode==1">
+                        <strong>Informations d'identification incorrectes ...</strong>
+                    </div>
+        
+                    <h1 class="panel-heading">Authentification</h1><br>
+        
+                    <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()">
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please input your
+                                            username!">
+                                <nz-input-group nzPrefixIcon="user">
+                                    <input type="text" nz-input formControlName="username" placeholder="username" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control nzErrorTip="Please input your
+                                            Password!">
+                                <nz-input-group nzPrefixIcon="lock">
+                                    <input type="password" nz-input formControlName="password" placeholder="Password" />
+                                </nz-input-group>
+                            </nz-form-control>
+                        </nz-form-item>
+                        <nz-form-item>
+                            <nz-form-control>
+                                <label nz-checkbox formControlName="remember">
+                                                <span>Remember me</span>
+                                            </label>
+                                <a class="login-form-forgot" class="login-form-forgot">Mot
+                                                de passe
+                                                oublier</a>
+                                <button nz-button class="login-form-button" [nzType]="'primary'" [disabled]="validateForm.invalid">Connexion</button> Or
+                                <a routerLink="/register">S'enrégistrer!</a>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </form>
+                </div>
+            </div>
+        </div> -->
+
+        <nz-footer style="text-align: center;">
+            <strong>Copyright &copy; 2020
+                        <a href="https://atouts.com">atouts</a>.
+                    </strong> All rights
+        </nz-footer>
+    </nz-modal>
 </div>

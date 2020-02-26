@@ -6,7 +6,7 @@ export class AppUser {
   password: string;
   nom: string;
   prenom: string;
-  dateNaissance: string;
+  dateNaissance: Date;
   lieu: string;
   sexe: string;
   departement: string;
@@ -19,7 +19,7 @@ export class AppUser {
   naturePiece: string;
   nci: string;
   // dateEmission                 :  string;
-  dateExpiration: string;
+  dateExpiration: Date;
   metier: string;
   metiers: Array<any>;
   nomPere: string;
@@ -36,6 +36,9 @@ export class AppUser {
   //profession: string;
   roles: Array<Role>;
   repassword: string;
+  photo: string;
+  scane: string;
+  signature: string;
   createdAt: Date;
 
 

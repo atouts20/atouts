@@ -59,8 +59,6 @@ export class OperationUserComponent implements OnInit {
     //this.loadOperation();
     this.getLisCompteFavoris();
     this.getMonCompte();
-
-    console.log(this.dataSet);
     // console.log( this.getRandomLong());
     this.resolutionDrawer();
 
@@ -144,7 +142,7 @@ export class OperationUserComponent implements OnInit {
     console.log(formData);
     console.log('formData');
     if (formData.type != null && formData.type === 'VIRE') {
-      this.operationBanqueService.save(operation).subscribe(
+      this.operationBanqueService.saveUser(operation).subscribe(
         (data: Operation) => {
           this.modalService.info({
             nzTitle: 'Information',

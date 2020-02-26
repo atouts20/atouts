@@ -126,7 +126,8 @@ export class DetailProduitComponent implements OnInit {
 
   addToCart(produit: Produit) {
     console.log(produit);
-		this.panierService.addToCart(produit);
+    this.panierService.addToCart(produit);
+    this.createMessage('success', 'Produit ajouter au panier');
   } 
 
   /* removeFromCart(){
@@ -138,6 +139,7 @@ export class DetailProduitComponent implements OnInit {
   diminuerFromCart(produit : Produit){
     //if(this.produit){
     this.panierService.diminuerProduct(produit);
+    this.createMessage('warning', 'Produit retire du panier');
     //this.router.navigateByUrl("/panier");
   //}
   }

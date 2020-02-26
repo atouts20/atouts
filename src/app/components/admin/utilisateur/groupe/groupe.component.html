@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 col-sm-12">
         <br>
-        <div nz-row nzGutter="12" class="example-input">
+        <div nz-row>
             <button nz-button nzType="primary" (click)="ajout()">
                 <i nz-icon type="laptop" theme="outline"></i>
                 Ajouter
@@ -12,11 +12,11 @@
 
         <nz-drawer [nzBodyStyle]="{ height: 'calc(100% - 55px)', overflow:
                 'auto',
-                'padding-bottom':'53px' }" [nzClosable]="false" [nzWidth]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT D'UN NOUVEAU GROUPE" (nzOnClose)="close()">
+                'padding-bottom':'53px' }" [nzClosable]="false" [(nzWidth)]="ecran" [nzVisible]="visible" nzTitle="ENREGISTREMENT MODIFICATION D'UN GROUPE" (nzOnClose)="close()">
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
 
-                <div nz-row nzGutter="12" class="example-input">
-                    <div nz-col nzSpan="12">
+                <div nz-row>
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="id" nzRequired>
@@ -32,7 +32,7 @@
                         </nz-form-item>
                     </div>
 
-                    <div nz-col nzSpan="12" *ngIf="!edit">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24" *ngIf="!edit">
                         <!-- *ngIf="!edit" -->
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="nomGroupe" nzRequired>
@@ -52,7 +52,7 @@
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                    <div nz-col nzSpan="12" *ngIf="edit">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24" *ngIf="edit">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="nomGroupe" nzRequired>
                                 <span>
@@ -72,10 +72,10 @@
                     </div>
                 </div>
 
-                <div nz-row nzGutter="12" class="example-input">
+                <div nz-row>
                     <!--  *ngIf="!edit"   -->
 
-                    <div nz-col nzSpan="6">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="appUser" nzRequired>Membre</nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
@@ -86,7 +86,7 @@
                         </nz-form-item>
                     </div>
 
-                    <div nz-col nzSpan="6">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24">
                         <nz-form-item>
                             <nz-form-label [nzSpan]="'vertical'" nzFor="partmn" nzRequired>Part Monnaie</nz-form-label>
                             <nz-form-control [nzSpan]="'vertical'">
@@ -98,9 +98,10 @@
                         </nz-form-item>
 
                     </div>
+                </div>
+                <div nz-row>
 
-
-                    <div nz-col nzSpan="6">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24">
 
                         <nz-form-item>
 
@@ -115,12 +116,13 @@
 
                     </div>
 
+                    <!-- nz-row style="margin-bottom:8px;" nzFor="partvl" nzRequired -->
 
-
-                    <div nz-col nzSpan="6">
-                        <nz-form-item nz-row style="margin-bottom:8px;">
+                    <div nz-col nzMd="12" nzSm="24" nzXs="24">
+                        <nz-form-item>
+                            <nz-form-label [nzSpan]="'vertical'">Cliquer ici</nz-form-label>
                             <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                                <button nz-button nzType="primary">
+                                <button nz-button nzType="primary" [disabled]="!validateForm.valid">
                                         <i nz-icon type="diff"></i>
                                         <span>Ajouter</span></button>
                             </nz-form-control>
@@ -192,10 +194,10 @@
                         </td>
                         <td>
                             <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
-                                {{data.appUser.tel}}
+                                {{data.appUser.phoneNumber}}
                             </ng-container>
                             <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
-                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.tel">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.phoneNumber">
                             </ng-container>
                         </td>
                         <td>
@@ -228,7 +230,7 @@
                                     <nz-popconfirm [nzTitle]="'Êtes vous sûr
                                             de
                                             supprimer?'" (nzOnConfirm)="delete(data.pkGrouper.appUser_id)">
-                                        <button title="Supprimer" nz-button nzType="primary" nz-popconfirm nzShape="circle">
+                                        <button title="Supprimer" nz-button nzType="danger" nz-popconfirm nzShape="circle">
                                                 <i nz-icon type="delete"></i>
                                             </button>
                                     </nz-popconfirm>
@@ -305,10 +307,10 @@
                         </td>
                         <td>
                             <ng-container *ngIf="!editCache[data.pkGrouper.appUser_id].edit">
-                                {{data.appUser.tel}}
+                                {{data.appUser.phoneNumber}}
                             </ng-container>
                             <ng-container *ngIf="editCache[data.pkGrouper.appUser_id].edit">
-                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.tel">
+                                <input type="text" disabled nz-input [(ngModel)]="editCache[data.pkGrouper.appUser_id].data.appUser.phoneNumber">
                             </ng-container>
                         </td>
                         <td>
@@ -387,59 +389,63 @@
 
             </nz-table>
             <!-- <div nz-row >
-    <div nz-col nzSpan="6" nzOffset="12">
+    <div nz-col nzMd="12" nzSm="24" nzXs="24" nzOffset="12">
         TOTAL
     </div>   
-    <div nz-col nzSpan="6">
+    <div nz-col nzMd="12" nzSm="24" nzXs="24">
         {{somme}}
     </div>   
 </div> -->
             <div nz-row>
                 <!-- *ngIf="!edit" -->
-                <div nz-col nzSpan="6">
+                <div nz-col nzMd="12" nzSm="24" nzXs="24">
                     <!--  nzOffset="12" -->
                     TOTAL MN
                 </div>
-                <div nz-col nzSpan="6">
+                <div nz-col nzMd="12" nzSm="24" nzXs="24">
                     {{sommemn}}
                 </div>
 
-                <div nz-col nzSpan="6">
+                <div nz-col nzMd="12" nzSm="24" nzXs="24">
                     TOTAL VL
                 </div>
-                <div nz-col nzSpan="6">
+                <div nz-col nzMd="12" nzSm="24" nzXs="24">
                     {{sommevl}}
                 </div>
             </div>
 
             <br><br>
-            <div nz-row nzGutter="12" class="example-input">
-                <div nz-col nzSpan="6" *ngIf="!edit">
-                    <button type="button" (click)="valider()" class="ant-btn
-                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
-                            <i nz-icon type="save" theme="outline"></i>
-                            <span>Valider</span></button>
-                </div>
-                <div nz-col nzSpan="6" *ngIf="edit">
-                    <button type="button" (click)="valider()" class="ant-btn
-                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
-                            <i nz-icon type="save" theme="outline"></i>
-                            <span>Modifier</span></button>
-                </div>
-                <div nz-col nzSpan="6" *ngIf="!edit">
-                    <!-- *ngIf="!edit" -->
-                    <button type="button" (click)="resegroupe()" class="ant-btn
-                            ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
-                            <i nz-icon type="retweet" theme="outline"></i>
-                            <span>Annuler Groupe</span></button>
-                </div>
-                <div nz-col nzSpan="8">
-                    <button type="button" (click)="close()" class="ant-btn
-                            ant-btn-primary">
-                            <i nz-icon type="logout"></i>
-                            <span>Fermer</span></button>
+            <div class="footer">
+                <div nz-row nzType="flex" nzJustify="space-between">
+                    <div nz-col nzMd="8" nzSm="8" nzXs="8" *ngIf="!edit">
+                        <!-- *ngIf="!edit" -->
+                        <button type="button" (click)="resegroupe()" class="ant-btn
+                                ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="retweet" theme="outline"></i>
+                                <span>Annuler</span></button>
+                    </div>
+                    <div nz-col nzMd="8" nzSm="8" nzXs="8" *ngIf="!edit">
+                        <button type="button" (click)="valider()" [disabled]="dataSet.length == 0" class="ant-btn
+                                ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="save" theme="outline"></i>
+                                <span>Valider</span></button>
+                    </div>
+                    <div nz-col nzMd="8" nzSm="8" nzXs="8" *ngIf="edit">
+                        <button type="button" (click)="valider()" [disabled]="dataSet.length == 0" class="ant-btn
+                                ant-btn-primary" style="margin-right: 8px;" ant-btn-primary>
+                                <i nz-icon type="save" theme="outline"></i>
+                                <span>Modifier</span></button>
+                    </div>
+
+                    <div nz-col nzSpan="8">
+                        <button type="button" (click)="close()" class="ant-btn
+                                ant-btn-primary">
+                                <i nz-icon type="logout"></i>
+                                <span>Fermer</span></button>
+                    </div>
                 </div>
             </div>
+
 
 
 
